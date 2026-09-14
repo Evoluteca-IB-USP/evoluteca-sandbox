@@ -1,0 +1,74 @@
+/* A seção "Simuladores": o palco da poeira, a ficha do passo e a trilha
+   que diz em que passo a apresentação está. */
+
+.poeira-cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 4rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+.poeira-cabeca .vivo-texto { max-width: 54ch; margin-bottom: 0; }
+
+.poeira-palco { position: relative; }
+.poeira-tela { display: block; width: 100%; height: clamp(360px, 47vh, 520px); }
+.sr-viva { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* no fecho, a saída para o catálogo ganha peso: é o fim da história */
+.poeira-pe[data-fecho] .link-seta { font-size: 1.05rem; border-bottom: 2px solid var(--amarelo); }
+.poeira-pe[data-fecho] .poeira-ficha { color: var(--tinta); }
+
+.poeira-pe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 2rem;
+  margin-top: .5rem;
+  min-height: 5rem;
+}
+.poeira-ficha { max-width: 74ch; }
+.poeira-ficha b { color: var(--navy); font-weight: 600; }
+
+.poeira-acoes { display: inline-flex; align-items: baseline; gap: 1.25rem; white-space: nowrap; }
+.poeira-denovo { font-size: .9rem; }
+
+.poeira-trilha {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 1.25rem;
+  margin-top: 1.5rem;
+}
+.poeira-passo {
+  font: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: .6rem 0 0;
+  cursor: pointer;
+  display: grid;
+  grid-template-areas: "barra barra" "n rotulo";
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: .5rem .45rem;
+  color: var(--tinta-suave);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color .3s ease;
+}
+.poeira-passo:hover { color: var(--navy); }
+.poeira-passo[data-ativo] { color: var(--navy); }
+.poeira-barra { grid-area: barra; display: block; height: 2px; background: var(--borda); overflow: hidden; }
+.poeira-n { grid-area: n; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.poeira-passo[data-ativo] .poeira-n { color: var(--amarelo); }
+.poeira-passo > span:last-child { grid-area: rotulo; }
+.poeira-barra i { display: block; height: 100%; width: 0; background: var(--amarelo); }
+
+@media (max-width: 900px) {
+  .poeira-cabeca { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .poeira-trilha { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.25rem; }
+  .poeira-ficha { min-height: 4.5rem; }
+  .poeira-tela { height: 320px; }
+}

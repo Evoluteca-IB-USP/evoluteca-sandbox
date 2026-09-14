@@ -1,0 +1,36 @@
+/* As cores da casa. O chrome da USP é medido em www5.usp.br; o navy e o
+   teal vêm do site do IB. Os neutros são mais escuros que os do IB, que
+   usa #848484 e reprova em AA. */
+
+:root {
+  /* -------- chrome USP (medido em www5.usp.br) -------- */
+  --usp-amarelo: #ffb500;   /* faixa 1, 6px               */
+  --usp-ciano:   #00c5d4;   /* faixa 2, 6px               */
+  --usp-teal:    #1094ab;   /* barra de menu, 40px        */
+
+  /* -------- cores da casa (IB) -------- */
+  --navy:        #142560;   /* o azul do IB (#footer em style.css do template ibusp2019) */
+  --navy-rodape: #142560;   /* rodapé — mesmo tom          */
+  --teal:        #1094ab;   /* ação: botões, sublinhados   */
+  --teal-escuro: #0d7a8d;   /* MESMO teal, legível em texto (5:1) */
+  --teal-claro:  #64c4d2;   /* hover, detalhes sobre navy  */
+  --amarelo:     #fcb421;   /* acento fino                 */
+  --cinza-header:#f5f5f5;   /* faixa do header e blocos    */
+
+  /* -------- neutros (IB usa #848484, que reprova em AA) -------- */
+  --tinta:       #3d3d3d;   /* corpo (10:1) */
+  --tinta-suave: #6b6b6b;   /* secundário (5,3:1)          */
+  --fundo:       #ffffff;
+  --fundo-suave: #f5f5f5;
+  --borda:       #e5e5e5;
+  --borda-forte: #cfcfcf;
+
+  /* -------- séries de gráfico -------- */
+  --grafico-1: #1094ab;
+  --grafico-2: #64c4d2;
+  --grafico-3: #fcb421;
+  --grafico-4: #131d60;
+  --alelo-1:   #142560;   /* alelo A (bolinhas da lupa, série em foco) */
+  --alelo-2:   #fcb421;   /* alelo a                                    */
+  --fantasma:  #b9bdc9;   /* rodada guardada como referência            */
+}

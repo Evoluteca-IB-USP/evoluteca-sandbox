@@ -1,0 +1,12 @@
+/* o primeiro link da página, só para quem navega pelo teclado */
+
+.pular {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--navy);
+  color: #fff;
+  padding: .6rem 1rem;
+  z-index: 100;
+}
+.pular:focus { left: .5rem; top: .5rem; }

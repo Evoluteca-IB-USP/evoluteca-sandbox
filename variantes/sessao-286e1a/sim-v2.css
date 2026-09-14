@@ -1,0 +1,60 @@
+/* sim-v2.css — a teoria ao lado do sorteio (ver sim-v2.js). Prefixo teo-. */
+
+.teo-cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 3.5rem;
+  align-items: start;
+  margin-bottom: 2.25rem;
+}
+.teo-cabeca .vivo-texto { max-width: 52ch; margin-bottom: 0; }
+.teo-cabeca .vivo-elo[aria-pressed="true"] { color: var(--navy); font-weight: 600; text-decoration-style: solid; }
+
+.teo-figura { position: relative; }
+.teo-tela { display: block; width: 100%; height: 460px; }
+
+/* o placar em números, no canto de cima à direita da figura */
+.teo-placar {
+  position: absolute;
+  right: 0;
+  bottom: -.25rem;
+  display: flex;
+  gap: 2.25rem;
+  padding-top: .6rem;
+}
+.teo-placar > div { display: grid; gap: .1rem; }
+.teo-placar b { font-size: 1.5rem; font-weight: 300; color: var(--navy); line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.teo-placar small { font-size: .72rem; color: var(--tinta-suave); }
+.teo-placar-teoria { padding-left: 1.5rem; border-left: 2px dashed var(--navy); }
+
+.teo-legenda {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 3rem;
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+}
+.teo-item { min-width: 0; }
+.teo-n { display: block; font-size: 2rem; font-weight: 300; line-height: 1; color: var(--teal); margin-bottom: .55rem; font-variant-numeric: tabular-nums; }
+.teo-item h3 { margin: 0 0 .45rem; font-size: 1rem; font-weight: 600; color: var(--navy); line-height: 1.3; text-wrap: balance; }
+.teo-item p { margin: 0; font-size: .9rem; line-height: 1.55; color: var(--tinta); text-wrap: pretty; max-width: 44ch; }
+
+.teo-pe {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+}
+.teo-pe .vivo-nota { max-width: 70ch; }
+
+@media (max-width: 900px) {
+  .teo-cabeca { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .teo-tela { height: 400px; }
+  .teo-placar { position: static; margin-top: .75rem; gap: 1.5rem; }
+  .teo-legenda { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>v1 · Evoluteca — simuladores de evolução e genética · IB-USP</title>
+  <meta name="description" content="Simuladores interativos de evolução, genética de populações e genética quantitativa, em português, gratuitos e direto no navegador. Projeto de extensão do Instituto de Biociências da USP.">
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link rel="apple-touch-icon" href="../../imagens/icone-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="../../aparencia/home/__pacote__.css">
+  <link rel="stylesheet" href="sim-v1.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "r": "../../motor-de-simuladores/r/__pacote__.js",
+        "escrever-html": "../../escrever-html/__pacote__.js",
+        "portugues": "../../portugues/__pacote__.js"
+      }
+    }
+  </script>
+</head>
+<body class="tem-abertura">
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- chrome institucional: padrão de todos os sites da USP (www5.usp.br).
+       A barra teal fica vazia por enquanto; o conteúdo muda de site para site. -->
+  <div class="usp-faixa-amarela"></div>
+  <div class="usp-faixa-azul"></div>
+  <div class="usp-barra">
+    <div class="container usp-barra-inner">
+      <a class="usp-logo" href="https://www.ib.usp.br" rel="external" title="Instituto de Biociências da USP">
+        <img src="../../imagens/simbolo_ib_bco.png" alt="Instituto de Biociências da USP" class="usp-logo-ib">
+      </a>
+      <a class="usp-logo" href="https://www5.usp.br" rel="external" title="Universidade de São Paulo">
+        <img src="../../imagens/logo_usp_bco.png" alt="Universidade de São Paulo" class="usp-logo-usp">
+      </a>
+    </div>
+  </div>
+
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="../../index.html">
+        <span class="marca-nome">Evoluteca</span>
+        <span class="marca-sub">Instituto de Biociências · USP</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="../../index.html" aria-current="page">Início</a>
+        <a href="../../catalogo.html">Simuladores</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ============ abertura ============
+         O fundo é o modelo de Wright–Fisher pré-calculado (paginas/home/abertura.js). -->
+    <section class="abertura">
+      <canvas class="abertura-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="container">
+        <div class="abertura-conteudo">
+          <h1>Um acervo de simuladores de <strong>evolução e genética</strong>.</h1>
+          <p class="abertura-lede">
+            Cada simulador é um modelo de genética de populações que roda no
+            navegador. Você define o tamanho da população, a intensidade da
+            seleção ou a frequência inicial de um alelo e acompanha, geração a
+            geração, o que acontece — na tela, em segundos, processos que na
+            natureza levam milhares de gerações.
+          </p>
+          <p class="abertura-nota">
+            Feito para o ensino médio e a graduação. Cada simulador vem com a
+            explicação do conceito, um roteiro de atividade e um guia para o
+            professor.
+          </p>
+          <div class="abertura-acoes">
+            <a class="botao botao-claro botao-grande" href="../../catalogo.html">Ver os simuladores <span class="seta" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- ============ a saída da abertura ============
+           A fronteira com a página não é uma linha reta nem um degradê: é uma
+           trajetória. O traçado usa a mesma receita da linha em destaque do
+           gráfico — passeio lento + tremor rápido, comprimido por tanh —
+           sorteado uma vez com semente 2 em 52 passos e congelado aqui
+           (o gerador está em testes/aresta.mjs). O viewBox estica só na
+           horizontal, então a altura das subidas e descidas é a mesma em
+           qualquer largura de tela. -->
+      <svg class="abertura-aresta" viewBox="0 0 1440 160" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="aresta-massa" d="M0 87.6 L28 93 L55 80.9 L83 65.8 L111 73.1 L138 64.1 L166 34.9 
+             L194 37.9 L222 54.8 L249 37.3 L277 22.9 L305 19.5 L332 26.1 L360 23.8 
+             L388 17 L415 19.6 L443 18.3 L471 31.8 L498 45.3 L526 48.6 L554 55.1 
+             L582 46.6 L609 60.3 L637 40.8 L665 35.6 L692 45.1 L720 33.4 L748 25 
+             L775 53.4 L803 55.9 L831 75.1 L858 91.3 L886 75.6 L914 54.7 L942 31 
+             L969 35.3 L997 48.1 L1025 65.9 L1052 68.8 L1080 47.5 L1108 51.4 L1135 36.1 
+             L1163 30.7 L1191 41.5 L1218 75.9 L1246 59.9 L1274 66.1 L1302 60.3 L1329 89.9 
+             L1357 106.8 L1385 116.8 L1412 135.1 L1440 137.8 L1440 160 L0 160 Z"/>
+        <path class="aresta-linha" d="M0 87.6 L28 93 L55 80.9 L83 65.8 L111 73.1 L138 64.1 L166 34.9 
+             L194 37.9 L222 54.8 L249 37.3 L277 22.9 L305 19.5 L332 26.1 L360 23.8 
+             L388 17 L415 19.6 L443 18.3 L471 31.8 L498 45.3 L526 48.6 L554 55.1 
+             L582 46.6 L609 60.3 L637 40.8 L665 35.6 L692 45.1 L720 33.4 L748 25 
+             L775 53.4 L803 55.9 L831 75.1 L858 91.3 L886 75.6 L914 54.7 L942 31 
+             L969 35.3 L997 48.1 L1025 65.9 L1052 68.8 L1080 47.5 L1108 51.4 L1135 36.1 
+             L1163 30.7 L1191 41.5 L1218 75.9 L1246 59.9 L1274 66.1 L1302 60.3 L1329 89.9 
+             L1357 106.8 L1385 116.8 L1412 135.1 L1440 137.8"/>
+      </svg>
+    </section>
+
+    <!-- ============ por que aprender evolução ============
+         Seis apostas sobre casos reais — leia, aposte, veja o modelo rodar.
+         Montada por paginas/home/porque-aprender/ (rodada de variantes de 2026-08). -->
+    <section id="secao-porque"></section>
+
+    <!-- ============ o que é um simulador ============
+         A placa de colônias (modelo de Eden) com a escada de quatro degraus:
+         modelo → simulação → simulador → o site. As frases dos degraus SÃO os
+         controles. Montada por paginas/home/o-que-e-um-simulador/. -->
+    <section id="secao-explica"></section>
+
+    <!-- ============ simuladores ============
+         VARIANTE v1: montada por sim-v1.js, abaixo do título -->
+    <section class="secao" id="secao-simuladores">
+      <div class="container">
+        <h2 class="titulo-secao">Simuladores</h2>
+      </div>
+    </section>
+
+    <!-- ============ sobre ============
+         A história do projeto — não a explicação do que é um simulador, que
+         é a seção de cima. Como surgiu, por quê, como foi feito, o intuito:
+         uma frase de identidade, quatro blocos rotulados em duas colunas, a
+         amostra em faixa e o expediente. -->
+    <section class="secao secao-suave" id="sobre">
+      <div class="container">
+        <h2 class="titulo-secao">Sobre</h2>
+        <p class="sobre-lede">
+          Um projeto de extensão do Instituto de Biociências da USP, em
+          código aberto, para a sala de aula.
+        </p>
+
+        <div class="sobre-itens">
+          <div class="sobre-item">
+            <h3>Como surgiu</h3>
+            <p>
+              A Evoluteca nasceu como projeto de extensão do Instituto de
+              Biociências da USP, da vontade de dar à aula de evolução o que
+              ela quase nunca tem: um experimento. A forma que isso tomou foi
+              um site — modelos pequenos, escritos para o navegador, com o
+              material da aula em volta.
+            </p>
+          </div>
+          <div class="sobre-item">
+            <h3>Por quê</h3>
+            <p>
+              Evolução é feita de processos que ninguém vê acontecer:
+              populações inteiras, milhares de gerações, o acaso agindo aos
+              poucos. O que existia para mostrar isso em movimento estava
+              espalhado por dezenas de sites, em inglês, e muitas vezes exigia
+              instalar um programa — e o trabalho de garimpar, traduzir e
+              adaptar caía no professor, um por um.
+            </p>
+          </div>
+          <div class="sobre-item">
+            <h3>Como foi feito</h3>
+            <p>
+              Nada roda em servidor: quem calcula a simulação é o navegador de
+              quem está usando. Os modelos são curtos e conferidos contra
+              resultados clássicos — a heterozigosidade perde 1/(2N) a cada
+              geração, a chance de fixar um alelo é a sua frequência inicial —
+              e o sorteio tem semente: a mesma configuração dá sempre o mesmo
+              resultado, então a turma inteira roda junto e compara os mesmos
+              números.
+            </p>
+          </div>
+          <div class="sobre-item">
+            <h3>O intuito</h3>
+            <p>
+              Chegar à escola pública, que acessa pelo celular e em conexão
+              ruim — daí o site não pedir cadastro, não instalar nada e ser
+              leve. E crescer por temas e por outras mãos: o código é aberto e
+              o <a href="https://github.com/lucaanasser/evoluteca" rel="external">repositório é público</a>,
+              para ler o modelo, corrigir, reaproveitar e propor um simulador
+              novo.
+            </p>
+          </div>
+        </div>
+
+        <!-- ornamento: a mesma amostra de genótipos da lupa dos simuladores,
+             preenchida indivíduo a indivíduo (paginas/home/faixa-de-amostra.js) -->
+        <figure class="sobre-faixa" aria-hidden="true">
+          <canvas id="sobre-amostra"></canvas>
+          <figcaption class="legenda-alelos">
+            <span class="legenda-item"><span class="legenda-amostra amostra-AA"></span>AA</span>
+            <span class="legenda-item"><span class="legenda-amostra amostra-Aa"></span>Aa</span>
+            <span class="legenda-item"><span class="legenda-amostra amostra-aa"></span>aa</span>
+          </figcaption>
+        </figure>
+
+        <dl class="expediente">
+          <div><dt>Desenvolvimento</dt><dd>Luca Marinho Nasser, Ciências Moleculares</dd></div>
+          <div><dt>Orientação</dt><dd>Diogo Amaral R. Melo</dd></div>
+          <div><dt>Repositório</dt><dd><a href="https://github.com/lucaanasser/evoluteca" rel="external">github.com/lucaanasser/evoluteca</a></dd></div>
+          <div><dt>Licenças</dt><dd>Textos em CC BY 4.0, código em MIT</dd></div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-grid">
+      <div>
+        <h4>Evoluteca</h4>
+        <ul>
+          <li><a href="../../index.html">Início</a></li>
+          <li><a href="../../catalogo.html">Simuladores</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="https://www.ib.usp.br" rel="external">Instituto de Biociências</a></li>
+          <li><a href="https://www5.usp.br" rel="external">Universidade de São Paulo</a></li>
+        </ul>
+      </div>
+      <div class="rodape-logos">
+        <a href="https://www.ib.usp.br" rel="external">
+          <img class="rodape-logo-ib" src="../../imagens/logo_ib_bco.png" alt="Instituto de Biociências da USP">
+        </a>
+        <a href="https://www5.usp.br" rel="external">
+          <img class="rodape-logo-usp" src="../../imagens/logo_usp_bco.png" alt="Universidade de São Paulo">
+        </a>
+      </div>
+    </div>
+    <div class="rodape-base">
+      <div class="container">© 2026 Evoluteca · Instituto de Biociências · Universidade de São Paulo — textos em CC BY 4.0, código MIT</div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { montarHome } from "../../paginas/home/__pacote__.js";
+    await montarHome();
+    const secaoSimuladores = document.getElementById("secao-simuladores");
+    secaoSimuladores.querySelector(".container").replaceChildren(
+      secaoSimuladores.querySelector(".titulo-secao"));
+    const sim = await import("./sim-v1.js");
+    sim.montar(secaoSimuladores, { base: "../../" });
+  </script>
+</body>
+</html>

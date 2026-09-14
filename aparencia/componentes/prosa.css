@@ -1,0 +1,14 @@
+/* conteúdo em prosa: a saída do Markdown do material de apoio */
+
+.prosa { max-width: 68ch; }
+.prosa h2 { font-size: 1.35rem; margin-top: 1.6em; }
+.prosa h3 { font-size: 1.1rem; margin-top: 1.4em; }
+.prosa li { margin-bottom: .35em; }
+.prosa blockquote, blockquote {
+  margin: 1.25em 0;
+  padding: .75em 1.1em;
+  border-left: 3px solid var(--teal);
+  background: var(--fundo-suave);
+  color: var(--tinta-suave);
+}
+.prosa blockquote p:last-child, blockquote p:last-child { margin-bottom: 0; }

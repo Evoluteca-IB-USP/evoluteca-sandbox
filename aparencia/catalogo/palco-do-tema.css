@@ -1,0 +1,35 @@
+/* ---- o palco: a simulação no chão da seção, sem caixa ---- */
+.palco { position: sticky; top: calc(var(--altura-topo, 82px) + 1.25rem); }
+.palco-cena { position: relative; height: 215px; }
+.palco-cena canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; transition: opacity .7s ease; }
+.palco-ficha { transition: opacity .3s ease; }
+.palco-ficha[data-trocando] { opacity: 0; transition: none; }
+.palco-legenda { margin: .35rem 0 .9rem; font-size: .68rem; line-height: 1.4; color: var(--tinta-suave); }
+.palco-kicker {
+  margin: 0 0 .15rem;
+  font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--teal-escuro); font-variant-numeric: tabular-nums;
+}
+.palco-titulo { margin: 0 0 .3rem; font-size: 1.15rem; font-weight: 600; line-height: 1.2; color: var(--navy); }
+.palco-titulo a { color: inherit; text-decoration: none; }
+.palco-titulo a:hover { color: var(--teal-escuro); }
+.palco-desc { margin: 0 0 .5rem; font-size: .84rem; line-height: 1.5; color: var(--tinta); }
+.palco-controla { margin: 0 0 .9rem; font-size: .76rem; line-height: 1.45; color: var(--tinta-suave); }
+.palco-acao { display: flex; align-items: center; gap: .9rem; margin: 0; }
+.palco-tempo { font-size: .74rem; color: var(--tinta-suave); white-space: nowrap; }
+
+.tema[data-tom="escuro"] .palco-legenda,
+.tema[data-tom="escuro"] .palco-controla,
+.tema[data-tom="escuro"] .palco-tempo { color: rgba(255, 255, 255, .6); }
+.tema[data-tom="escuro"] .palco-kicker { color: var(--teal-claro); }
+.tema[data-tom="escuro"] .palco-titulo { color: #fff; }
+.tema[data-tom="escuro"] .palco-titulo a:hover { color: var(--teal-claro); }
+.tema[data-tom="escuro"] .palco-desc { color: rgba(255, 255, 255, .85); }
+.tema[data-tom="escuro"] .botao-primario { background: #fff; color: var(--navy); }
+.tema[data-tom="escuro"] .botao-primario:hover { background: var(--amarelo); color: var(--navy); }
+
+@media (max-width: 1000px) {
+  .cat-temas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tema-corpo { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .palco { position: static; }
+}

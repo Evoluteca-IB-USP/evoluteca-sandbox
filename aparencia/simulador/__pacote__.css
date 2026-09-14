@@ -1,0 +1,6 @@
+/* A página de um simulador: o console de parâmetros, o laboratório
+   (gráfico + lupa + linha do tempo) e o material de apoio. */
+@import "pagina-do-simulador.css";
+@import "painel-de-parametros.css";
+@import "area-da-simulacao.css";
+@import "material-de-apoio.css";

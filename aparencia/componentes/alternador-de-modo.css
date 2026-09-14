@@ -1,0 +1,23 @@
+/* ============ alternância básico / avançado ============ */
+
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio);
+  overflow: hidden;
+  background: #fff;
+}
+.seg button {
+  font: inherit;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  background: #fff;
+  border: 0;
+  padding: .45rem .9rem;
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--borda-forte); }
+.seg button[aria-pressed="true"] { background: var(--teal); color: #fff; }

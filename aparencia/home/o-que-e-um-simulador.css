@@ -1,0 +1,108 @@
+/* A seção "O que é um simulador": a placa de colônias de borda a borda e a
+   escada de quatro degraus por cima. O texto tem uma sombra leve —
+   invisível sobre o navy, ela só aparece quando uma célula clara passa
+   atrás da letra. */
+
+#secao-explica {
+  position: relative;
+  background: #16265f;
+}
+.fundo-tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  opacity: .92;                       /* quase nada: só tira o "grito" das células */
+}
+#secao-explica .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  min-height: 82vh;
+  pointer-events: none;               /* os cliques vazam para o fundo… */
+}
+#secao-explica .container > * { pointer-events: auto; }   /* …menos sobre o texto */
+.fundo-espaco { flex: 1 1 auto; min-height: 20vh; pointer-events: none; }
+
+.frente-cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 3.5rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
+}
+.frente-cabeca .vivo-texto { margin-bottom: .2rem; }
+
+.explica-estado {
+  width: fit-content;
+  margin: .7rem 0 0;
+  max-width: none;
+  font-variant-numeric: tabular-nums;
+  background: rgba(12, 21, 58, .72);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  color: rgba(255, 255, 255, .82);
+}
+.explica-estado b { font-weight: 600; color: #fff; }
+
+/* os degraus: quatro colunas sob a figura, numeradas — legenda de uma figura só, não cards */
+.degraus {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 2.5rem;
+  margin-top: 2rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 255, 255, .22);
+  background: transparent;
+}
+.degrau { min-width: 0; }
+.degrau-n {
+  display: block;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--teal-claro);
+  margin-bottom: .55rem;
+  font-variant-numeric: tabular-nums;
+}
+.degrau h3 { margin: 0 0 .45rem; font-size: 1rem; font-weight: 600; color: #fff; line-height: 1.3; text-wrap: balance; }
+.degrau p { margin: 0; font-size: .9rem; line-height: 1.55; color: rgba(255, 255, 255, .78); text-wrap: pretty; }
+.degrau .link-seta { display: inline-block; margin-top: .5rem; font-size: .9rem; }
+
+/* a camada navy: texto claro sobre o fundo escuro (.titulo-secao,
+   .kicker-secao, .vivo-*, .link-seta são estilos COMPARTILHADOS —
+   têm de ficar presos a #secao-explica para não vazar para as
+   outras seções, que continuam navy sobre branco) */
+#secao-explica .titulo-secao { color: #fff; }
+#secao-explica .kicker-secao { color: var(--teal-claro); }
+#secao-explica .vivo-frase { color: #fff; }
+#secao-explica .vivo-frase b { color: var(--amarelo); }
+#secao-explica .vivo-texto { color: rgba(255, 255, 255, .85); }
+#secao-explica .vivo-texto em { color: var(--teal-claro); }
+#secao-explica .vivo-elo { color: var(--teal-claro); }
+#secao-explica .vivo-elo:hover,
+#secao-explica .vivo-elo[aria-pressed="true"] { color: #fff; }
+#secao-explica .link-seta { color: var(--teal-claro); }
+#secao-explica .link-seta:hover { color: #fff; }
+
+/* a sombra: leve, invisível sobre o navy — só aparece quando uma
+   célula clara da colônia passa atrás da letra */
+#secao-explica :is(.kicker-secao, .vivo-frase, .vivo-texto,
+  .degrau h3, .degrau p, .degrau-n, .vivo-elo, .link-seta) {
+  text-shadow: 0 1.5px 3px rgba(9, 16, 45, .85), 0 5px 16px rgba(9, 16, 45, .65);
+}
+#secao-explica .titulo-secao {
+  text-shadow: 0 2.5px 4px rgba(9, 16, 45, .8), 0 9px 26px rgba(9, 16, 45, .6);
+}
+
+@media (max-width: 900px) {
+  .frente-cabeca { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .degraus { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2rem; }
+  #secao-explica .container { min-height: 0; }
+  .fundo-espaco { min-height: 34vh; }
+}

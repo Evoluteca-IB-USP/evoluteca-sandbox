@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testes · Evoluteca</title>
+  <link rel="stylesheet" href="../aparencia/__pacote__.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "r": "../motor-de-simuladores/r/__pacote__.js",
+        "escrever-html": "../escrever-html/__pacote__.js",
+        "portugues": "../portugues/__pacote__.js"
+      }
+    }
+  </script>
+  <style>
+    main { max-width: 720px; margin: 3rem auto; padding: 0 1.25rem; }
+    #resultados { list-style: none; padding: 0; display: grid; gap: .5rem;
+                  font-family: var(--fonte-dados); font-size: .9rem; }
+    #resultados li { padding: .6rem .9rem; border-radius: 8px; border: 1px solid var(--borda); }
+    #resultados li.ok { background: #eef8f0; border-color: #bfe3c6; color: #1d6b2f; }
+    #resultados li.falha { background: #fdeeee; border-color: #f0bcbc; color: #9c2121; }
+    #placar { font-family: var(--fonte-dados); color: var(--tinta-suave); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Testes da biologia</h1>
+    <p>Cada teste checa uma previsão teórica, não um número decorado.
+       Rode também no terminal: <code>node testes/rodar-no-node.mjs</code>.</p>
+    <p id="placar">Rodando…</p>
+    <ul id="resultados"></ul>
+  </main>
+  <script type="module" src="testes.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+/* ============ página do app ============ */
+
+.app-voltar { display: inline-block; font-size: .85rem; margin-bottom: 1.25rem; }
+
+.app-cabeca {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .6rem 1.5rem;
+  margin-bottom: 1.4rem;
+}
+.app-cabeca h1 { margin: 0; font-weight: 300; }
+
+.botao svg { width: 1em; height: 1em; fill: currentColor; }
+.botao-ativo { background: var(--navy); color: #fff; border-color: var(--navy); }
+.botao-ativo:hover { background: #0e1a48; border-color: #0e1a48; color: #fff; }

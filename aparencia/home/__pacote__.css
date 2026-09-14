@@ -1,0 +1,10 @@
+/* A página inicial, seção a seção. */
+@import "../secoes-empilhadas/__pacote__.css";
+@import "cabecalho-sobreposto.css";
+@import "abertura.css";
+@import "emendas-da-home.css";
+@import "porque-aprender.css";
+@import "figura-da-enzima.css";
+@import "o-que-e-um-simulador.css";
+@import "simuladores.css";
+@import "sobre.css";

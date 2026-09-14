@@ -1,0 +1,149 @@
+/* O percurso pelos simuladores — a forma antiga da seção 03, hoje
+   substituída pela poeira (home/simuladores.css). O código que a monta
+   está em paginas/home/percurso.js e não é chamado por página nenhuma. */
+
+/* ============ home: o percurso pelos simuladores ============
+   Nem grade de cards, nem cópia do catálogo: os simuladores em destaque
+   passam um de cada vez na coluna que rola, e o palco fica parado à
+   direita rodando o que está no meio da tela. A rolagem é curta e fixa
+   (três + o fecho) — o acervo inteiro só aparece no mosaico do fim,
+   que leva ao catálogo. Ver paginas/home/percurso.js. */
+
+.percurso {
+  display: grid;
+  grid-template-columns: minmax(0, 42%) minmax(0, 1fr);
+  gap: 0 4rem;
+  align-items: start;
+}
+
+/* ---- a coluna que rola ---- */
+.percurso-passo {
+  min-height: 74vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 0;
+  opacity: .28;                       /* fora de foco: o palco manda */
+  transition: opacity .35s ease;
+}
+.percurso-passo[data-ativo] { opacity: 1; }
+.percurso-conta {
+  margin: 0 0 .9rem;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal-escuro);
+  font-variant-numeric: tabular-nums;
+}
+.percurso-passo h3 {
+  margin: 0 0 .8rem;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+.percurso-passo h3 a { color: inherit; text-decoration: none; }
+.percurso-passo h3 a:hover { color: var(--teal-escuro); }
+.percurso-desc { margin: 0 0 1.4rem; font-size: 1.05rem; max-width: 34ch; text-wrap: pretty; }
+.percurso-dado { margin: 0 0 1.7rem; font-size: .9rem; color: var(--tinta-suave); max-width: 36ch; }
+.percurso-dado b {
+  display: block;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: .25rem;
+}
+.percurso-acoes { display: flex; align-items: center; flex-wrap: wrap; gap: .8rem 1.25rem; }
+.percurso-pe { font-size: .8rem; color: var(--tinta-suave); }
+
+/* ---- o palco, parado ---- */
+.percurso-palco {
+  position: sticky;
+  top: 100px;
+  height: 74vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: .9rem;
+}
+.percurso-cena {
+  position: relative;
+  height: clamp(320px, 52vh, 440px);
+  border-radius: var(--raio);
+  background: linear-gradient(170deg, #1b2f72 0%, var(--navy) 62%, #0e1a48 100%);
+  overflow: hidden;
+}
+.percurso-cena canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; transition: opacity .6s ease; }
+.percurso-legenda {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1rem;
+  margin: 0;
+  font-size: .78rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, .66);
+}
+
+/* ---- o mosaico do acervo: o fim do percurso ---- */
+.percurso-mosaico {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--colunas, 3), minmax(0, 1fr));
+  align-content: center;
+  gap: .55rem .6rem;
+  padding: 1.25rem 1.5rem 3rem;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity .6s ease;
+}
+.percurso-cena[data-mosaico] .percurso-mosaico { opacity: 1; pointer-events: auto; }
+.mosaico-item { display: flex; flex-direction: column; gap: .25rem; min-width: 0; }
+.mosaico-item canvas {
+  position: static;
+  height: var(--vinheta, 56px);
+  background: rgba(255, 255, 255, .05);
+  border-radius: 3px;
+  transition: background .2s ease;
+}
+.percurso-mosaico:hover .mosaico-item canvas { background: rgba(255, 255, 255, .1); }
+.mosaico-item small {
+  font-size: .68rem;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, .62);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- o trilho: onde estamos no percurso ---- */
+.percurso-trilho { list-style: none; display: flex; gap: .5rem; margin: 0; padding: 0; }
+.percurso-trilho li { flex: 1; min-width: 0; }
+.percurso-trilho button {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: .76rem;
+  text-align: left;
+  color: var(--tinta-suave);
+  background: none;
+  border: 0;
+  border-top: 2px solid var(--borda-forte);
+  padding: .5rem 0 0;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color .2s ease, border-color .2s ease;
+}
+.percurso-trilho button:hover { color: var(--navy); }
+.percurso-trilho button[aria-current="true"] { color: var(--navy); border-top-color: var(--teal); font-weight: 600; }
+
+@media (max-width: 900px) {
+  .percurso { grid-template-columns: 1fr; gap: 1.5rem; }
+  .percurso-passo { min-height: 0; padding: 1.25rem 0; opacity: 1; }
+  .percurso-palco { position: static; height: auto; }
+}

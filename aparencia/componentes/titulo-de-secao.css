@@ -1,0 +1,32 @@
+/* ============ títulos de página e de seção ============ */
+
+/* a assinatura do IB, o traço teal sob o título, com a largura da própria
+   palavra — como o sublinhado da aba ativa no header. Era fixo em 72 px, o que
+   cobria quase toda a palavra "Sobre" e só um terço de "Simuladores". */
+.titulo-pagina, .titulo-secao {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding-bottom: .4em;
+  margin-bottom: 1.2em;
+}
+.titulo-pagina::after, .titulo-secao::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--teal);
+}
+/* a fonte das abas do header (Open Sans 600, caixa alta, espaçada), mas em
+   navy: se o título tomasse também o cinza da aba, ficaria com o mesmo peso
+   visual do corpo e a seção perderia a âncora */
+.titulo-pagina, .titulo-secao {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--navy);
+}
+.titulo-pagina { font-size: clamp(1.7rem, 3vw, 2.15rem); }
+.titulo-secao  { font-size: clamp(1.3rem, 2.2vw, 1.6rem); }

@@ -1,0 +1,41 @@
+/* A emenda: a seção recortada (o clip-path vem de
+   paginas/emenda-entre-secoes.js) sobe sobre a anterior; a linha teal e a
+   cabecinha âmbar correm pela crista. Os 118px são a altura da serra e
+   precisam bater com o ALTURA do JS.
+
+   Cada seção precisa de um fundo PRÓPRIO: sem ele fica transparente, a
+   seção de trás aparece por igual na faixa de sobreposição inteira e o
+   corte vira invisível, como se a emenda fosse reta. */
+
+.secao { padding: 7em 0; }
+main > section:not(.abertura) { background: var(--fundo); }
+#sobre { background: #e9eef7; }
+
+@media (max-width: 900px) { .secao { padding: 4.5em 0; } }
+
+/* A sombra segue a forma do recorte — fora dos Simuladores, cuja seção anima
+   um canvas grande a cada quadro, e o filter forçaria recompor a camada
+   inteira junto. */
+#secao-explica, #secao-simuladores, #sobre, .rodape { position: relative; }
+.recortado { margin-top: -118px; }
+.rodape.recortado { margin-top: -118px; }   /* precisa vencer .tem-abertura .rodape do cabeçalho sobreposto */
+:is(#secao-explica, #sobre, .rodape).recortado {
+  filter: drop-shadow(0 -10px 16px rgba(10, 20, 60, .28));
+}
+.recorte-linha {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 118px;
+  pointer-events: none;
+  z-index: 3;
+}
+.recorte-linha polyline {
+  fill: none;
+  stroke: var(--teal-claro);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.recorte-linha circle { fill: var(--amarelo); stroke: #fff; stroke-width: 1.5; }

@@ -1,0 +1,80 @@
+/* ============ abertura da home: texto sobre a deriva ao vivo ============ */
+
+.abertura {
+  position: relative;
+  background: linear-gradient(170deg, #1a2d6e 0%, var(--navy) 45%, #0e1a48 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.abertura-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* as trajetórias são textura: recuam atrás do texto e ganham força à direita */
+  -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
+  mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
+}
+.abertura-conteudo {
+  position: relative;
+  padding: 6rem 0 6.25rem;
+  max-width: 760px;
+  text-shadow: 0 1px 2px rgba(6, 14, 46, .45);   /* separa as letras das trajetórias */
+}
+.abertura h1 { color: #fff; font-weight: 300; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: .5em; }
+.abertura h1 strong { font-weight: 600; color: var(--amarelo); }
+.abertura-lede {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.9);
+  max-width: 58ch;
+  margin-bottom: 1rem;
+}
+.abertura-nota {
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.65);
+  max-width: 58ch;
+  margin-bottom: 2.25rem;
+}
+.abertura-acoes { display: flex; flex-wrap: wrap; gap: .75rem; }
+
+/* ---- a aresta: onde a abertura encontra a página ----
+   O azul não desliza para o branco: ele é cortado por uma trajetória. O
+   preenchimento branco cobre tudo abaixo da linha, e os picos sobem alto o
+   bastante para atravessar a grade do 0,25 — é isso que faz a aresta ler como
+   parte da figura, e não como borda decorativa colada embaixo.
+   O SVG fica por cima do canvas (que cobre a seção inteira), então as outras
+   trajetórias mergulham sob a aresta em vez de serem cortadas na horizontal.
+   O traçado vem de testes/aresta.mjs (semente fixa, congelado no HTML). */
+.abertura-aresta {
+  position: relative;                  /* acima do canvas */
+  display: block;
+  width: 100%;
+  /* A faixa é alta de propósito, e cresce junto com o corpo da abertura. A
+     grade do 0,25 fica em 82,9% da ALTURA DA SEÇÃO, então as duas medidas são
+     amarradas: os picos só alcançam o pontilhado enquanto a faixa passar de
+     cerca de 24% do corpo acima dela. Aumentar só o corpo (para a aresta
+     descer) tira os picos do alcance da grade. */
+  height: clamp(190px, 20vh, 230px);
+  margin-bottom: -1px;                 /* sem fresta entre o SVG e a página */
+}
+.aresta-massa { fill: var(--fundo); }
+.aresta-linha {
+  fill: none;
+  stroke: var(--teal-claro);          /* a cor das outras populações do fundo:
+                                         a aresta é mais uma delas, e não disputa
+                                         com a amarela, que é a linha em destaque */
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;   /* o traço não engorda quando o SVG estica */
+}
+
+@media (max-width: 700px) {
+  .abertura-aresta { height: clamp(70px, 9vh, 100px); }
+  .abertura-canvas {
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
+  }
+}

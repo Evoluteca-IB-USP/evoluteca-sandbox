@@ -1,0 +1,82 @@
+/* ---- material de apoio: conceito + roteiro lado a lado; professor recolhido ---- */
+
+.material {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+.material-conceito .titulo-secao { font-size: clamp(1.4rem, 2.4vw, 1.75rem); margin-top: 0; }
+
+.roteiro {
+  position: sticky;
+  top: 100px;
+  background: var(--fundo-suave);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--teal);
+  border-radius: var(--raio);
+  padding: 1.35rem 1.5rem 1.25rem;
+  font-size: .93rem;
+}
+.roteiro h2 {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal-escuro);
+  margin: 0 0 .8rem;
+}
+.roteiro p { color: var(--tinta-suave); font-size: .85rem; }
+.roteiro ol { list-style: none; counter-reset: passo; margin: 0; padding: 0; display: grid; gap: .85rem; }
+.roteiro ol li { counter-increment: passo; position: relative; padding-left: 2.35rem; line-height: 1.5; }
+.roteiro ol li::before {
+  content: counter(passo);
+  position: absolute;
+  left: 0;
+  top: .05rem;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 900px) {
+  .material { grid-template-columns: 1fr; gap: 2rem; }
+  .roteiro { position: static; }
+}
+
+.professor { border: 1px solid var(--borda); border-radius: var(--raio); margin-bottom: 1rem; }
+.professor summary {
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35rem 1rem;
+  list-style: none;
+}
+.professor summary::-webkit-details-marker { display: none; }
+.professor summary::before {
+  content: "+";
+  font-weight: 300;
+  font-size: 1.5rem;
+  line-height: .8;
+  color: var(--teal);
+  width: 1.2rem;
+}
+.professor[open] summary::before { content: "−"; }
+.professor-titulo {
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.professor-temas { font-size: .85rem; color: var(--tinta-suave); }
+.professor > .prosa { padding: 0 1.5rem 1.5rem 3.2rem; }

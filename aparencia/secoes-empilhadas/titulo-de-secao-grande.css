@@ -1,0 +1,38 @@
+/* O título de uma seção empilhada troca a etiqueta em caixa alta do IB
+   (componentes/titulo-de-secao.css) por um título grande com kicker
+   numerado, terminado num sinal âmbar. A página de um simulador NÃO
+   carrega este arquivo: lá o título continua com o traço teal do IB. */
+
+.titulo-secao {
+  text-transform: none;
+  letter-spacing: -.02em;
+  font-weight: 700;
+  font-size: clamp(2.3rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  padding-bottom: 0;
+  margin-bottom: 3rem;
+  width: fit-content;
+  max-width: 100%;
+}
+.titulo-secao::after { content: none; }
+.cabeca-secao { align-items: center; margin-bottom: 2.5rem; }
+.cabeca-secao .titulo-secao { margin-bottom: 0; }
+
+.kicker-secao {
+  margin: 0 0 1rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--teal-escuro);
+}
+.kicker-secao::before {
+  content: "";
+  display: inline-block;
+  width: 1.6rem;
+  height: 2px;
+  background: var(--amarelo);
+  margin-right: .65rem;
+  vertical-align: .28em;
+}
+.ponto-tema { color: var(--amarelo); }

@@ -1,0 +1,64 @@
+/* sim-v1.css — três escalas (ver sim-v1.js). Prefixo esc-.
+   A tipografia comum (.vivo-frase, .vivo-texto, .vivo-elo, .link-seta)
+   vem de aparencia/secoes-empilhadas/secao-viva.css e da base, carregadas na home. */
+
+.esc-cabeca {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 3.5rem;
+  align-items: start;
+  margin-bottom: 2.25rem;
+}
+.esc-cabeca .vivo-texto { max-width: 50ch; margin-bottom: 0; }
+
+.esc-figura { position: relative; }
+.esc-tela {
+  display: block;
+  width: 100%;
+  height: 440px;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+/* a legenda das três escalas: uma coluna sob cada zona, como os degraus do Explica */
+.esc-legenda {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1.45fr);
+  gap: 0 3rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--borda);
+}
+.esc-item { min-width: 0; }
+.esc-n {
+  display: block;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--teal);
+  margin-bottom: .55rem;
+  font-variant-numeric: tabular-nums;
+}
+.esc-item h3 { margin: 0 0 .45rem; font-size: 1rem; font-weight: 600; color: var(--navy); line-height: 1.3; text-wrap: balance; }
+.esc-item p { margin: 0; font-size: .9rem; line-height: 1.55; color: var(--tinta); text-wrap: pretty; max-width: 44ch; }
+
+.esc-pe {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--borda);
+}
+.esc-pe .vivo-nota { max-width: 70ch; }
+
+@media (max-width: 900px) {
+  .esc-cabeca { grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+  .esc-tela { height: 420px; }
+}
+@media (max-width: 560px) {
+  .esc-tela { height: 580px; }
+  .esc-legenda { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+}

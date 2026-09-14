@@ -1,0 +1,52 @@
+/* A tipografia comum das seções "vivas" da home — a frase de abertura, o
+   texto, a nota do pé e o elo que é ao mesmo tempo o controle. Três seções
+   a usam (as apostas, a placa de colônias e a poeira dos simuladores), por
+   isso ela não mora em nenhuma delas. */
+
+/* ---------- tipografia comum das seções vivas ---------- */
+
+.vivo-frase {
+  margin: 0 0 .9rem;
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 300;
+  line-height: 1.22;
+  color: var(--navy);
+  text-wrap: balance;
+}
+.vivo-frase b { font-weight: 600; }
+.vivo-texto {
+  margin: 0 0 1.4rem;
+  color: var(--tinta);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 42ch;
+  text-wrap: pretty;
+}
+.vivo-texto em { font-style: normal; font-weight: 600; color: var(--teal-escuro); }   /* o gesto */
+.vivo-nota { margin: 0; font-size: .84rem; line-height: 1.5; color: var(--tinta-suave); max-width: 44ch; text-wrap: pretty; }
+.vivo-acoes { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.75rem; margin-top: 1.5rem; }
+
+/* a frase que age na placa: parece link, é botão */
+.vivo-elo {
+  font: inherit;
+  color: var(--teal-escuro);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color .15s ease;
+}
+.vivo-elo:hover { color: var(--navy); text-decoration-style: solid; }
+.vivo-elo[aria-pressed="true"] { color: var(--navy); font-weight: 600; text-decoration-style: solid; }
+
+.porque-kicker {
+  margin: 0 0 .6rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
