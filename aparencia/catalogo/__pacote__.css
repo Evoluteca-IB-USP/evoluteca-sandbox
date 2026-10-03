@@ -1,7 +1,5 @@
-/* A página de catálogo: o banner navy com os filtros e a folha de contato,
-   e o acervo em uma seção por tema. */
+/* A página de catálogo: o banner claro com a busca e a urna, e a estante. */
 @import "../secoes-empilhadas/__pacote__.css";
-@import "banner.css";
-@import "folha-de-contato.css";
-@import "secao-por-tema.css";
-@import "palco-do-tema.css";
+@import "banner-com-busca.css";
+@import "urna-de-sorteio.css";
+@import "estante.css";

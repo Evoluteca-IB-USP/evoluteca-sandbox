@@ -26,6 +26,23 @@
 .vivo-nota { margin: 0; font-size: .84rem; line-height: 1.5; color: var(--tinta-suave); max-width: 44ch; text-wrap: pretty; }
 .vivo-acoes { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.75rem; margin-top: 1.5rem; }
 
+/* a pílula da regra em vigor: diz, sobre um fundo navy, o que a figura de
+   trás está rodando (a placa de colônias, o fundo da abertura) */
+.vivo-estado {
+  width: fit-content;
+  margin: 0;
+  font-size: .84rem;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  background: rgba(12, 21, 58, .72);
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  color: rgba(255, 255, 255, .82);
+  text-shadow: none;
+}
+.vivo-estado b { font-weight: 600; color: #fff; }
+
 /* a frase que age na placa: parece link, é botão */
 .vivo-elo {
   font: inherit;

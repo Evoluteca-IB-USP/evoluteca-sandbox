@@ -1,0 +1,17 @@
+/* ============ variante 2: o arquipélago ============ */
+
+.arq-A { color: var(--navy); font-weight: 600; }
+.frase-aposta { font-size: 1.15rem; margin-top: .4rem; color: var(--tinta-suave); }
+
+.mar { background: var(--navy); margin-top: 2rem; }
+.mar-inner { position: relative; }
+.mar-canvas { display: block; width: 100%; height: 480px; }
+.mar-geracao { position: absolute; left: 39px; top: .9rem; margin: 0; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; color: var(--teal-claro); }
+.mar-geracao b { font-size: 1.6rem; font-weight: 300; color: #fff; letter-spacing: 0; margin-left: .3rem; vertical-align: -2px; }
+
+.fichas-canvas { display: block; width: 100%; height: 170px; margin-top: 1.5rem; }
+
+.arq-base { display: flex; align-items: center; gap: 2rem; padding-top: 1rem; }
+.arq-veredito { margin: 0; font-size: 1rem; color: var(--tinta); }
+.arq-veredito b { color: var(--navy); }
+.arq-sep { display: inline-block; width: 1.4rem; }

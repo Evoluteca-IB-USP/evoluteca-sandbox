@@ -1,6 +1,5 @@
-/* A página de um simulador: o console de parâmetros, o laboratório
-   (gráfico + lupa + linha do tempo) e o material de apoio. */
+/* A página de um simulador: o painel (réguas, gráfico, linha do tempo) e as
+   ferramentas que andam junto com a simulação. */
 @import "pagina-do-simulador.css";
-@import "painel-de-parametros.css";
-@import "area-da-simulacao.css";
-@import "material-de-apoio.css";
+@import "controles-do-simulador.css";
+@import "ferramentas.css";

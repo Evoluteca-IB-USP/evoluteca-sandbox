@@ -16,7 +16,7 @@ export function montar(secao, opcoes = {}) {
 
   /* a placa é o fundo; o texto, por cima */
   const tela = criar("canvas", { class: "fundo-tela", "aria-hidden": true });
-  const estado = criar("p", { class: "vivo-nota explica-estado" });
+  const estado = criar("p", { class: "vivo-estado explica-estado" });
   const placa = criarPlacaDeColonias(secao, tela);
 
   function elo(texto, acao) {

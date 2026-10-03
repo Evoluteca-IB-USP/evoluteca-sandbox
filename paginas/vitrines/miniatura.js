@@ -1,5 +1,5 @@
 /* A vinheta de um simulador: o gráfico dele em miniatura, sem eixos nem
-   rótulos, para a folha de contato do catálogo e os cards. Determinística
+   rótulos, para o mosaico da home e os cards. Determinística
    por semente; com `t` (segundos), anima em ciclos. */
 
 import { criarRng, rbinom } from "r";

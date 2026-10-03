@@ -5,7 +5,7 @@
 
      1  o cabeçalho, primeiro, porque é ele que mede --altura-topo e a
         sobreposição da abertura depende dessa medida;
-     2  a abertura e a faixa do Sobre, que animam sozinhas;
+     2  a abertura, a nota viva dela e a faixa do Sobre, que animam sozinhas;
      3  as seções 01 e 02, montadas e decoradas;
      4  os simuladores, POR ÚLTIMO: ali há um import dinâmico por modelo, e
         nem a abertura nem o Sobre podem ficar esperando o acervo carregar
@@ -15,6 +15,7 @@ import { lista, destaques } from "../../modelos-de-simulacao/__pacote__.js";
 import { kicker, pontuar, recortar } from "../__pacote__.js";
 import { ativarTopoSobreposto } from "./cabecalho-sobreposto.js";
 import { animarAbertura } from "./abertura.js";
+import { contarGeracoes } from "./geracoes-ao-fundo.js";
 import { animarFaixaDeAmostra } from "./faixa-de-amostra.js";
 import * as porqueAprender from "./porque-aprender/__pacote__.js";
 import * as oQueEUmSimulador from "./o-que-e-um-simulador/__pacote__.js";
@@ -34,15 +35,13 @@ function decorar(secao, numeroDaSecao) {
 export async function montarHome() {
   ativarTopoSobreposto();
   animarAbertura(document.getElementById("hero-canvas"));
+  contarGeracoes(document.getElementById("abertura-nota"));
   animarFaixaDeAmostra(document.getElementById("sobre-amostra"));
 
-  /* ---- 01 · por que aprender evolução: as seis apostas ----
-     O corpo vira um díptico: a cabeça e a trilha do índice entram na coluna
-     do texto, ao lado do palco que fica fixo. */
+  /* ---- 01 · por que aprender evolução: as sete apostas ---- */
   const secaoPorque = document.getElementById("secao-porque");
   porqueAprender.montar(secaoPorque);
   decorar(secaoPorque, "Seção 01");
-  porqueAprender.diptico(secaoPorque);
 
   /* ---- 02 · o que é um simulador: a placa com os degraus ----
      A seção seguinte corta esta numa emenda. */

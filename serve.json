@@ -1,0 +1,7 @@
+{
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/catalogo", "destination": "/catalogo.html" },
+    { "source": "/simulador", "destination": "/simulador.html" }
+  ]
+}

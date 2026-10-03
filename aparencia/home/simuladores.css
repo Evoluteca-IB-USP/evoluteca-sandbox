@@ -1,17 +1,8 @@
 /* A seção "Simuladores": o palco da poeira, a ficha do passo e a trilha
    que diz em que passo a apresentação está. */
 
-.poeira-cabeca {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 0 4rem;
-  align-items: start;
-  margin-bottom: 1.5rem;
-}
-.poeira-cabeca .vivo-texto { max-width: 54ch; margin-bottom: 0; }
-
 .poeira-palco { position: relative; }
-.poeira-tela { display: block; width: 100%; height: clamp(360px, 47vh, 520px); }
+.poeira-tela { display: block; width: 100%; height: clamp(300px, 44vh, 480px); }
 .sr-viva { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* no fecho, a saída para o catálogo ganha peso: é o fim da história */
@@ -25,7 +16,7 @@
   justify-content: space-between;
   gap: .5rem 2rem;
   margin-top: .5rem;
-  min-height: 5rem;
+  min-height: 3.5rem;
 }
 .poeira-ficha { max-width: 74ch; }
 .poeira-ficha b { color: var(--navy); font-weight: 600; }
@@ -37,7 +28,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0 1.25rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 .poeira-passo {
   font: inherit;
@@ -67,7 +58,6 @@
 .poeira-barra i { display: block; height: 100%; width: 0; background: var(--amarelo); }
 
 @media (max-width: 900px) {
-  .poeira-cabeca { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
   .poeira-trilha { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.25rem; }
   .poeira-ficha { min-height: 4.5rem; }
   .poeira-tela { height: 320px; }

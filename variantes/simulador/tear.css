@@ -1,0 +1,16 @@
+/* ============ variante 1: o tear ============ */
+
+.tear { margin-top: 2.2rem; }
+.tear-canvas { display: block; width: 100%; height: 500px; border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda); }
+.tear-A { color: var(--navy); font-weight: 600; }
+
+.tear-base { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 2rem; padding-top: 1.2rem; }
+.tear-estado { margin: 0; font-size: 1rem; color: var(--tinta); }
+.tear-estado b { color: var(--navy); }
+.tear-sep { display: inline-block; width: 1.4rem; }
+
+.tear-rodadas { display: flex; align-items: center; flex-wrap: wrap; gap: .3rem; max-width: 380px; justify-content: flex-end; }
+.tear-rodadas > span[class^="legenda"] { margin: 0; width: 12px; height: 12px; animation: tear-cai .4s ease-out; }
+.tear-conta { margin-left: .7rem; font-size: .85rem; color: var(--tinta-suave); }
+.tear-conta b { color: var(--navy); }
+@keyframes tear-cai { from { transform: translateY(-10px); opacity: 0; } }

@@ -1,0 +1,53 @@
+/* ============ o que as três variantes compartilham ============ */
+
+.sim { padding: 2.2rem 0 5rem; }
+.sim-voltar { font-size: .85rem; color: var(--teal-escuro); text-decoration: none; }
+.sim-voltar:hover { text-decoration: underline; }
+.sim h1 { color: var(--navy); font-size: clamp(2.6rem, 4.6vw, 3.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 1.2rem 0 1.4rem; }
+.sim h1 span { color: var(--amarelo); }
+
+/* a frase com campos: o mesmo gesto da busca do catálogo */
+.frase { font-size: 1.45rem; font-weight: 300; color: var(--tinta); line-height: 1.6; margin: 0; }
+.frase-caixa { white-space: nowrap; }
+.frase-campo {
+  font: inherit;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  background: none;
+  border: 0;
+  border-bottom: 2px dashed var(--borda-forte);
+  border-radius: 0;
+  padding: 0 .1rem;
+  margin: 0 .15rem;
+  -moz-appearance: textfield;
+  transition: border-color .2s;
+}
+.frase-campo::-webkit-inner-spin-button, .frase-campo::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.frase-campo:hover { border-bottom-color: var(--tinta-suave); }
+.frase-campo:focus { outline: none; border-bottom: 2px solid var(--teal); }
+.frase-sufixo { font-weight: 600; color: var(--navy); margin-left: -.3rem; }
+
+.tocador { display: flex; align-items: center; gap: .6rem; }
+.tocador-botao {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--borda-forte);
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.tocador-botao svg { width: 16px; height: 16px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.tocador-botao:hover { border-color: var(--navy); }
+.tocador-principal { width: 52px; height: 52px; background: var(--navy); border-color: var(--navy); color: #fff; }
+.tocador-principal svg { width: 20px; height: 20px; }
+.tocador-principal:hover { background: #1d3380; }
+
+.legenda-a, .legenda-A { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: .35rem; vertical-align: -1px; }
+.legenda-A { background: var(--alelo-1); }
+.legenda-a { background: var(--alelo-2); }

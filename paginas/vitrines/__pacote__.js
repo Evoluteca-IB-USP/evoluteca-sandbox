@@ -1,5 +1,5 @@
 /* As figuras que apresentam um simulador sem ser ele: a vinheta pequena
-   (folha de contato) e a vitrine grande (o palco de cada tema do catálogo e
+   (o mosaico da home) e a vitrine grande (o palco de cada tema do catálogo e
    o percurso da home). Rodam o modelo de verdade, com semente fixa, e
    animam em ciclos — mas não têm controle nenhum: quem quiser mexer abre o
    simulador. */

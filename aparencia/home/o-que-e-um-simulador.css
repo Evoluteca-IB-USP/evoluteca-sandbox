@@ -37,18 +37,7 @@
 }
 .frente-cabeca .vivo-texto { margin-bottom: .2rem; }
 
-.explica-estado {
-  width: fit-content;
-  margin: .7rem 0 0;
-  max-width: none;
-  font-variant-numeric: tabular-nums;
-  background: rgba(12, 21, 58, .72);
-  border: 1px solid rgba(255, 255, 255, .22);
-  border-radius: 999px;
-  padding: .4rem 1rem;
-  color: rgba(255, 255, 255, .82);
-}
-.explica-estado b { font-weight: 600; color: #fff; }
+.explica-estado { margin-top: .7rem; }
 
 /* os degraus: quatro colunas sob a figura, numeradas — legenda de uma figura só, não cards */
 .degraus {

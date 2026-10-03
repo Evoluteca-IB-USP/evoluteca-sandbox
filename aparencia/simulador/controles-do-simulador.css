@@ -1,0 +1,32 @@
+/* ============ os controles: réguas-linha, linha do tempo, sortear ============ */
+
+.tocador { display: flex; align-items: center; gap: .6rem; }
+.tocador-botao {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--borda-forte);
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.tocador-botao svg { width: 16px; height: 16px; fill: currentColor; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.tocador-botao:hover { border-color: var(--navy); }
+.tocador-principal { width: 52px; height: 52px; background: var(--navy); border-color: var(--navy); color: #fff; }
+.tocador-principal svg { width: 20px; height: 20px; }
+.tocador-principal:hover { background: #1d3380; }
+
+/* ---------- linha do tempo e sortear ---------- */
+.tempo { display: flex; align-items: center; gap: 1.4rem; }
+.tempo-entrada { flex: 1; }
+.tempo-rotulo { min-width: 12ch; font-size: .9rem; color: var(--tinta-suave); white-space: nowrap; }
+.tempo-rotulo b { color: var(--navy); font-variant-numeric: tabular-nums; }
+.sortear { font: inherit; font-size: .88rem; font-weight: 600; background: none; border: 0; padding: 0; color: var(--teal-escuro); cursor: pointer; white-space: nowrap; }
+.sortear:hover { text-decoration: underline; text-underline-offset: 3px; }
+.sortear-dado { font-size: 1.15rem; vertical-align: -.08em; margin-right: .15rem; }
+
+/* a régua-linha mora em componentes/regua-linha.css: a home usa o mesmo slider nas apostas */

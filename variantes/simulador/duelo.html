@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Deriva genética · variante 3, o duelo</title>
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="comum/comum.css">
+  <link rel="stylesheet" href="duelo.css">
+  <script type="importmap">
+    { "imports": { "r": "../../motor-de-simuladores/r/__pacote__.js", "escrever-html": "../../escrever-html/__pacote__.js", "portugues": "../../portugues/__pacote__.js" } }
+  </script>
+</head>
+<body>
+  <main id="conteudo" class="sim">
+    <div class="container">
+      <a class="sim-voltar" href="../../catalogo.html">← Simuladores</a>
+      <h1>Deriva genética<span>.</span></h1>
+      <p class="frase" id="frase"></p>
+    </div>
+    <div class="container duelo">
+      <div id="raias"></div>
+      <div id="tocador"></div>
+    </div>
+  </main>
+  <script type="module">
+    import { montarMoldura } from "./comum/comum.js";
+    import { montarDuelo } from "./duelo.js";
+    montarMoldura();
+    montarDuelo();
+  </script>
+</body>
+</html>

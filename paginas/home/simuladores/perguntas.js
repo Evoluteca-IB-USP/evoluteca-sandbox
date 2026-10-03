@@ -30,8 +30,7 @@ export const PERGUNTAS = {
 
 export const FECHO = {
   texto: "Perguntas diferentes, o mesmo instrumento.",
-  ficha: "Muda o modelo e muda a figura; o resto é igual em todos. Os números ficam na sua mão, a simulação corre " +
-         "geração a geração e a mesma configuração dá sempre o mesmo resultado — dá para mudar uma coisa só, rodar " +
-         "de novo e comparar as duas. Cada um traz junto o conceito explicado, um roteiro de atividade e um guia " +
-         "para quem vai dar a aula.",
+  ficha: "Todos funcionam do mesmo jeito: você mexe nos números e a simulação corre geração a geração. Junto " +
+         "vêm a derivação das fórmulas com os números da rodada, um caderno para comparar as rodadas e os dados " +
+         "para levar ao R.",
 };

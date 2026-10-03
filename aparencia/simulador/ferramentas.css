@@ -1,0 +1,72 @@
+/* ============ as ferramentas sob o painel, escolhidas na trilha de passos ============ */
+
+/* as fórmulas: Open Sans, letras em itálico, números retos */
+.eq { margin: 0; font-size: 1.2rem; font-weight: 400; color: var(--navy); line-height: 1.6; }
+.eq i { font-style: italic; }
+.eq sub, .eq sup { font-size: .66em; line-height: 0; }
+.eq-valores { font-size: .95rem; color: var(--tinta); }
+.eq-num { font-variant-numeric: tabular-nums; }
+.eq-termo { border-radius: 3px; padding: 0 .08em; transition: background .2s; }
+.eq-termo.acesa { background: rgba(252, 180, 33, .3); }
+.frac { display: inline-flex; flex-direction: column; vertical-align: middle; font-size: .8em; line-height: 1.2; text-align: center; margin: 0 .15em; }
+.frac > span + span { border-top: 1px solid currentColor; padding-top: .08em; }
+
+.eq-titulo { margin: 0 0 .5rem; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-suave); }
+.eq-medido::before { content: ""; display: inline-block; width: 16px; margin-right: .4rem; vertical-align: middle; border-top: 2px solid var(--navy); }
+
+.ferramentas { margin-top: 3.5rem; }
+.abas-corpo { padding-top: 1.8rem; min-height: 340px; }
+.abas-nota { margin: 0 0 1.2rem; font-size: .9rem; color: var(--tinta-suave); }
+
+/* ---------- caderno ---------- */
+.caderno-amostra { display: inline-block; width: 18px; margin: 0 .5rem 0 .6rem; vertical-align: middle; border-top: 2px solid #b9bdc9; }
+.caderno-fila { display: grid; align-items: center; border-bottom: 1px solid var(--borda); }
+.caderno-cabeca, .caderno-mudou { border-bottom: 0; }
+.caderno-mudou { border-bottom: 1px solid var(--borda-forte); }
+.caderno-resumo { background: var(--fundo-suave); }
+.caderno-rotulo { padding: .55rem 0; font-size: .85rem; color: var(--tinta-suave); }
+.caderno-rotulo i { color: var(--navy); }
+.caderno-celula { padding: .55rem .4rem; text-align: center; font-size: .92rem; color: var(--tinta); font-variant-numeric: tabular-nums; }
+.caderno-mudou .caderno-celula { font-size: .82rem; color: var(--navy); }
+.caderno-mudou .caderno-celula small { display: block; font-size: .72rem; font-weight: 600; color: #9a7318; }
+.caderno-celula.mudou { font-weight: 700; color: var(--navy); background: rgba(252, 180, 33, .22); }
+.caderno-celula.atual { box-shadow: inset 2px 0 var(--navy), inset -2px 0 var(--navy); }
+.caderno-no { width: 30px; height: 30px; padding: 0; font: inherit; font-size: .8rem; font-weight: 700; color: #fff; background: var(--teal); border: 0; border-radius: 50%; cursor: pointer; box-shadow: 0 0 0 4px #fff; transition: transform .2s; }
+.caderno-no:hover { transform: scale(1.1); }
+.caderno-no.atual { background: var(--navy); box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--amarelo); }
+
+/* ---------- derivação ---------- */
+.derivacoes { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 3rem; }
+.derivacao-passos { position: relative; margin: .4rem 0 0; padding: 0 0 0 2.4rem; list-style: none; counter-reset: passo; }
+.derivacao-passos::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; border-left: 2px dotted var(--teal-claro); }
+.derivacao-passo { position: relative; padding-bottom: 1.6rem; counter-increment: passo; }
+.derivacao-passo::before { content: counter(passo); position: absolute; left: -2.4rem; top: 0; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .75rem; font-weight: 700; box-shadow: 0 0 0 4px #fff; }
+.derivacao-texto { margin: 0 0 .3rem; font-size: .95rem; line-height: 1.55; color: var(--tinta); max-width: 52ch; }
+.derivacao-passo .eq { font-size: 1.3rem; }
+.derivacao-passo .eq-valores { font-size: .92rem; }
+.derivacao-passo .eq-valores .eq-num { color: var(--teal-escuro); font-weight: 600; }
+.derivacao-passo .eq-valores b { color: var(--navy); }
+.derivacao-medido { margin: .25rem 0 0; font-size: .82rem; color: var(--tinta-suave); }
+.derivacao-medido b { color: var(--navy); }
+
+/* ---------- por dentro ---------- */
+.lupa { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; align-items: start; }
+.lupa-canvas { display: block; width: 100%; height: 260px; }
+.lupa-conta { display: flex; align-items: baseline; gap: .5rem; margin: 0 0 .6rem; font-size: 1rem; color: var(--tinta); }
+.lupa-conta b { font-size: 2rem; font-weight: 300; color: var(--navy); font-variant-numeric: tabular-nums; }
+.lupa-conta small { margin-left: auto; color: var(--tinta-suave); }
+.lupa-amostra { width: 12px; height: 12px; border-radius: 50%; align-self: center; }
+
+/* ---------- dados ---------- */
+.dados { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.dados-tabela { width: 100%; border-collapse: collapse; font-size: .88rem; font-variant-numeric: tabular-nums; }
+.dados-tabela th { padding: .5rem .6rem; text-align: right; font-family: var(--fonte-mono); font-size: .78rem; font-weight: 600; color: var(--tinta-suave); border-bottom: 1px solid var(--borda-forte); }
+.dados-tabela td { padding: .45rem .6rem; text-align: right; color: var(--tinta); border-bottom: 1px solid var(--borda); }
+.dados-tabela tr.agora td { color: var(--navy); font-weight: 700; background: rgba(252, 180, 33, .15); }
+.dados-pulo td { text-align: center; color: var(--tinta-suave); border-bottom: 0; padding: 0; }
+.dados-lado { display: flex; flex-direction: column; gap: 1rem; }
+.dados-lado .sortear { align-self: flex-start; }
+.dados-caixa { position: relative; }
+.dados-codigo { margin: 0; padding: 1.1rem 1.2rem; font-family: var(--fonte-mono); font-size: .82rem; line-height: 1.6; color: var(--navy); background: var(--fundo-suave); border-left: 3px solid var(--teal-claro); border-radius: 0 var(--raio) var(--raio) 0; overflow-x: auto; }
+.dados-copiar { position: absolute; top: .6rem; right: .6rem; font: inherit; font-size: .75rem; padding: .2rem .6rem; color: var(--teal-escuro); background: #fff; border: 1px solid var(--borda-forte); border-radius: 999px; cursor: pointer; }
+.dados-copiar:hover { border-color: var(--teal); }

@@ -1,0 +1,46 @@
+/* ============ a urna de sorteio, ao lado da busca ============ */
+
+.urna-bolas {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 7px;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.urna-bola { aspect-ratio: 1; border-radius: 50%; border: 1.3px solid var(--teal-claro); background: #fff; transition: transform .12s, background .12s, border-color .12s, opacity .2s; }
+.urna-pronta { background: var(--navy); border-color: var(--navy); }
+.urna-vez { background: var(--amarelo); border-color: var(--amarelo); transform: scale(1.45); }
+.urna-fora { background: transparent; border: 1.5px dashed #b5b5b5; transform: scale(.72); }
+.urna-bolas:focus-visible { outline: 2px solid var(--teal); outline-offset: 6px; border-radius: 4px; }
+
+@keyframes urna-chacoalhar {
+  0%, 100% { translate: 0 0; }
+  25% { translate: 0 -2px; }
+  75% { translate: 0 1px; }
+}
+.urna-bolas:hover .urna-bola:not(.urna-fora) { animation: urna-chacoalhar .45s ease-in-out; }
+.urna-bolas:hover .urna-bola:nth-child(3n) { animation-delay: .06s; }
+.urna-bolas:hover .urna-bola:nth-child(3n + 1) { animation-delay: .12s; }
+@media (prefers-reduced-motion: reduce) { .urna-bolas:hover .urna-bola { animation: none; } }
+
+.urna-linha { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1rem; margin: 1rem 0 0; min-height: 1.5em; font-size: .9rem; }
+.urna-resultado:empty { display: none; }
+.urna-titulo { font-weight: 700; color: var(--navy); text-decoration: none; }
+a.urna-titulo:hover { color: var(--teal-escuro); }
+.urna-titulo-previsto { font-weight: 400; color: var(--tinta-suave); }
+.urna-acao {
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--teal-escuro);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.urna-acao:hover { text-decoration: underline; text-underline-offset: 3px; }
+.urna-dado { font-size: 1.15rem; vertical-align: -.08em; margin-right: .15rem; }

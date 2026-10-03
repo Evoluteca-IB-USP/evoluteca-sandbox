@@ -34,7 +34,7 @@ export function criarDegraus({ recomecar, deNovo, selecao, mutacao }, linkCatalo
         "deixa fazer.")),
     degrau("4", "É para isso que a Evoluteca existe.",
       T("Evolução se ensina com figuras paradas e fórmulas. Cada simulador do acervo é um " +
-        "modelo como este, com o que se pode mudar à mão, o conceito explicado, um roteiro de " +
-        "atividade e um guia para o professor — para a aula ter algo para rodar. "),
+        "modelo como este, com o que se pode mudar à mão, a derivação das fórmulas com os números " +
+        "da rodada e um caderno para comparar as rodadas — para a aula ter algo para rodar. "),
       criar("a", { class: "link-seta", href: linkCatalogo, texto: "Ver os simuladores" })));
 }

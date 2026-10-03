@@ -61,22 +61,21 @@
       <canvas class="abertura-canvas" id="hero-canvas" aria-hidden="true"></canvas>
       <div class="container">
         <div class="abertura-conteudo">
-          <h1>Um acervo de simuladores de <strong>evolução e genética</strong>.</h1>
+          <h1>A evolução, <strong>em tempo de aula</strong>.</h1>
           <p class="abertura-lede">
-            Cada simulador é um modelo de genética de populações que roda no
-            navegador. Você define o tamanho da população, a intensidade da
-            seleção ou a frequência inicial de um alelo e acompanha, geração a
-            geração, o que acontece — na tela, em segundos, processos que na
-            natureza levam milhares de gerações.
+            Simuladores de genética de populações para o ensino médio e a
+            graduação. A turma muda a população, a seleção e o acaso — e vê
+            milhares de gerações passarem em segundos.
           </p>
-          <p class="abertura-nota">
-            Feito para o ensino médio e a graduação. Cada simulador vem com a
-            explicação do conceito, um roteiro de atividade e um guia para o
-            professor.
+          <!-- os números e a troca de espécie vêm de paginas/home/geracoes-ao-fundo.js -->
+          <p class="abertura-nota" id="abertura-nota">
+            Enquanto você lia, o fundo andou <b data-geracoes>0 gerações</b>.
+            Em <button type="button" class="vivo-elo" data-especie title="Trocar a população">humanos</button>
+            — uma geração a cada <span data-ritmo>25 anos</span> — seriam <b data-tempo>0 anos</b>.
           </p>
-          <div class="abertura-acoes">
-            <a class="botao botao-claro botao-grande" href="catalogo.html">Ver os simuladores <span class="seta" aria-hidden="true">→</span></a>
-          </div>
+          <p class="vivo-estado">
+            <b>Ao fundo:</b> populações de 150 indivíduos · nenhuma versão do gene leva vantagem · deriva genética.
+          </p>
         </div>
       </div>
       <!-- ============ a saída da abertura ============
@@ -108,7 +107,7 @@
     </section>
 
     <!-- ============ por que aprender evolução ============
-         Seis apostas sobre casos reais — leia, aposte, veja o modelo rodar.
+         Sete apostas sobre casos reais — leia, aposte, veja o modelo rodar.
          Montada por paginas/home/porque-aprender/ (rodada de variantes de 2026-08). -->
     <section id="secao-porque"></section>
 
@@ -127,65 +126,45 @@
     <section class="secao" id="secao-simuladores">
       <div class="container">
         <h2 class="titulo-secao">Simuladores</h2>
+        <p class="intro-secao">Cada simulador nasce de <b>uma pergunta que não se responde de cabeça</b>.</p>
       </div>
     </section>
 
     <!-- ============ sobre ============
-         A história do projeto — não a explicação do que é um simulador, que
-         é a seção de cima. Como surgiu, por quê, como foi feito, o intuito:
-         uma frase de identidade, quatro blocos rotulados em duas colunas, a
-         amostra em faixa e o expediente. -->
+         Quem fez, por que existe, como os modelos são conferidos e como
+         contribuir. O que é um simulador e para quem é o site já foram ditos
+         acima: aqui não se repetem. -->
     <section class="secao secao-suave" id="sobre">
       <div class="container">
         <h2 class="titulo-secao">Sobre</h2>
-        <p class="sobre-lede">
-          Um projeto de extensão do Instituto de Biociências da USP, em
-          código aberto, para a sala de aula.
-        </p>
+        <p class="intro-secao">Um projeto de extensão do Instituto de Biociências da USP.</p>
 
         <div class="sobre-itens">
           <div class="sobre-item">
-            <h3>Como surgiu</h3>
+            <h3>Por que existe</h3>
             <p>
-              A Evoluteca nasceu como projeto de extensão do Instituto de
-              Biociências da USP, da vontade de dar à aula de evolução o que
-              ela quase nunca tem: um experimento. A forma que isso tomou foi
-              um site — modelos pequenos, escritos para o navegador, com o
-              material da aula em volta.
+              A aula de evolução quase nunca tem um experimento. O que havia
+              para mostrar esses processos em movimento estava espalhado por
+              dezenas de sites, em inglês, e muitas vezes pedia para instalar
+              um programa — e o garimpo caía no professor, um por um.
             </p>
           </div>
           <div class="sobre-item">
-            <h3>Por quê</h3>
+            <h3>Como os modelos são conferidos</h3>
             <p>
-              Evolução é feita de processos que ninguém vê acontecer:
-              populações inteiras, milhares de gerações, o acaso agindo aos
-              poucos. O que existia para mostrar isso em movimento estava
-              espalhado por dezenas de sites, em inglês, e muitas vezes exigia
-              instalar um programa — e o trabalho de garimpar, traduzir e
-              adaptar caía no professor, um por um.
+              Cada modelo é curto e conferido contra resultados clássicos: a
+              heterozigosidade perde 1/(2N) por geração; a chance de um alelo
+              se fixar é a sua frequência inicial. O sorteio tem semente, então
+              a turma inteira roda junto e compara os mesmos números.
             </p>
           </div>
           <div class="sobre-item">
-            <h3>Como foi feito</h3>
+            <h3>Como contribuir</h3>
             <p>
-              Nada roda em servidor: quem calcula a simulação é o navegador de
-              quem está usando. Os modelos são curtos e conferidos contra
-              resultados clássicos — a heterozigosidade perde 1/(2N) a cada
-              geração, a chance de fixar um alelo é a sua frequência inicial —
-              e o sorteio tem semente: a mesma configuração dá sempre o mesmo
-              resultado, então a turma inteira roda junto e compara os mesmos
-              números.
-            </p>
-          </div>
-          <div class="sobre-item">
-            <h3>O intuito</h3>
-            <p>
-              Chegar à escola pública, que acessa pelo celular e em conexão
-              ruim — daí o site não pedir cadastro, não instalar nada e ser
-              leve. E crescer por temas e por outras mãos: o código é aberto e
-              o <a href="https://github.com/lucaanasser/evoluteca" rel="external">repositório é público</a>,
-              para ler o modelo, corrigir, reaproveitar e propor um simulador
-              novo.
+              O código é aberto e o
+              <a href="https://github.com/lucaanasser/evoluteca" rel="external">repositório é público</a>:
+              dá para ler cada modelo, corrigir, reaproveitar em aula e propor
+              um simulador novo.
             </p>
           </div>
         </div>
@@ -205,7 +184,6 @@
           <div><dt>Desenvolvimento</dt><dd>Luca Marinho Nasser, Ciências Moleculares</dd></div>
           <div><dt>Orientação</dt><dd>Diogo Amaral R. Melo</dd></div>
           <div><dt>Repositório</dt><dd><a href="https://github.com/lucaanasser/evoluteca" rel="external">github.com/lucaanasser/evoluteca</a></dd></div>
-          <div><dt>Licenças</dt><dd>Textos em CC BY 4.0, código em MIT</dd></div>
         </dl>
       </div>
     </section>

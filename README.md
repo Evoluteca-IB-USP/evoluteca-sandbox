@@ -8,12 +8,13 @@ Instituto de Biociências da USP.
 > com três simuladores funcionais: deriva genética, Hardy–Weinberg e seleção em
 > um locus. O restante do acervo previsto no projeto entra ao longo de 2026–27.
 
-Cada simulador é um pequeno laboratório: a simulação **roda no tempo** (▶,
-passo a passo, linha do tempo arrastável), uma **lupa** mostra a população como
-bolinhas (alelos, genótipos ou os indivíduos sorteados), há **cenários** de um
-clique com uma dica do que observar, e dá para **guardar uma rodada como
-referência** e comparar com a seguinte. Tudo isso é montado pelo motor a partir
-do bloco `meta` do modelo — quem escreve um modelo não escreve interface.
+Cada simulador é um pequeno laboratório: réguas para os parâmetros, o gráfico
+que **roda no tempo** (▶, passo a passo, linha do tempo arrastável, que desce
+junto quando se rola a página) e, embaixo, uma trilha de ferramentas que andam
+com a simulação — o **caderno** das rodadas, a **derivação das fórmulas** com os
+números da rodada, a população **por dentro** e os **dados para o R**. Tudo
+isso é montado pelo motor a partir da `ficha.js` do modelo — quem escreve um
+modelo não escreve interface.
 
 ## Rodando localmente
 
@@ -31,10 +32,10 @@ Abra <http://localhost:8000>. Editou um arquivo? Salve e recarregue.
 ```
 evoluteca_2/
 ├── index.html                página inicial (abertura, as quatro seções, sobre)
-├── catalogo.html             catálogo: banner (busca, nível, duração, temas, folha de contato) + uma seção por tema
-├── simulador.html            um simulador (simulador.html?modelo=<slug>): console + laboratório + material
+├── catalogo.html             catálogo: banner (busca em frase, urna de sorteio) + estante (filtros, cartões por tema)
+├── simulador.html            um simulador (simulador.html?modelo=<slug>): painel + trilha de ferramentas
 │
-├── escrever-html/            escrever HTML em JS: `criar`, ícones, Markdown → HTML   ← importmap "escrever-html"
+├── escrever-html/            escrever HTML em JS: `criar`, ícones                      ← importmap "escrever-html"
 ├── portugues/                números e palavras como se escrevem em português        ← importmap "portugues"
 │
 ├── aparencia/                TODA a roupagem estética, em camadas
@@ -48,25 +49,26 @@ evoluteca_2/
 ├── motor-de-simuladores/     identidade estreita: lógica e construção, nunca cor
 │   ├── r/                    o vocabulário do R em JS (rbinom, seq, sd…)             ← importmap "r"
 │   ├── graficos/             canvas puro: bases/ (superfície e eixos) e tipos-de-grafico/
-│   └── interface/            monta a página do simulador a partir do bloco `meta`
-│       ├── montar-simulador.js   o orquestrador (o estado da simulação mora aqui)
-│       ├── controles/        o que a pessoa manipula: sliders, cenários, linha do tempo
-│       └── mostradores/      o que ela lê: legenda, lupa da população, material de apoio
+│   └── interface/            monta a página do simulador a partir da `ficha.js` do modelo
+│       ├── montar-simulador.js   o orquestrador; painel.js (réguas, gráfico, tempo) e sessao.js (o estado)
+│       ├── controles/        régua-linha, linha do tempo, a linha do tempo flutuante
+│       ├── graficos-da-pagina/   peças de gráfico e os tipos: réplicas, curva, barras
+│       └── abas/             a trilha de ferramentas: caderno, fórmulas, por dentro, dados para o R
 │
 ├── paginas/                  o código das páginas do site — nunca entra no motor
 │   ├── emenda-entre-secoes.js · titulo-de-secao.js
 │   ├── desenho-em-canvas/    o que as figuras animadas têm em comum
 │   ├── vitrines/             a vinheta e a vitrine que apresentam um simulador
 │   ├── home/                 montar-home.js + abertura, porque-aprender/, o-que-e-um-simulador/, simuladores/
-│   └── catalogo/             montar-catalogo.js + banner, folha de contato, seções por tema, palco
+│   └── catalogo/             montar-catalogo.js + banner com busca, urna de sorteio, estante
 │
 ├── modelos-de-simulacao/     os simuladores: um diretório por slug
 │   ├── __pacote__.js         a lista de slugs publicados (o único índice do projeto)
 │   ├── niveis-e-temas.js     o vocabulário do bloco `meta`
 │   ├── previstos.js          fichas de mentira do acervo previsto (aparecem no catálogo, não abrem)
 │   └── <slug>/
-│       ├── modelo.js         bloco `meta` + `simular()` — o único código do simulador
-│       └── conceito.md · roteiro.md · professor.md
+│       ├── modelo.js         `simular()` + o `meta` que o catálogo e a home leem
+│       └── ficha.js          o que a página do simulador mostra: réguas, gráficos, fórmulas, caderno
 │
 ├── imagens/                  logos IB e USP (brancas) e o favicon gerado do símbolo do IB
 ├── testes/                   testes da biologia (`node testes/rodar-no-node.mjs`) e o gerador da aresta

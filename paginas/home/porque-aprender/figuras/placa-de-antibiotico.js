@@ -2,22 +2,22 @@ import { criar } from "escrever-html";
 import { criarRng } from "r";
 import { numero } from "portugues";
 import { canvasNo, laco, rotulo, NAVY, TEAL, TEAL_ESC, TEAL_CLARO, AMARELO, SUAVE } from "../../../desenho-em-canvas/__pacote__.js";
-import { legenda } from "./legenda-de-bolinhas.js";
 
 const reduzido = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* bactérias atravessam faixas de antibiótico */
 export function placa(palco, pe) {
-  const CEL = 3, FAIXAS = 5, TAXA = 6500, POR_DIA = 6500, MUT = 1 / 2500, MAX_DIAS = 40;
+  const CEL = 3, FAIXAS = 5, MUT = 1 / 2500, MAX_DIAS = 40;
   const CORES = [TEAL_CLARO, TEAL, TEAL_ESC, NAVY, AMARELO];
   const NOMES = ["sem antibiótico", "dose fraca", "10× mais", "100× mais", "1 000× mais"];
   const VIZ = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
   let { ctx, W, H } = canvasNo(palco);
   const GW = Math.floor(W / CEL), GH = Math.floor((H - 26) / CEL), Y0 = 26;
+  const TAXA = 48 * GH, POR_DIA = TAXA;                 // o relógio anda com a altura da placa: mais linhas, mais tentativas por dia
   const faixaDe = (x) => Math.min(FAIXAS - 1, Math.floor((x / GW) * FAIXAS));
   let rng, res, frente, tentativas, chegou, parar = null, semente = 2016, maior = 0;
   const conta = criar("p", { class: "vivo-nota" });
-  pe.replaceChildren(criar("div", {}, conta, legenda(CORES.map((c, i) => [c, i ? `resiste a ${NOMES[i]}` : "bactéria comum"]))));
+  pe.replaceChildren(criar("div", {}, conta, criar("p", { class: "vivo-nota", texto: "Cada bactéria tem a cor da faixa mais forte que ela aguenta." })));
 
   function fundo() {
     ctx.clearRect(0, 0, W, H);
@@ -25,7 +25,8 @@ export function placa(palco, pe) {
       const x0 = (k / FAIXAS) * W, x1 = ((k + 1) / FAIXAS) * W;
       ctx.fillStyle = `rgba(20,37,96,${0.03 * k})`; ctx.fillRect(x0, Y0, x1 - x0, H - Y0);
       ctx.strokeStyle = "#e5e5e5"; ctx.beginPath(); ctx.moveTo(x0, Y0); ctx.lineTo(x0, H); ctx.stroke();
-      rotulo(ctx, NOMES[k], x0 + 8, 8, { cor: k ? SUAVE : TEAL_ESC, peso: k === FAIXAS - 1 ? "600" : "" });
+      ctx.fillStyle = CORES[k]; ctx.fillRect(x0 + 2, 9, 9, 9);
+      rotulo(ctx, NOMES[k], x0 + 16, 8, { cor: k === FAIXAS - 1 ? NAVY : SUAVE, peso: k === FAIXAS - 1 ? "600" : "" });
     }
     ctx.strokeStyle = "#e5e5e5"; ctx.strokeRect(0.5, Y0 + 0.5, W - 1, H - Y0 - 1);
   }

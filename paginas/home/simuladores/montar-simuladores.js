@@ -46,17 +46,12 @@ export function montar(secao, entradas, opcoes = {}) {
   const tela = criar("canvas", { class: "poeira-tela" });
   const viva = criar("p", { class: "sr-viva", "aria-live": "polite" });
   const ficha = criar("p", { class: "vivo-nota poeira-ficha" });
-  const elo = criar("a", { class: "link-seta", href: linkCatalogo, texto: "Ver os simuladores" });
+  const elo = criar("a", { class: "link-seta", href: linkCatalogo });
   const deNovo = criar("button", { type: "button", class: "vivo-elo poeira-denovo", hidden: true, texto: "ver de novo" });
   const pe = criar("div", { class: "poeira-pe" }, ficha, criar("span", { class: "poeira-acoes" }, deNovo, elo));
   const trilha = criar("div", { class: "poeira-trilha" });
 
   container.append(
-    criar("div", { class: "poeira-cabeca" },
-      criar("p", { class: "vivo-frase", html: "Cada simulador nasce de <b>uma pergunta que não se responde de cabeça</b>." }),
-      criar("p", { class: "vivo-texto", html:
-        "A figura que se forma abaixo não é ilustração: é a saída do próprio simulador que responde a pergunta, " +
-        "rodando aqui com valores que ele aceita. Cada um mostra também uma coisa que esses modelos sabem fazer." })),
     criar("div", { class: "poeira-palco" }, tela, viva), pe, trilha);
 
   /* ---------- os passos vêm do acervo, na ordem de PERGUNTAS ---------- */
@@ -106,7 +101,7 @@ export function montar(secao, entradas, opcoes = {}) {
       const texto = poeiraDeTexto(W, H, FECHO.texto, rng);
       return { fig: { pts: texto, eixos: null }, texto, textoProx: texto,
                atraso: texto.map(() => 0), dur: TEMPOS_FECHO,
-               ficha: FECHO.ficha, href: linkCatalogo, rotulo: "Ver os simuladores" };
+               ficha: FECHO.ficha, href: linkCatalogo, rotulo: "Ver todos no catálogo" };
     }
 
     const { meta, simular } = passo.modulo;

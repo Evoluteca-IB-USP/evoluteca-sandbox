@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Deriva genética · variante 1, o tear</title>
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="comum/comum.css">
+  <link rel="stylesheet" href="tear.css">
+  <script type="importmap">
+    { "imports": { "r": "../../motor-de-simuladores/r/__pacote__.js", "escrever-html": "../../escrever-html/__pacote__.js", "portugues": "../../portugues/__pacote__.js" } }
+  </script>
+</head>
+<body>
+  <main id="conteudo" class="sim">
+    <div class="container">
+      <a class="sim-voltar" href="../../catalogo.html">← Simuladores</a>
+      <h1>Deriva genética<span>.</span></h1>
+      <p class="frase" id="frase"></p>
+    </div>
+    <div class="container tear">
+      <canvas class="tear-canvas" id="tear"></canvas>
+      <div class="tear-base">
+        <div id="tocador"></div>
+        <p class="tear-estado" id="estado"></p>
+        <div class="tear-rodadas" id="rodadas"></div>
+      </div>
+    </div>
+  </main>
+  <script type="module">
+    import { montarMoldura } from "./comum/comum.js";
+    import { montarTear } from "./tear.js";
+    montarMoldura();
+    montarTear();
+  </script>
+</body>
+</html>

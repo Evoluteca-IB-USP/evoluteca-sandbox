@@ -18,9 +18,12 @@
      faz o fim do laço encontrar o começo.
 
    API: animarAbertura(canvas)
+        VELOCIDADE: gerações por segundo do fundo
    ============================================================ */
 
 import { criarRng, rbinom, rnorm } from "r";
+
+export const VELOCIDADE = 9;                       // gerações por segundo
 
 export function animarAbertura(canvas) {
   const ctx = canvas.getContext("2d");
@@ -143,7 +146,6 @@ export function animarAbertura(canvas) {
   });
 
   /* animação: sempre para a frente; como os dados formam um laço, nunca acaba */
-  const VELOCIDADE = 9;                            // gerações por segundo
   let posicaoAtual = 0, t0 = null;
   function quadro(agora) {
     if (t0 === null) t0 = agora;

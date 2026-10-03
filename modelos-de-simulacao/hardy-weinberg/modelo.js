@@ -1,5 +1,7 @@
 import { seq } from "r";
 
+/* O que o catálogo e a home leem deste simulador. A página do simulador
+   lê a ficha.js, ao lado. */
 export const meta = {
   titulo: "Equilíbrio de Hardy–Weinberg",
   descricao:
@@ -8,21 +10,10 @@ export const meta = {
   tema: "populacoes",
   tempo: "10 min",
   parametros: [
-    { nome: "p", rotulo: "Frequência do alelo A", min: 0.02, max: 0.98, valor: 0.5, passo: 0.01 },
-    { nome: "N", rotulo: "Tamanho da amostra",    min: 10,   max: 5000, valor: 100, escala: "log" },
+    { nome: "p", rotulo: "Frequência do alelo A", valor: 0.5 },
+    { nome: "N", rotulo: "Tamanho da amostra",    valor: 100 },
   ],
-  cenarios: [
-    { rotulo: "Amostra pequena", valores: { N: 20 },
-      dica: "Vinte indivíduos: as barras da amostra fogem bastante do esperado — sem nenhuma evolução acontecendo." },
-    { rotulo: "Amostra grande", valores: { N: 5000 },
-      dica: "Com milhares de indivíduos, amostra e esperado quase coincidem: é a lei dos grandes números." },
-    { rotulo: "Alelo raro", valores: { p: 0.9, N: 1000 },
-      dica: "q = 0,1: só 1% dos indivíduos é aa, mas 18% são portadores Aa. Alelo raro vive em heterozigoto." },
-  ],
-  saida: {
-    tipo: "barras", y: "frequência genotípica", ylim: [0, 1],
-    alelos: ["A", "a"],          // liga a lupa da amostra (bolinhas = indivíduos, coloridos por genótipo)
-  },
+  saida: { tipo: "barras", y: "frequência genotípica" },
 };
 
 export function simular({ p, N }, rng) {
@@ -45,11 +36,4 @@ export function simular({ p, N }, rng) {
     ],
     individuos,
   };
-}
-
-export function resumo(resultado, { p, N }) {
-  const [fAA, fAa] = resultado.grupos[1].valores;
-  const pObs = fAA + fAa / 2;
-  const fmt = (x) => x.toLocaleString("pt-BR", { maximumFractionDigits: 3 });
-  return `p esperado = ${fmt(p)} · p̂ estimado na amostra = ${fmt(pObs)} · desvio = ${fmt(Math.abs(pObs - p))}`;
 }

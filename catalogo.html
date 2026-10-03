@@ -54,15 +54,10 @@
   </header>
 
   <!-- ============ catálogo ============
-       A página inteira é montada por paginas/catalogo/ a partir do bloco
-       `meta` de cada modelo: o banner navy (título, filtros, os temas em
-       tipo grande e a folha de contato que rola de lado) e, embaixo, uma
-       seção por tema com o índice e o simulador em foco rodando ao vivo.
-       Quem adiciona um simulador não mexe aqui. -->
-  <main id="conteudo">
-    <div id="banner"></div>
-    <!-- uma seção por tema entra aqui (paginas/catalogo/) -->
-  </main>
+       Montado por paginas/catalogo/ a partir do bloco `meta` de cada modelo:
+       o banner claro (busca em frase e urna de sorteio) e a estante (filtros
+       na lateral, cartões por tema). Quem adiciona um simulador não mexe aqui. -->
+  <main id="conteudo"></main>
 
   <footer class="rodape">
     <div class="container rodape-grid">
@@ -100,7 +95,6 @@
        quando o acervo real crescer. */
     import { lista, previstos } from "./modelos-de-simulacao/__pacote__.js";
     import { montarCatalogo } from "./paginas/catalogo/__pacote__.js";
-    import { recortar } from "./paginas/__pacote__.js";
 
     const entradas = [];
     for (const slug of lista) {
@@ -108,7 +102,6 @@
       entradas.push({ slug, meta: m.meta });
     }
     montarCatalogo(document.getElementById("conteudo"), [...entradas, ...previstos]);
-    recortar(document.querySelector(".rodape"), 91);
   </script>
 </body>
 </html>

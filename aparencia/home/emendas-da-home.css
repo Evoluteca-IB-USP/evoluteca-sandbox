@@ -1,10 +1,10 @@
 /* O respiro de cada seção da home, com espaço reservado para a emenda que
    a seção seguinte recorta sobre ela. */
 
-#secao-porque { padding-top: 8em; padding-bottom: calc(118px + 8em); }
+#secao-porque { padding-top: 4.5em; padding-bottom: calc(118px + 3em); }
 #secao-explica { padding-top: calc(118px + 8em); padding-bottom: calc(118px + 6em); }
-#secao-simuladores { padding-top: calc(118px + 9em); padding-bottom: calc(118px + 9em); }
-#sobre { padding-top: calc(118px + 9em); padding-bottom: calc(118px + 8em); }
+#secao-simuladores { padding-top: calc(118px + 3em); padding-bottom: calc(118px + 3em); }
+#sobre { padding-top: calc(118px + 3.5em); padding-bottom: calc(118px + 3.5em); }
 .rodape { padding-top: 118px; }
 
 @media (max-width: 900px) {

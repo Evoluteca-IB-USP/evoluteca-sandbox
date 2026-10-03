@@ -2,8 +2,8 @@
    modelos-de-simulacao/previstos.js — FICHAS DE MENTIRA, temporárias.
 
    Os simuladores do acervo previsto, escritos só com o bloco `meta`
-   que o catálogo lê: eles aparecem na página como os outros — na
-   folha de contato, no índice do tema, nos filtros e no palco — mas
+   que o catálogo lê: eles aparecem na página como os outros —
+   no índice do tema, nos filtros e no palco — mas
    NÃO abrem, porque ainda não existe modelo para eles. Servem para
    ver o catálogo cheio, na escala em que ele vai viver, em vez de
    julgá-lo com três simuladores.

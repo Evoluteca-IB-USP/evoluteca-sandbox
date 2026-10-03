@@ -1,16 +1,21 @@
-/* ============ página do app ============ */
+/* ============ a página do simulador ============ */
 
-.app-voltar { display: inline-block; font-size: .85rem; margin-bottom: 1.25rem; }
+.simulador { padding: 2.2rem 0 5rem; }
+.simulador-voltar { font-size: .85rem; color: var(--teal-escuro); text-decoration: none; }
+.simulador-voltar:hover { text-decoration: underline; }
+.simulador h1 { color: var(--navy); font-size: clamp(2.6rem, 4.6vw, 3.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 1.2rem 0 1.4rem; }
+.simulador h1 span { color: var(--amarelo); }
 
-.app-cabeca {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: .6rem 1.5rem;
-  margin-bottom: 1.4rem;
-}
-.app-cabeca h1 { margin: 0; font-weight: 300; }
+/* o painel: réguas à esquerda, o gráfico principal e a linha do tempo */
+.painel-corpo { display: grid; grid-template-columns: 250px 1fr; gap: 3.5rem; margin-top: .6rem; }
+.painel-controles { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 1.6rem; }
+.painel-controles .sortear { align-self: flex-start; margin-top: .4rem; }
+.painel-principal { display: block; width: 100%; height: 420px; }
+.painel-tempo { margin-top: .8rem; }
 
-.botao svg { width: 1em; height: 1em; fill: currentColor; }
-.botao-ativo { background: var(--navy); color: #fff; border-color: var(--navy); }
-.botao-ativo:hover { background: #0e1a48; border-color: #0e1a48; color: #fff; }
+/* a linha do tempo presa ao pé da janela quando o painel sai da tela (motor-de-simuladores/interface/controles/tempo-flutuante.js) */
+.flutuante { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(255, 255, 255, .96); backdrop-filter: blur(8px); border-top: 1px solid var(--borda); box-shadow: 0 -6px 20px rgba(20, 37, 96, .08); transform: translateY(110%); transition: transform .3s ease; }
+.flutuante.visivel { transform: none; }
+.flutuante-inner { display: flex; align-items: center; gap: 2rem; padding-top: .55rem; padding-bottom: .55rem; }
+.flutuante-miniatura { flex-shrink: 0; width: 200px; height: 46px; }
+.flutuante .tempo { flex: 1; }

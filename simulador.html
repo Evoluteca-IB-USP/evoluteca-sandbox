@@ -52,20 +52,23 @@
     </div>
   </header>
 
-  <main id="conteudo" class="secao" style="padding-top:2rem">
+  <main id="conteudo" class="simulador">
     <div class="container">
-      <a class="app-voltar" href="catalogo.html">← Todos os simuladores</a>
-      <!-- o motor (motor-de-simuladores/interface/) monta aqui: cabeçalho,
-           console de parâmetros, laboratório (gráfico + lupa + linha do tempo)
-           e material de apoio -->
-      <div id="app-raiz">
-        <p style="color:var(--tinta-suave)">Carregando o simulador…</p>
+      <a class="simulador-voltar" href="catalogo.html">← Simuladores</a>
+      <h1 id="titulo">Simulador<span>.</span></h1>
+      <div class="painel-corpo">
+        <aside class="painel-controles" id="controles"></aside>
+        <div>
+          <div id="principal"></div>
+          <div class="painel-tempo" id="tempo"></div>
+        </div>
       </div>
-      <noscript>
-        <p>Os simuladores precisam de JavaScript para rodar — nada é enviado a
-        servidor algum: a simulação acontece inteira no seu aparelho.</p>
-      </noscript>
+      <section class="ferramentas" id="ferramentas"></section>
     </div>
+    <noscript>
+      <p class="container">Os simuladores precisam de JavaScript para rodar — nada é enviado a
+      servidor algum: a simulação acontece inteira no seu aparelho.</p>
+    </noscript>
   </main>
 
   <footer class="rodape">
@@ -102,22 +105,17 @@
     import { lista } from "./modelos-de-simulacao/__pacote__.js";
     import { montarSimulador } from "./motor-de-simuladores/__pacote__.js";
 
-    const raiz = document.getElementById("app-raiz");
+    const raiz = document.getElementById("conteudo");
     const slug = new URLSearchParams(location.search).get("modelo");
 
     if (!lista.includes(slug)) {
       raiz.innerHTML =
-        `<h1>Simulador não encontrado</h1>
+        `<div class="container"><h1>Simulador não encontrado<span>.</span></h1>
          <p>O endereço parece incompleto ou o simulador ainda não foi publicado.
-         <a href="catalogo.html">Veja todos os simuladores</a>.</p>`;
+         <a href="catalogo.html">Veja todos os simuladores</a>.</p></div>`;
     } else {
-      const modulo = await import(`./modelos-de-simulacao/${slug}/modelo.js`);
-      const textos = {};
-      for (const nome of ["conceito", "roteiro", "professor"]) {
-        const resposta = await fetch(`./modelos-de-simulacao/${slug}/${nome}.md`);
-        if (resposta.ok) textos[nome] = await resposta.text();
-      }
-      montarSimulador(raiz, modulo, textos);
+      const { default: ficha } = await import(`./modelos-de-simulacao/${slug}/ficha.js`);
+      montarSimulador(raiz, ficha);
     }
   </script>
 </body>
