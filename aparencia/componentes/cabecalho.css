@@ -1,0 +1,55 @@
+/* ============ header do site (faixa cinza, como no IB) ============ */
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--cinza-header);
+  border-bottom: 1px solid var(--borda);
+}
+.topo-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem;
+}
+
+.marca { display: flex; flex-direction: column; text-decoration: none; line-height: 1.1; }
+/* wordmark inspirado nos subsites do IB (graduacao.ib.usp.br):
+   Open Sans bold em #284c75 — lá é uma imagem em itálico; aqui é texto, sem itálico */
+.marca-nome {
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: #284c75;
+}
+.marca-sub {
+  font-size: .82rem;
+  font-weight: 600;
+  color: #284c75;
+  margin-top: .1rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+  overflow-x: auto;                 /* em telas estreitas a nav rola, sem hambúrguer */
+  -webkit-overflow-scrolling: touch;
+}
+.nav a {
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: uppercase;        /* menu em caixa alta, como o IB */
+  letter-spacing: .06em;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  padding: .55rem .8rem;
+  border-bottom: 2px solid transparent;
+}
+.nav a:hover { color: var(--teal-escuro); }
+.nav a[aria-current="page"] { color: var(--teal-escuro); border-bottom-color: var(--teal); }

@@ -1,0 +1,38 @@
+/* a trilha de passos: nós numerados sobre uma linha de deriva, o escolhido
+   com o anel âmbar. Escolhe a ferramenta no simulador e a pergunta na home. */
+.trilha { position: relative; }
+.trilha-linha { position: absolute; left: 0; right: 0; top: 0; height: 60px; }
+.trilha-linha svg { width: 100%; height: 100%; display: block; }
+.trilha-linha path { fill: none; stroke: var(--teal-claro); stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.trilha-passos { position: relative; display: grid; grid-template-columns: repeat(var(--passos), 1fr); }
+.trilha-passo {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0 .4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  color: var(--tinta);
+}
+.trilha-no {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin: 14px 0 1rem;
+  transform: translateY(var(--dy));
+  border-radius: 50%;
+  background: var(--teal);
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 4px #fff;
+  transition: transform .2s, box-shadow .2s;
+}
+.trilha-passo[aria-pressed="true"] .trilha-no { box-shadow: 0 0 0 4px #fff, 0 0 0 7px var(--amarelo); transform: translateY(var(--dy)) scale(1.12); }
+.trilha-titulo { font-size: .9rem; font-weight: 600; line-height: 1.3; color: var(--navy); max-width: 15ch; }
+.trilha-passo:hover .trilha-titulo { color: var(--teal-escuro); }
+.trilha-passo[aria-pressed="true"] .trilha-titulo { color: var(--navy); font-weight: 700; }

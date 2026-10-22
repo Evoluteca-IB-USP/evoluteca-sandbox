@@ -1,0 +1,9 @@
+/* --altura-topo é só o valor de partida: na home o cabeçalho se mede
+   sozinho (paginas/home/cabecalho-sobreposto.js). */
+
+:root {
+  --container: 1170px;      /* mesmo container do IB       */
+  --altura-topo: 82px;      /* na home o cabeçalho se mede sozinho */
+  --raio: 4px;
+  --sombra: 0 5px 15px rgba(0, 0, 0, .12);
+}

@@ -1,0 +1,58 @@
+/* A seção "Quando usar um simulador": a seção inteira em papel pontilhado,
+   a legenda da figura à esquerda, um parágrafo só, e o painel à direita. */
+
+/* o espaçamento dos pontos é o PASSO_DO_PAPEL de paginas/home/quando-usar/moldura-e-letreiros.js */
+#secao-quando-usar {
+  background-color: var(--fundo);
+  background-image: radial-gradient(circle at 1px 1px, #d5dbe5 1px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+#secao-quando-usar .intro-secao { margin-bottom: 1.75rem; }
+
+.quando-folha {
+  display: grid;
+  grid-template-columns: minmax(0, 370px) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+}
+
+/* a legenda: o trecho da vez é tingido da esquerda para a direita */
+.quando-legenda {
+  margin: 2.4rem 0 0;
+  font-size: .92rem; line-height: 1.6; color: var(--tinta);
+  background: var(--fundo); box-shadow: 0 0 0 10px var(--fundo);
+  text-wrap: pretty;
+}
+.quando-figura { color: var(--navy); }
+.quando-trecho { cursor: pointer; transition: color .3s ease; }
+.quando-trecho b { font-weight: 600; }
+.quando-trecho[data-estado="futuro"] { color: #a3aab8; }
+.quando-trecho[data-estado="futuro"]:hover { color: var(--tinta-suave); }
+.quando-trecho[data-estado="lido"] .quando-letra { color: var(--amarelo); }
+.quando-trecho[data-estado="ativo"] {
+  background: linear-gradient(90deg, var(--navy) var(--p, 0%), #a3aab8 var(--p, 0%));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.quando-acervo-na-legenda { font-weight: 600; color: var(--teal-escuro); -webkit-text-fill-color: var(--teal-escuro); white-space: nowrap; }
+.quando-trecho[data-estado="futuro"] .quando-acervo-na-legenda { color: inherit; -webkit-text-fill-color: currentColor; pointer-events: none; }
+
+/* o painel */
+.quando-painel { position: relative; margin: 0; height: 440px; }
+.quando-tela { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.quando-letra-do-painel {
+  position: absolute; left: 0; top: 8px; z-index: 1;
+  font-size: 1.5rem; font-weight: 700; line-height: 1; color: var(--navy);
+}
+
+/* o painel (E): sem dados, só a pergunta e a saída para o acervo */
+.quando-convite {
+  position: absolute; left: 80px; bottom: 76px;
+  display: flex; align-items: baseline; gap: 2rem;
+  opacity: 0; visibility: hidden; transition: opacity .6s ease .3s;
+}
+.quando-painel[data-convite] .quando-convite { opacity: 1; visibility: visible; }
+.quando-acervo { text-decoration: none; color: var(--navy); }
+.quando-acervo b { display: block; font-size: 1.15rem; font-weight: 600; border-bottom: 2px solid var(--teal); width: fit-content; padding-bottom: .15rem; }
+.quando-acervo small { display: block; font-size: .82rem; color: var(--tinta-suave); margin-top: .35rem; }
+.quando-acervo:hover b { color: var(--teal-escuro); }
+.quando-denovo { font-size: .85rem; }

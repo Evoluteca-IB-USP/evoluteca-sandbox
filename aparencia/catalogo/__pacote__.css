@@ -1,0 +1,5 @@
+/* A página de catálogo: o banner claro com a busca e a urna, e a estante. */
+@import "../secoes-empilhadas/__pacote__.css";
+@import "banner-com-busca.css";
+@import "urna-de-sorteio.css";
+@import "estante.css";

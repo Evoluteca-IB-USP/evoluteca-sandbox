@@ -1,0 +1,11 @@
+/* O que se repete em qualquer página do site. */
+@import "faixas-da-usp.css";
+@import "cabecalho.css";
+@import "rodape.css";
+@import "titulo-de-secao.css";
+@import "cabecalho-de-secao.css";
+@import "botao.css";
+@import "etiqueta.css";
+@import "aviso.css";
+@import "trilha-de-passos.css";
+@import "regua-linha.css";

@@ -1,0 +1,119 @@
+/* A seção "O que é um simulador": a placa de colônias de borda a borda e,
+   por cima, só o texto à esquerda, com desenhos do tamanho de uma letra no
+   meio das palavras. O quadro de perto abre solto sobre a placa, ao lado
+   do ponto que mostra, no traço plano do resto do site. O texto tem uma
+   sombra leve — invisível sobre o navy, ela só aparece quando uma célula
+   clara passa atrás da letra. */
+
+#secao-explica {
+  position: relative;
+  background: #16265f;
+  padding: 7.6rem 0 8rem;
+  min-height: calc(100vh + 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.fundo-tela {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+  opacity: .92;                       /* quase nada: só tira o "grito" das células */
+}
+.explica-camada {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+#secao-explica .container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: none;               /* os cliques vazam para o fundo… */
+}
+#secao-explica .container * { pointer-events: auto; }   /* …menos sobre o texto */
+
+/* ---------- o texto ---------- */
+
+.explica-texto { max-width: 36rem; }
+#secao-explica .titulo-secao { white-space: nowrap; }
+#secao-explica .titulo-secao, #secao-explica .intro-secao { color: #fff; }
+#secao-explica .kicker-secao { color: var(--teal-claro); }
+#secao-explica .intro-secao b { color: var(--amarelo); }
+
+.explica-corpo p {
+  margin: 0 0 1.1rem;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, .92);
+  text-wrap: pretty;
+}
+.explica-corpo p:last-child { margin-bottom: 0; }
+
+/* os desenhos na linha: quadradinhos de canto redondo, como as células da placa */
+.explica-desenho {
+  display: inline-block;
+  width: .9em;
+  height: .9em;
+  margin: 0 .1em;
+  border-radius: .22em;
+  vertical-align: -.1em;
+  transition: box-shadow .2s;
+}
+.explica-desenho.celula, .explica-desenho.filha { background: #0d7f95; }
+.explica-desenho.vazio { box-sizing: border-box; border: 1.5px dashed rgba(100, 196, 210, .9); }
+.explica-desenho.mancha { border-radius: 50%; background: conic-gradient(#2f4bab 0 30%, #0d7f95 0 52%, #d99920 0 75%, #4da8b8 0); }
+.explica-desenho.amarela { background: #d99920; }
+.explica-desenho.filha[data-heranca="1"] { background: linear-gradient(135deg, #0d7f95 0 58%, #d99920 58%); }
+.explica-desenho.filha[data-heranca="2"] { background: conic-gradient(#2f4bab 0 25%, #0d7f95 0 50%, #d99920 0 75%, #4da8b8 0); }
+
+/* um trecho com desenho: com o mouse, o trecho clareia e o desenho ganha o anel âmbar */
+.explica-trecho { cursor: zoom-in; transition: color .2s; }
+.explica-trecho.da-vez { color: #fff; }
+.explica-trecho.da-vez .explica-desenho { box-shadow: 0 0 0 2px #16265f, 0 0 0 3.5px var(--amarelo); }
+
+/* ---------- o quadro de perto ---------- */
+
+/* um quadrado de canto redondo, como as células, com a borda âmbar */
+.explica-quadro {
+  position: absolute;
+  z-index: 3;
+  width: 200px;
+  margin: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s;
+}
+.explica-quadro.aberto { opacity: 1; }
+.explica-vista {
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  background: #101b48;
+  box-shadow: 0 0 0 2px var(--amarelo);
+}
+.explica-quadro figcaption {
+  margin-top: .8rem;
+  min-height: 4.5em;
+  font-size: .84rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, .92);
+}
+
+/* a sombra: leve, invisível sobre o navy — só aparece quando uma
+   célula clara da colônia passa atrás da letra */
+#secao-explica :is(p, span, b, figcaption) {
+  text-shadow: 0 1.5px 3px rgba(9, 16, 45, .85), 0 5px 16px rgba(9, 16, 45, .65);
+}
+#secao-explica .titulo-secao {
+  text-shadow: 0 2.5px 4px rgba(9, 16, 45, .8), 0 9px 26px rgba(9, 16, 45, .6);
+}

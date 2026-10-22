@@ -1,0 +1,59 @@
+/* ============ o banner: título, busca em frase, linha de fecho ============ */
+
+.banner-catalogo { background: var(--fundo); }
+.banner-grade { display: grid; grid-template-columns: 1fr 360px; gap: 4rem; align-items: center; padding: 4rem 0 2rem; }
+.banner-catalogo h1 { color: var(--navy); font-size: clamp(3rem, 5.5vw, 4.4rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 0 0 2rem; }
+
+/* o título: a palavra recortada sobre o desenho de paginas/catalogo/titulo-em-varredura.js */
+.banner-catalogo h1 { cursor: default; }
+.titulo-varredura {
+  display: inline-block;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 100% 100%;
+  padding: .08em 0;
+  margin: -.08em 0;
+  letter-spacing: -.02em;
+}
+
+/* a busca é uma frase; o campo é o tracejado dentro dela */
+.busca { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem .8rem; font-size: 1.6rem; font-weight: 300; color: var(--tinta); cursor: text; }
+.busca-caixa { position: relative; flex: 1; min-width: 300px; max-width: 420px; }
+.busca-campo {
+  font: inherit;
+  width: 100%;
+  font-weight: 600;
+  color: var(--navy);
+  background: none;
+  border: 0;
+  border-bottom: 2px dashed var(--borda-forte);
+  border-radius: 0;
+  padding: 0 2rem .2rem 0;
+  transition: border-color .2s;
+}
+.busca-campo::placeholder { font-weight: 300; color: #a3a3a3; }
+.busca-campo:hover { border-bottom-color: var(--tinta-suave); }
+.busca-campo:focus { outline: none; border-bottom: 2px solid var(--teal); }
+.busca-campo::-webkit-search-cancel-button { display: none; }
+.busca-lupa { position: absolute; right: .3rem; top: 50%; width: 15px; height: 15px; margin-top: -10px; border: 2px solid var(--tinta-suave); border-radius: 50%; pointer-events: none; transition: border-color .2s; }
+.busca-lupa::after { content: ""; position: absolute; width: 7px; height: 2px; background: var(--tinta-suave); right: -6px; bottom: -3px; transform: rotate(45deg); transition: background .2s; }
+.busca-caixa:focus-within .busca-lupa { border-color: var(--teal-escuro); }
+.busca-caixa:focus-within .busca-lupa::after { background: var(--teal-escuro); }
+.busca-conta { margin: .9rem 0 0; font-size: .82rem; color: var(--tinta-suave); }
+.busca-conta-filtrando { color: var(--teal-escuro); font-weight: 600; }
+
+/* a linha de fecho: separa o banner da estante */
+.fecho { position: relative; height: 70px; }
+.fecho svg { display: block; width: 100%; height: 100%; }
+.fecho path { fill: none; stroke: var(--teal-claro); stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.fecho .fecho-resto { stroke-dasharray: 3 6; opacity: .45; }
+.fecho-cabeca {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: var(--amarelo);
+  box-shadow: 0 0 0 4px rgba(252, 180, 33, .25);
+}

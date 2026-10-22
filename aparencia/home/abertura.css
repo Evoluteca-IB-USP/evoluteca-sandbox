@@ -1,0 +1,153 @@
+/* ============ abertura da home ============
+   Dois grupos sobre o fundo: a chamada (título, lede e botão), centrada no
+   azul, e, no pé, a nota de rodapé com a legenda do fundo, chamada pelo ¹ do
+   lede. */
+
+.abertura {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  --altura-aresta: clamp(200px, 26vh, 290px);
+  /* O azul toma a tela inteira: a janela menos o chrome da USP acima da
+     abertura (duas faixas de 6px e a barra de 40px — o header já está dentro
+     dela), mais 60% da aresta, que desce para fora da tela. Na primeira tela
+     o branco sobra só como um recorte irregular no pé. */
+  min-height: calc(100vh - 52px + var(--altura-aresta) * .6);
+  min-height: calc(100svh - 52px + var(--altura-aresta) * .6);
+  background: linear-gradient(170deg, #1a2d6e 0%, var(--navy) 45%, #0e1a48 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.abertura-palco { flex: 1; display: flex; flex-direction: column; width: 100%; }
+.abertura-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* as trajetórias são textura: recuam atrás do texto e ganham força à direita */
+  -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
+  mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
+}
+
+/* ---- a chamada ---- */
+.abertura-conteudo {
+  position: relative;
+  margin-block: auto;                             /* centrada no que sobra acima da nota */
+  padding: 2.5rem 0 3rem;
+  max-width: 760px;
+  text-shadow: 0 1px 2px rgba(6, 14, 46, .45);   /* separa as letras das trajetórias */
+}
+/* maior que os títulos das seções, porque abre a página; em duas linhas */
+.abertura h1 {
+  margin-bottom: .45em;
+  font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+.titulo-linha { display: block; }
+.abertura h1 strong { font-weight: 700; color: var(--amarelo); }
+.abertura-lede {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.9);
+  max-width: 58ch;
+  margin-bottom: 1rem;
+}
+.marca-da-nota {                                  /* o ¹ que chama a nota de rodapé */
+  margin-left: .08em;
+  font-size: .68em;
+  font-weight: 700;
+  line-height: 0;
+  vertical-align: super;
+  color: var(--amarelo);
+  text-decoration: none;
+}
+.marca-da-nota:hover { color: #fff; }
+
+/* o botão: âmbar, com a borda de cima cortada por uma trajetória */
+.botao-recortado {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  height: 84px;
+  margin-top: 1.6rem;
+  padding: 0 2.4rem 1.35rem;
+  color: var(--navy);
+  text-decoration: none;
+  text-shadow: none;
+}
+.botao-recortado svg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.botao-recortado path { fill: var(--amarelo); transition: fill .15s ease; }
+.botao-recortado span { position: relative; font-size: 1.22rem; font-weight: 600; line-height: 1; white-space: nowrap; }
+.botao-recortado:hover { color: var(--navy); }
+.botao-recortado:hover path { fill: #ffc43d; }
+.botao-recortado:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 4px; }
+
+/* ---- a nota de rodapé: a legenda do fundo, viva ---- */
+.nota-da-abertura { position: relative; max-width: 38rem; padding-bottom: 1.7rem; }
+.nota-legenda { margin: 0 0 .4rem; font-size: .82rem; line-height: 1.55; color: rgba(255, 255, 255, .85); }
+.nota-legenda sup { margin-right: .1em; font-weight: 700; color: var(--amarelo); }
+.nota-legenda b { font-weight: 600; color: #fff; }
+.nota-relogio { margin: 0; font-size: .82rem; line-height: 1.6; color: rgba(255, 255, 255, .85); font-variant-numeric: tabular-nums; }
+.nota-relogio b { font-weight: 600; color: #fff; }
+/* uma linha só: trocar a espécie muda o comprimento da frase, e se ela
+   quebrasse em outro ponto a altura da nota mudaria e a chamada pularia */
+.nota-linha { display: block; white-space: nowrap; }
+.nota-relogio [data-especie] { transition: color .7s ease; }
+.nota-relogio [data-especie].sorteada { color: var(--amarelo); transition: none; }
+.nota-sortear {                                   /* o dado do sorteio do catálogo */
+  margin-left: .6rem;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--teal-claro);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.nota-sortear:hover { color: #fff; }
+.nota-sortear:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 3px; }
+.nota-dado { display: inline-block; font-size: 1.3rem; vertical-align: -.1em; margin-right: .25rem; transition: transform .5s ease; }
+
+/* ---- a aresta: onde a abertura encontra a página ----
+   O azul não desliza para o branco: ele é cortado por uma trajetória. O
+   preenchimento branco cobre tudo abaixo da linha, e os picos sobem alto o
+   bastante para atravessar a grade do 0,25 — é isso que faz a aresta ler como
+   parte da figura, e não como borda decorativa colada embaixo.
+   O SVG fica por cima do canvas (que cobre a seção inteira), então as outras
+   trajetórias mergulham sob a aresta em vez de serem cortadas na horizontal.
+   O traçado vem de testes/aresta.mjs (semente fixa, congelado no HTML). */
+.abertura-aresta {
+  position: relative;                  /* acima do canvas */
+  display: block;
+  width: 100%;
+  /* A faixa é alta de propósito, e cresce junto com o corpo da abertura. A
+     grade do 0,25 fica em 82,9% da ALTURA DA SEÇÃO, então as duas medidas são
+     amarradas: os picos só alcançam o pontilhado enquanto a faixa passar de
+     cerca de 19% do corpo (mais uns 40px de folga). Aumentar só o corpo (para
+     a aresta descer) tira os picos do alcance da grade. A medida mora em
+     --altura-aresta, na .abertura, porque o corpo também depende dela. */
+  height: var(--altura-aresta);
+  margin-bottom: -1px;                 /* sem fresta entre o SVG e a página */
+}
+.aresta-massa { fill: var(--fundo); }
+.aresta-linha {
+  fill: none;
+  stroke: var(--teal-claro);          /* a cor das outras populações do fundo:
+                                         a aresta é mais uma delas, e não disputa
+                                         com a amarela, que é a linha em destaque */
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;   /* o traço não engorda quando o SVG estica */
+}
+
+@media (max-width: 700px) {
+  .abertura { --altura-aresta: clamp(70px, 9vh, 100px); }
+  .abertura-canvas {
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
+  }
+}

@@ -1,0 +1,5 @@
+/* A página de um simulador: o painel (réguas, gráfico, linha do tempo) e as
+   ferramentas que andam junto com a simulação. */
+@import "pagina-do-simulador.css";
+@import "controles-do-simulador.css";
+@import "ferramentas.css";

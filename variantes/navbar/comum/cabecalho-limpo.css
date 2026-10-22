@@ -1,0 +1,9 @@
+/* ============ a base das variantes 4 a 6: cabeçalho branco, só um fio embaixo ============ */
+
+.topo-limpo { background: #fff; border-bottom: 1px solid var(--borda); }
+.topo-limpo .topo-inner { padding-top: 1.3rem; padding-bottom: 1.3rem; }
+.topo-limpo .marca-nome { color: var(--navy); }
+.topo-limpo .marca-sub { color: var(--tinta-suave); font-weight: 400; }
+.topo-limpo .nav { overflow: visible; gap: 2rem; }
+.topo-limpo .nav a { border-bottom: 0; padding: .4rem 0; transition: color .2s; }
+.topo-limpo .nav a[aria-current="page"] { color: var(--navy); }

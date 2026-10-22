@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador · Evoluteca</title>
+  <link rel="icon" type="image/png" href="imagens/favicon.png">
+  <link rel="apple-touch-icon" href="imagens/icone-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="aparencia/__pacote__.css">
+  <link rel="stylesheet" href="aparencia/simulador/__pacote__.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "r": "./motor-de-simuladores/r/__pacote__.js",
+        "escrever-html": "./escrever-html/__pacote__.js",
+        "portugues": "./portugues/__pacote__.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- chrome institucional: padrão de todos os sites da USP (www5.usp.br).
+       A barra teal fica vazia por enquanto; o conteúdo muda de site para site. -->
+  <div class="usp-faixa-amarela"></div>
+  <div class="usp-faixa-azul"></div>
+  <div class="usp-barra">
+    <div class="container usp-barra-inner">
+      <a class="usp-logo" href="https://www.ib.usp.br" rel="external" title="Instituto de Biociências da USP">
+        <img src="imagens/simbolo_ib_bco.png" alt="Instituto de Biociências da USP" class="usp-logo-ib">
+      </a>
+      <a class="usp-logo" href="https://www5.usp.br" rel="external" title="Universidade de São Paulo">
+        <img src="imagens/logo_usp_bco.png" alt="Universidade de São Paulo" class="usp-logo-usp">
+      </a>
+    </div>
+  </div>
+
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="index.html">
+        <span class="marca-nome">Evoluteca</span>
+        <span class="marca-sub">Instituto de Biociências · USP</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="index.html">Início</a>
+        <a href="catalogo.html" aria-current="page">Simuladores</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="simulador">
+    <div class="container">
+      <a class="simulador-voltar" href="catalogo.html">← Simuladores</a>
+      <h1 id="titulo">Simulador<span>.</span></h1>
+      <div class="painel-corpo">
+        <aside class="painel-controles" id="controles"></aside>
+        <div>
+          <div id="principal"></div>
+          <div class="painel-tempo" id="tempo"></div>
+        </div>
+      </div>
+      <section class="ferramentas" id="ferramentas"></section>
+    </div>
+    <noscript>
+      <p class="container">Os simuladores precisam de JavaScript para rodar — nada é enviado a
+      servidor algum: a simulação acontece inteira no seu aparelho.</p>
+    </noscript>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape-grid">
+      <div>
+        <h4>Evoluteca</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="catalogo.html">Simuladores</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Institucional</h4>
+        <ul>
+          <li><a href="https://www.ib.usp.br" rel="external">Instituto de Biociências</a></li>
+          <li><a href="https://www5.usp.br" rel="external">Universidade de São Paulo</a></li>
+        </ul>
+      </div>
+      <div class="rodape-logos">
+        <a href="https://www.ib.usp.br" rel="external">
+          <img class="rodape-logo-ib" src="imagens/logo_ib_bco.png" alt="Instituto de Biociências da USP">
+        </a>
+        <a href="https://www5.usp.br" rel="external">
+          <img class="rodape-logo-usp" src="imagens/logo_usp_bco.png" alt="Universidade de São Paulo">
+        </a>
+      </div>
+    </div>
+    <div class="rodape-base">
+      <div class="container">© 2026 Evoluteca · Instituto de Biociências · Universidade de São Paulo — textos em CC BY 4.0, código MIT</div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { lista } from "./modelos-de-simulacao/__pacote__.js";
+    import { montarSimulador } from "./motor-de-simuladores/__pacote__.js";
+
+    const raiz = document.getElementById("conteudo");
+    const slug = new URLSearchParams(location.search).get("modelo");
+
+    if (!lista.includes(slug)) {
+      raiz.innerHTML =
+        `<div class="container"><h1>Simulador não encontrado<span>.</span></h1>
+         <p>O endereço parece incompleto ou o simulador ainda não foi publicado.
+         <a href="catalogo.html">Veja todos os simuladores</a>.</p></div>`;
+    } else {
+      const { default: ficha } = await import(`./modelos-de-simulacao/${slug}/ficha.js`);
+      montarSimulador(raiz, ficha);
+    }
+  </script>
+</body>
+</html>

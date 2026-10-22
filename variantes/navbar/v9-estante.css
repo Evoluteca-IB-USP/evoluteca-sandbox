@@ -1,0 +1,61 @@
+/* ============ v9: a busca é uma pílula com lupa; os resultados são cartões com as vinhetas do catálogo ============ */
+
+.topo-estante .topo-inner { align-items: center; }
+
+.pilula {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin: 0;
+  padding: .55rem 1.2rem .55rem 1rem;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  background: var(--fundo-suave);
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--tinta);
+  transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.pilula:focus-within { background: #fff; border-color: var(--teal); box-shadow: 0 6px 18px rgba(20, 37, 96, .08); }
+.pilula-lupa { width: 18px; height: 18px; fill: none; stroke: var(--teal-escuro); stroke-width: 2; stroke-linecap: round; }
+.pilula label { cursor: text; }
+.pilula-campo { width: 13rem; border: 0; background: none; font: inherit; font-weight: 600; color: var(--navy); transition: width .25s ease; }
+.pilula-campo:focus { outline: none; width: 19rem; }
+.pilula-campo::placeholder { font-weight: 300; color: var(--tinta-suave); }
+
+.pilula-painel {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + .7rem);
+  right: 0;
+  width: 42rem;
+  padding: 1.2rem 1.4rem 1.3rem;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(20, 37, 96, .1);
+  font-weight: 400;
+}
+.pilula-painel[hidden] { display: none; }
+.pilula-rotulo { margin: 0 0 .7rem; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal-escuro); }
+.pilula-cartoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem 1.1rem; margin-bottom: 1.2rem; }
+.pilula-cartao { display: block; color: inherit; text-decoration: none; }
+.pilula-mini-fundo { height: 76px; padding: 4px; margin-bottom: .45rem; border-radius: 8px; background: var(--fundo-suave); transition: background .2s, box-shadow .2s; }
+.pilula-cartao:hover .pilula-mini-fundo,
+.pilula-cartao.ativo .pilula-mini-fundo { background: #e3f4f7; }
+.pilula-cartao.atual .pilula-mini-fundo { box-shadow: 0 0 0 2px var(--amarelo); }
+.pilula-mini { display: block; width: 100%; height: 100%; }
+.pilula-cartao h3 { margin: 0; font-size: .88rem; font-weight: 600; line-height: 1.3; color: var(--navy); }
+.pilula-cartao:hover h3,
+.pilula-cartao.ativo h3 { color: var(--teal-escuro); }
+.pilula-cartao small { font-size: .72rem; color: var(--tinta-suave); }
+.pilula-cartao.previsto .pilula-mini { opacity: .28; filter: grayscale(1); }
+.pilula-cartao.previsto h3 { font-weight: 400; color: var(--tinta); }
+.pilula-fichas { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.pilula-ficha { padding: .3rem .8rem; border: 1px solid var(--borda-forte); border-radius: 999px; font-size: .8rem; color: var(--tinta); text-decoration: none; transition: color .15s, border-color .15s; }
+.pilula-ficha small { margin-left: .3rem; color: var(--tinta-suave); }
+.pilula-ficha:hover,
+.pilula-ficha.ativo { border-color: var(--teal); color: var(--teal-escuro); }
+.pilula-ficha.atual { border-color: var(--navy); color: var(--navy); font-weight: 600; }
+.pilula-mais, .pilula-nada { margin: 0; font-size: .8rem; color: var(--tinta-suave); }

@@ -1,0 +1,13 @@
+/* A frase de abertura de uma seção da home, logo abaixo do título. */
+
+.titulo-secao:has(+ .intro-secao) { margin-bottom: 1rem; }
+.intro-secao {
+  margin: 0 0 2rem;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--navy);
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+.intro-secao b { font-weight: 600; }

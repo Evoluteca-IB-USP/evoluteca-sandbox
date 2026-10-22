@@ -1,0 +1,9 @@
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.secao { padding: 4em 0; }
+.secao-suave { background: var(--fundo-suave); }
+.medida { max-width: 68ch; }

@@ -1,0 +1,18 @@
+/* ============ variante 3: o duelo ============ */
+
+.duelo-A { color: var(--navy); font-weight: 600; }
+.duelo { margin-top: 2rem; }
+
+.raia { padding: 1.4rem 0 .4rem; border-top: 1px solid var(--borda); }
+.raia + .raia { margin-top: .6rem; }
+.raia-topo { display: flex; align-items: baseline; justify-content: space-between; gap: 2rem; }
+.raia-frase { font-size: 1.25rem; }
+.raia-canvas { display: block; width: 100%; height: 230px; margin-top: .6rem; }
+
+.raia-medidor { display: flex; align-items: center; gap: .7rem; font-size: .85rem; color: var(--tinta-suave); }
+.raia-medidor-rotulo { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
+.raia-medidor-trilho { position: relative; width: 180px; height: 8px; border-radius: 4px; background: var(--fundo-suave); overflow: hidden; }
+.raia-medidor-cheio { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--teal); transition: width .2s; }
+.raia-medidor-valor { min-width: 3ch; font-weight: 600; color: var(--navy); text-align: right; }
+
+.duelo #tocador { padding-top: 1.2rem; border-top: 1px solid var(--borda); margin-top: .4rem; }

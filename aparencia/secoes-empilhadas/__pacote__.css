@@ -1,0 +1,6 @@
+/* O sistema estrutural da home e do catálogo: cada seção corta a de cima
+   numa emenda serrilhada e abre com um título grande e um kicker numerado.
+   A página de um simulador não carrega este pacote. */
+@import "titulo-de-secao-grande.css";
+@import "emenda-entre-secoes.css";
+@import "secao-viva.css";

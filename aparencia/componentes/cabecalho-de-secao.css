@@ -1,0 +1,21 @@
+/* ============ cabeçalho de seção: título à esquerda, link à direita ============ */
+
+.cabeca-secao {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.cabeca-secao .titulo-secao { margin-bottom: 0; }
+.cabeca-secao p { margin: .9rem 0 0; color: var(--tinta-suave); max-width: 60ch; }
+.link-seta {
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: .35rem;
+}
+.link-seta::after { content: " →"; }
+.link-seta:hover { text-decoration: underline; }

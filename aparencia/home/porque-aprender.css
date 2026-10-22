@@ -1,0 +1,165 @@
+/* A seção "Por que aprender evolução?": quatro apostas sobre casos reais,
+   cada uma com a sua figura. Extraída das rodadas de variantes de 2026-08 e 2026-10;
+   só as regras que a seção usa. */
+
+/* ---------- as pontas da trilha: o prelúdio e a síntese ---------- */
+
+/* as frases do começo: no prelúdio o aluno vota; na síntese elas voltam com a resposta dos casos */
+.perguntas-palco.perguntas-palco-preludio, .perguntas-palco.perguntas-palco-sintese { height: auto; }
+.frases { list-style: none; margin: 0; padding: 0; counter-reset: frase; }
+.frase { counter-increment: frase; position: relative; padding: .85rem 0 .85rem 2.2rem; border-top: 1px solid var(--borda); }
+.frase-com-votos { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .2rem 1.25rem; align-items: center; }
+.frase:last-child { border-bottom: 1px solid var(--borda); }
+.frase::before { content: counter(frase); position: absolute; left: 0; top: .9rem; font-size: 1.6rem; font-weight: 300; line-height: 1; color: var(--amarelo); }
+.frase-texto { margin: 0; font-size: clamp(1rem, 1.3vw, 1.1rem); font-weight: 600; line-height: 1.35; color: var(--navy); text-wrap: pretty; }
+/* a régua de cada frase: cinco nós numa linha, como os passos da trilha */
+.frase-regua { display: flex; align-items: center; gap: .6rem; }
+.regua-ponta { font-size: .78rem; font-weight: 600; color: var(--tinta-suave); }
+.regua-trilho { position: relative; display: flex; gap: 1.1rem; }
+.regua-trilho::before { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; margin-top: -1px; background: var(--teal-claro); }
+.regua-no { position: relative; width: 14px; height: 14px; padding: 0; border: 2px solid var(--teal-claro); border-radius: 50%; background: #fff; cursor: pointer; transition: transform .12s, border-color .12s, background .12s; }
+.regua-no:hover { border-color: var(--teal); transform: scale(1.2); }
+.regua-no[aria-checked="true"] { border-color: var(--amarelo); background: var(--amarelo); transform: scale(1.35); }
+.frase-casos { margin: .4rem 0 0; font-size: .8rem; color: var(--tinta-suave); }
+.frase-casos .grade-caso { font-size: .8rem; }
+.frase-resposta { margin: .35rem 0 0; font-size: .9rem; line-height: 1.5; color: var(--tinta); text-wrap: pretty; }
+.frase-resposta b { color: var(--navy); text-decoration: underline 3px var(--amarelo); text-underline-offset: 4px; }
+.frase-voto-dado[data-voto="discordo"] { color: var(--teal-escuro); font-weight: 600; }
+.perguntas-palco-sintese .porque-kicker { margin-bottom: .8rem; }
+.grade-caso { font: inherit; font-size: .95rem; font-weight: 600; color: var(--navy); background: none; border: 0; padding: 0; cursor: pointer; text-align: left; }
+.grade-caso:hover { color: var(--teal-escuro); }
+
+/* os desafios da síntese: cada simulador com uma pergunta para levar */
+.desafios { list-style: none; margin: .4rem 0 0; padding: 0; }
+.desafios li + li { margin-top: .5rem; }
+.desafios a { display: block; padding: .75rem 1rem; border-left: 3px solid var(--teal); background: var(--fundo-suave); text-decoration: none; transition: border-color .15s; }
+.desafios a:hover { border-left-color: var(--amarelo); }
+.desafio-nome { display: block; font-size: .95rem; font-weight: 600; color: var(--teal-escuro); }
+.desafio-texto { display: block; margin-top: .15rem; font-size: .88rem; line-height: 1.4; color: var(--navy); }
+
+/* ---------- as apostas ---------- */
+
+/* nenhuma aposta é lista de opções: régua contínua, bolinhas para pintar,
+   barra para dividir ou um gesto na figura; todas terminam com a leitura e o botão */
+.aposta-opcoes { margin: 0 0 1.5rem; }
+.aposta-instrucao { margin: 0 0 .8rem; font-size: .92rem; line-height: 1.5; color: var(--tinta); }
+.aposta-instrucao em { font-style: normal; font-weight: 600; color: var(--teal-escuro); }
+.aposta-lida { margin: .75rem 0 0; font-size: .9rem; line-height: 1.6; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.aposta-lida b { color: var(--navy); font-weight: 600; }
+.aposta-veredito { display: inline-block; margin-left: .6rem; padding: .05rem .55rem; border-radius: 999px; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--fundo-suave); color: var(--tinta-suave); vertical-align: 1px; }
+.aposta-veredito[data-perto="true"] { background: rgba(252, 180, 33, .3); color: var(--navy); }
+.aposta-botao { margin-top: .8rem; padding: .45rem 1.3rem; font: inherit; font-size: .88rem; font-weight: 600; color: #fff; background: var(--navy); border: 0; border-radius: 999px; cursor: pointer; transition: background .15s, opacity .15s; }
+.aposta-botao:hover:not(:disabled) { background: var(--teal-escuro); }
+.aposta-botao:disabled { opacity: .35; cursor: default; }
+.aposta-botao[hidden] { display: none; }
+
+/* a régua logarítmica: o slider do simulador (componentes/regua-linha.css), uma camada recuada meio cursor para as marcas e o modelo, e o "nunca" à parte */
+.regua-log { display: flex; align-items: flex-start; gap: 1.1rem; padding-top: 1.5rem; }
+.regua-log-trilho { position: relative; flex: 1; padding-bottom: 1.4rem; }
+.regua-log .rl-entrada[data-apagada] { opacity: .3; }
+.regua-log .rl-entrada:disabled { cursor: default; }
+.regua-log-camada { position: absolute; top: 0; bottom: 0; left: 6.5px; right: 6.5px; pointer-events: none; }
+.regua-log-marca { position: absolute; top: 22px; padding-top: 6px; transform: translateX(-50%); font-size: .7rem; color: #a3a3a3; white-space: nowrap; }
+.regua-log-marca:first-of-type { transform: translateX(-6.5px); }
+.regua-log-modelo { position: absolute; top: -1.4rem; height: calc(1.4rem + 14px); display: flex; flex-direction: column; align-items: center; transform: translateX(-50%); }
+.regua-log-modelo[hidden] { display: none; }
+.regua-log-modelo span { font-size: .85rem; font-weight: 700; color: var(--navy); white-space: nowrap; }
+.regua-log-modelo::after { content: ""; flex: 1; width: 3px; margin-top: .15rem; border-radius: 2px; background: var(--navy); }
+.regua-log-nunca { margin-top: -2px; padding: .2rem .8rem; font: inherit; font-size: .82rem; font-weight: 600; color: var(--tinta-suave); background: #fff; border: 1.5px solid var(--borda-forte); border-radius: 999px; cursor: pointer; }
+.regua-log-nunca:hover:not(:disabled) { border-color: var(--teal); color: var(--teal-escuro); }
+.regua-log-nunca[aria-pressed="true"] { color: #fff; background: var(--navy); border-color: var(--navy); }
+.regua-log-nunca:disabled { cursor: default; }
+.aposta-lida:empty { display: none; }
+
+/* as bolinhas do pug: cada uma vale 2 pugs, e a metade pintada, 1 */
+.folegos { display: flex; align-items: center; gap: .45rem; margin: .4rem 0; }
+.folegos-rotulo { width: 5.6rem; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+.folego { display: inline-block; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 50%; background: #c9cfdb; }
+.folego[data-mal="1"] { background: linear-gradient(90deg, var(--navy) 50%, #c9cfdb 50%); }
+.folego[data-mal="2"] { background: var(--navy); }
+button.folego { cursor: pointer; transition: transform .1s; }
+button.folego:hover:not(:disabled) { transform: scale(1.12); box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--teal); }
+button.folego:disabled { cursor: default; }
+
+/* a barra dos vidros, com os dois divisores */
+.vidros-rotulo { margin: .5rem 0 .3rem; font-size: .68rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+.vidros-sua { position: relative; height: 28px; cursor: ew-resize; touch-action: none; }
+.vidros-sua[data-travada] { cursor: default; }
+.vidros-sua .vidros-barra { position: absolute; left: 0; right: 0; top: 6px; }
+.vidros-barra { display: flex; height: 16px; }
+.vidros-parte { flex-basis: 0; min-width: 0; }
+.vidros-b { background: var(--navy); }
+.vidros-meio { background: #c9cfdb; }
+.vidros-a { background: var(--amarelo); }
+.vidros-alca { position: absolute; top: 0; width: 8px; height: 28px; margin-left: -4px; background: #fff; border: 2px solid var(--navy); border-radius: 3px; }
+.vidros-contas { display: flex; justify-content: space-between; margin: .3rem 0 0; font-size: .76rem; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.vidros-contas span:first-child { color: var(--navy); font-weight: 600; }
+.vidros-contas span:last-child { color: #9a7318; font-weight: 600; }
+
+.aposta-leitura { min-height: 4.5rem; }
+.aposta-leitura[hidden] { display: none; }
+.aposta-conta {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  margin: .4rem 0 0;
+  color: var(--tinta-suave);
+  font-size: .95rem;
+  font-variant-numeric: tabular-nums;
+}
+.aposta-conta b { font-size: 2.6rem; font-weight: 300; color: var(--navy); line-height: 1; min-width: 2ch; }
+
+/* ---------- a trilha das perguntas e a figura ---------- */
+
+/* ainda não apostada: nó vazado; já apostada: nó cheio, como no simulador */
+.perguntas-trilha { margin: 2rem 0 2.75rem; }
+.perguntas-trilha .trilha-passo:not([data-feita]) .trilha-no { background: #fff; color: var(--teal-escuro); border: 2px solid var(--teal-claro); }
+@keyframes jogo-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .motivo-entra { animation: none; } }
+
+.perguntas {
+  display: grid;
+  grid-template-columns: minmax(0, 27rem) minmax(0, 1fr);
+  gap: 0 4.5rem;
+  align-items: start;
+}
+.perguntas-coluna { display: flex; flex-direction: column; }
+/* o palco fica fixo enquanto a coluna do texto rola */
+.perguntas > div:last-child { position: sticky; top: calc(var(--altura-topo, 82px) + 16px); }
+.pergunta-texto {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-weight: 300;
+  line-height: 1.38;
+  color: var(--navy);
+  text-wrap: pretty;
+}
+.perguntas .aposta-leitura { min-height: 0; margin-bottom: 0; font-size: .95rem; max-width: none; }
+.motivo { margin-top: 1.4rem; padding-top: 1.1rem; border-top: 3px solid var(--amarelo); width: fit-content; max-width: 100%; }
+.motivo .porque-kicker { margin-bottom: .35rem; }
+.motivo-frase {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--navy);
+  text-wrap: balance;
+}
+.motivo-entra { animation: jogo-entra .45s ease both; }
+.perguntas .vivo-acoes { margin-top: 1.25rem; }
+.perguntas-palco { position: relative; height: clamp(300px, calc(100vh - 450px), 480px); }
+.perguntas-palco canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.perguntas-pe { margin-top: .55rem; min-height: 2.6rem; }
+.perguntas-pe .vivo-nota { max-width: none; font-variant-numeric: tabular-nums; }
+.perguntas-pe .vivo-nota b { color: var(--navy); font-weight: 600; }
+.perguntas-pe .vivo-nota em { font-style: normal; font-weight: 600; color: var(--teal-escuro); }
+.perguntas-pe .jogo-dica { margin-top: .2rem; }
+.perguntas-pe .aposta-conta { margin: .1rem 0 .3rem; }
+.jogo-legenda { display: flex; flex-wrap: wrap; gap: .2rem 1.25rem; margin-top: .2rem; font-size: .8rem; color: var(--tinta-suave); }
+.jogo-legenda .legenda-item { display: inline-flex; align-items: center; gap: .4rem; }
+.jogo-legenda i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
+@media (max-width: 900px) {
+  .perguntas { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  .perguntas-coluna { min-height: 0; }
+  .perguntas > div:last-child { position: static; }
+}

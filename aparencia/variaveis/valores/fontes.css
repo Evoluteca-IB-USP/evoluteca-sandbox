@@ -1,0 +1,7 @@
+/* Uma família só, como no IB. --fonte-dados é a que o motor de gráficos lê. */
+
+:root {
+  --fonte:       "Open Sans", Arial, sans-serif;
+  --fonte-dados: "Open Sans", Arial, sans-serif;   /* lida pelo motor de gráficos */
+  --fonte-mono:  ui-monospace, "Cascadia Mono", Consolas, monospace;
+}

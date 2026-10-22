@@ -1,0 +1,25 @@
+/* ============ chrome institucional USP (não alterar) ============ */
+
+.usp-faixa-amarela { height: 6px; background: var(--usp-amarelo); }
+.usp-faixa-azul    { height: 6px; background: var(--usp-ciano); }
+.usp-barra         { height: 40px; background: var(--usp-teal); }
+/* quando a barra receber conteúdo (menu institucional), o padrão da USP é:
+   Open Sans 14px, branco, itens com padding 0 10px e line-height 40px,
+   alinhados à direita dentro de um container de 1170px. */
+.usp-barra-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 40px;
+  font-size: 14px;
+  color: #fff;
+}
+.usp-barra-inner a { color: #fff; text-decoration: none; line-height: 40px; }
+.usp-barra-inner a:hover { color: var(--amarelo); }
+
+/* logos IB + USP (brancas), clicáveis, à esquerda da barra como no IB */
+.usp-logo { display: flex; align-items: center; height: 40px; opacity: .95; }
+.usp-logo:hover { opacity: 1; }
+.usp-logo img { display: block; width: auto; }
+.usp-logo-ib  { height: 26px; }
+.usp-logo-usp { height: 22px; }

@@ -1,0 +1,18 @@
+/* ============ etiquetas ============ */
+
+.chip {
+  display: inline-block;
+  font-size: .74rem;
+  font-weight: 600;
+  padding: .18rem .55rem;
+  border-radius: 3px;
+  background: var(--fundo-suave);
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+.chip-medio     { background: #fff3d6; color: #7a5600; }
+.chip-graduacao { background: #e3f4f7; color: #0a606f; }
+.chip-breve     { background: transparent; border: 1px dashed var(--borda-forte); }
+
+/* etiquetas de nível/tema (cabeçalho da página do simulador) */
+.card-chips { display: flex; flex-wrap: wrap; gap: .35rem; }

@@ -1,0 +1,11 @@
+/* ============ o pedaço de página que fica sob as três navbars ============ */
+
+.exemplo { padding: 4rem 0 8rem; }
+.exemplo h1 { color: var(--navy); font-size: 3.4rem; font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 0 0 1.2rem; }
+.exemplo h1 span { color: var(--amarelo); }
+.exemplo-lede { font-size: 1.3rem; font-weight: 300; color: var(--tinta); max-width: 40rem; margin: 0 0 2.6rem; }
+.exemplo-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.exemplo-grade div { height: 190px; background: var(--fundo-suave); border-radius: var(--raio); }
+
+.exemplo-sobrancelha { font-size: .75rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--teal-escuro); margin: 0 0 .8rem; }
+.exemplo-aviso { margin: 2.5rem 0 0; font-size: .8rem; color: var(--tinta-suave); }

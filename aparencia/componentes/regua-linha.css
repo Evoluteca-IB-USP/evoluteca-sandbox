@@ -1,0 +1,35 @@
+/* O slider do site: a linha de deriva do catálogo, contínua até a cabecinha
+   âmbar e pontilhada depois. É o dos parâmetros do simulador, da linha do
+   tempo e das apostas da home; quem o usa põe --cheio no input. */
+
+.rl { display: flex; flex-direction: column; gap: .2rem; cursor: pointer; }
+.rl-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.rl-rotulo { font-size: .95rem; color: var(--tinta); transition: color .2s; }
+.rl-valor { font-size: 1.15rem; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+.rl.acesa .rl-rotulo { color: var(--teal-escuro); }
+.rl-limites { display: flex; justify-content: space-between; font-size: .7rem; color: #a3a3a3; margin-top: -.15rem; }
+
+.rl-entrada, .tempo-entrada { --cheio: 50%; -webkit-appearance: none; appearance: none; width: 100%; height: 24px; margin: 0; background: transparent; cursor: pointer; }
+.rl-entrada::-webkit-slider-runnable-track, .tempo-entrada::-webkit-slider-runnable-track {
+  height: 6px;
+  background:
+    linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / var(--cheio) 2.5px no-repeat,
+    radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 7px 6px repeat-x;
+}
+.rl-entrada::-moz-range-track, .tempo-entrada::-moz-range-track { height: 2px; background: #cfe9ee; }
+.rl-entrada::-moz-range-progress, .tempo-entrada::-moz-range-progress { height: 2.5px; background: var(--teal-claro); }
+.rl-entrada::-webkit-slider-thumb, .tempo-entrada::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  margin-top: -3.5px;
+  border-radius: 50%;
+  background: var(--amarelo);
+  box-shadow: 0 0 0 4px rgba(252, 180, 33, .25);
+  transition: box-shadow .15s;
+}
+.rl-entrada::-moz-range-thumb, .tempo-entrada::-moz-range-thumb { width: 13px; height: 13px; border: 0; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 4px rgba(252, 180, 33, .25); }
+.rl-entrada:hover::-webkit-slider-thumb, .tempo-entrada:hover::-webkit-slider-thumb,
+.rl.acesa .rl-entrada::-webkit-slider-thumb { box-shadow: 0 0 0 7px rgba(252, 180, 33, .3); }
+.rl-entrada:focus-visible, .tempo-entrada:focus-visible { outline: none; }
+.rl-entrada:focus-visible::-webkit-slider-thumb, .tempo-entrada:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 7px rgba(16, 148, 171, .35); }

@@ -1,0 +1,8 @@
+.aviso {
+  background: #fff3d6;
+  border-left: 4px solid var(--amarelo);
+  color: #7a5600;
+  font-size: .9rem;
+  padding: .7rem 1rem;
+  margin-bottom: 2rem;
+}

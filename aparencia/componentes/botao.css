@@ -1,0 +1,32 @@
+/* ============ botões (IB: caixa alta, letter-spacing 2px) ============ */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--fonte);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: .9rem 1.5rem;
+  border-radius: var(--raio);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.botao-primario { background: var(--teal); color: #fff; }
+.botao-primario:hover { background: var(--teal-escuro); color: #fff; }
+.botao-contorno { background: transparent; color: var(--navy); border-color: var(--borda-forte); }
+.botao-contorno:hover { border-color: var(--navy); color: var(--navy); }
+.botao-claro { background: #fff; color: var(--navy); box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+.botao-claro:hover { background: #e3f4f7; color: var(--navy); }
+.botao-grande { font-size: .85rem; padding: 1.05rem 1.65rem; gap: .65rem; }
+.botao .seta { display: inline-block; font-weight: 400; transition: transform .2s ease; }
+.botao:hover .seta { transform: translateX(3px); }
+.botao-fantasma-claro { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+.botao-fantasma-claro:hover { border-color: #fff; color: #fff; }
+.botao-mini { padding: .55rem 1rem; font-size: .72rem; }
+
