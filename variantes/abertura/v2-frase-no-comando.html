@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abertura · v2, a frase no comando</title>
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="../../aparencia/home/__pacote__.css">
+  <link rel="stylesheet" href="comum/abertura-base.css">
+  <link rel="stylesheet" href="v2-frase-no-comando.css">
+  <script type="importmap">
+    { "imports": { "r": "../../motor-de-simuladores/r/__pacote__.js", "escrever-html": "../../escrever-html/__pacote__.js", "portugues": "../../portugues/__pacote__.js" } }
+  </script>
+</head>
+<body class="tem-abertura">
+  <div class="usp-faixa-amarela"></div>
+  <div class="usp-faixa-azul"></div>
+  <div class="usp-barra">
+    <div class="container usp-barra-inner">
+      <a class="usp-logo" href="https://www.ib.usp.br" rel="external" title="Instituto de Biociências da USP"><img src="../../imagens/simbolo_ib_bco.png" alt="Instituto de Biociências da USP" class="usp-logo-ib"></a>
+      <a class="usp-logo" href="https://www5.usp.br" rel="external" title="Universidade de São Paulo"><img src="../../imagens/logo_usp_bco.png" alt="Universidade de São Paulo" class="usp-logo-usp"></a>
+    </div>
+  </div>
+
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="../../index.html">
+        <span class="marca-nome">Evoluteca</span>
+        <span class="marca-sub">Instituto de Biociências · USP</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="../../index.html" aria-current="page">Início</a>
+        <a href="../../catalogo.html">Simuladores</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="abertura ab-comando">
+      <canvas id="fundo" aria-hidden="true"></canvas>
+      <div class="container ab-comando-palco">
+        <h1 class="ab-comando-frase">Numa população de <span id="escolha-n"></span> indivíduos, o que o acaso faz com uma variante genética?</h1>
+        <div class="ab-comando-pe">
+          <p class="ab-comando-legenda">Cada linha começa com metade da população carregando a variante.
+            Troque o número acima: com poucos indivíduos, o acaso decide rápido se a variante some ou fica com todos.</p>
+          <p class="ab-comando-saida">Isto já é um simulador.<br><a href="../../catalogo.html">A Evoluteca tem outros para a sua aula <span aria-hidden="true">→</span></a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="secao-porque"></section>
+  </main>
+
+  <script type="module" src="v2-frase-no-comando.js"></script>
+</body>
+</html>

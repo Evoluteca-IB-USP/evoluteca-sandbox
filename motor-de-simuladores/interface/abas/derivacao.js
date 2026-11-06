@@ -1,6 +1,7 @@
 /* Aba "Derivação": de onde vêm as fórmulas, em poucos passos. Cada passo
    tem uma frase, a fórmula e, embaixo, a mesma fórmula com os números da
-   rodada e o resultado; quando a ficha sabe medir, o valor nas réplicas. */
+   rodada e o resultado; quando a ficha sabe medir, o valor nas réplicas
+   (ou onde `rotuloMedido` disser; o medido pode ser um texto, como "ainda não"). */
 
 import { criar } from "escrever-html";
 import { formulaHtml, substituidaHtml, simbolos } from "../formulas.js";
@@ -29,7 +30,8 @@ export function montarDerivacao(painel, no) {
         const k = p.formula.search(/[=≈]/), sinal = k >= 0 ? p.formula[k] : "=";
         const lado = k >= 0 ? p.formula.slice(k + 1) : p.formula;
         valores.innerHTML = `${sinal} ${substituidaHtml(lado, sims, sessao.par, g, sessao.res)} = <b>${numero(p.valor(sessao.par, g, sessao.res), p.casas ?? 3)}</b>`;
-        if (medido) medido.innerHTML = `<span class="eq-medido">nas réplicas, agora <b>${numero(p.medido(sessao.res, g, sessao.par), p.casas ?? 3)}</b></span>`;
+        const v = medido && p.medido(sessao.res, g, sessao.par);
+        if (medido) medido.innerHTML = `<span class="eq-medido">${p.rotuloMedido ?? "nas réplicas, agora"} <b>${typeof v === "number" ? numero(v, p.casas ?? 3) : v}</b></span>`;
       }
     },
   };

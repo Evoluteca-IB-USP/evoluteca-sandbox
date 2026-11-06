@@ -3,22 +3,25 @@
      replicas  várias séries no tempo, a primeira em destaque, distribuição ao lado
      curva     uma série no tempo (uma média, uma proporção, uma trajetória)
      barras    categorias, com o esperado (contorno tracejado) e o medido (cheio)
+     genealogia  a população geração a geração e a árvore da amostra (genealogia.js)
    Todos aceitam a rodada anterior em cinza, para comparar. */
 
 import { grafico, eixos, linha, faixa, cabeca, referencia, agora, histogramaLateral, valorEm, texto, numero } from "./pecas.js";
+import { desenharGenealogia } from "./genealogia.js";
 import { FANTASMA, TEAL_ESCURO } from "../cores.js";
 
 /** a área do gráfico; `estado()` devolve { res, par, t, fantasmas } na hora de desenhar */
 export function areaDeSaida(canvas, spec, estado) {
   return grafico(canvas, {
     xlim: [0, 1], ylim: spec.ylim,
-    margem: { dir: spec.distribuicao ? 96 : 20 },
+    margem: { dir: spec.distribuicao ? 96 : spec.tipo === "genealogia" ? 34 : 20 },
     desenhar: (g) => { const e = estado(); if (e.res) desenharSaida(g, spec, e); },
   });
 }
 
 export function desenharSaida(g, spec, { res, par, t, fantasmas = [] }) {
   if (spec.tipo === "barras") return desenharBarras(g, spec, res, par, fantasmas);
+  if (spec.tipo === "genealogia") return desenharGenealogia(g, spec, { res, par, t, fantasmas });
   g.xlim = [0, total(spec, res)];
   eixos(g, { tituloY: spec.titulo, tituloX: "geração" });
   if (spec.faixa) {

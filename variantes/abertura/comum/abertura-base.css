@@ -1,0 +1,17 @@
+/* a base das três aberturas: o azul chapado do IB e o canvas cobrindo tudo */
+.abertura {
+  position: relative;
+  min-height: calc(100vh - 52px);
+  background: var(--navy);
+  color: #fff;
+  overflow: hidden;
+}
+.abertura canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.abertura a { color: #fff; }
+.abertura :focus-visible { outline: 2px solid var(--amarelo); outline-offset: 4px; }

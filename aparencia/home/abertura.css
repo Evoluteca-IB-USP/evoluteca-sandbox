@@ -1,24 +1,30 @@
 /* ============ abertura da home ============
-   Dois grupos sobre o fundo: a chamada (título, lede e botão), centrada no
-   azul, e, no pé, a nota de rodapé com a legenda do fundo, chamada pelo ¹ do
-   lede. */
+   A chamada à esquerda e a legenda junto ao gráfico à direita.
+   No celular, a legenda vem depois do botão. */
 
 .abertura {
   position: relative;
   display: flex;
   flex-direction: column;
-  --altura-aresta: clamp(200px, 26vh, 290px);
+  --altura-aresta: clamp(140px, 20vh, 220px);
   /* O azul toma a tela inteira: a janela menos o chrome da USP acima da
      abertura (duas faixas de 6px e a barra de 40px — o header já está dentro
-     dela), mais 60% da aresta, que desce para fora da tela. Na primeira tela
+     dela), mais 35% da aresta, que desce para fora da tela. Na primeira tela
      o branco sobra só como um recorte irregular no pé. */
-  min-height: calc(100vh - 52px + var(--altura-aresta) * .6);
-  min-height: calc(100svh - 52px + var(--altura-aresta) * .6);
+  min-height: calc(100vh - 52px + var(--altura-aresta) * .35);
+  min-height: calc(100svh - 52px + var(--altura-aresta) * .35);
   background: linear-gradient(170deg, #1a2d6e 0%, var(--navy) 45%, #0e1a48 100%);
   color: #fff;
   overflow: hidden;
 }
-.abertura-palco { flex: 1; display: flex; flex-direction: column; width: 100%; }
+.abertura-palco {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  width: 100%;
+}
 .abertura-canvas {
   position: absolute;
   inset: 0;
@@ -26,35 +32,50 @@
   height: 100%;
   display: block;
   /* as trajetórias são textura: recuam atrás do texto e ganham força à direita */
-  -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
-  mask-image: linear-gradient(100deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.34) 45%, rgba(0,0,0,1) 72%);
+  -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,.16), rgba(0,0,0,.22) 35%, rgba(0,0,0,.6) 68%, #000);
+  mask-image: linear-gradient(100deg, rgba(0,0,0,.16), rgba(0,0,0,.22) 35%, rgba(0,0,0,.6) 68%, #000);
 }
 
 /* ---- a chamada ---- */
 .abertura-conteudo {
   position: relative;
-  margin-block: auto;                             /* centrada no que sobra acima da nota */
-  padding: 2.5rem 0 3rem;
+  align-self: start;
+  margin-block: 0;
+  padding: clamp(3rem, 9vh, 6rem) 0 3rem;
   max-width: 760px;
   text-shadow: 0 1px 2px rgba(6, 14, 46, .45);   /* separa as letras das trajetórias */
 }
 /* maior que os títulos das seções, porque abre a página; em duas linhas */
 .abertura h1 {
   margin-bottom: .45em;
-  font-size: clamp(2.8rem, 5.2vw, 4.5rem);
+  font-size: clamp(2.1rem, 3.8vw, 3.45rem);
   font-weight: 300;
-  line-height: 1.04;
+  line-height: 1.13;
   letter-spacing: -.02em;
   color: #fff;
 }
 .titulo-linha { display: block; }
-.abertura h1 strong { font-weight: 700; color: var(--amarelo); }
+.abertura h1 strong {
+  display: block;
+  margin-top: .14em;
+  font-size: .79em;
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--amarelo);
+}
 .abertura-lede {
   font-size: 1.15rem;
   line-height: 1.65;
   color: rgba(255,255,255,.9);
-  max-width: 58ch;
+  max-width: 47ch;
   margin-bottom: 1rem;
+}
+.abertura-publico {
+  max-width: 49ch;
+  margin: 0;
+  font-size: .94rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.68);
 }
 .marca-da-nota {                                  /* o ¹ que chama a nota de rodapé */
   margin-left: .08em;
@@ -72,45 +93,55 @@
   position: relative;
   display: inline-flex;
   align-items: flex-end;
-  height: 84px;
-  margin-top: 1.6rem;
-  padding: 0 2.4rem 1.35rem;
+  height: 72px;
+  margin-top: 1.8rem;
+  padding: 0 1.55rem 1.15rem;
   color: var(--navy);
   text-decoration: none;
   text-shadow: none;
 }
 .botao-recortado svg { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
 .botao-recortado path { fill: var(--amarelo); transition: fill .15s ease; }
-.botao-recortado span { position: relative; font-size: 1.22rem; font-weight: 600; line-height: 1; white-space: nowrap; }
+.botao-recortado span { position: relative; font-size: 1.03rem; font-weight: 600; line-height: 1; white-space: nowrap; }
 .botao-recortado:hover { color: var(--navy); }
 .botao-recortado:hover path { fill: #ffc43d; }
 .botao-recortado:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 4px; }
 
 /* ---- a nota de rodapé: a legenda do fundo, viva ---- */
-.nota-da-abertura { position: relative; max-width: 38rem; padding-bottom: 1.7rem; }
-.nota-legenda { margin: 0 0 .4rem; font-size: .82rem; line-height: 1.55; color: rgba(255, 255, 255, .85); }
-.nota-legenda sup { margin-right: .1em; font-weight: 700; color: var(--amarelo); }
-.nota-legenda b { font-weight: 600; color: #fff; }
-.nota-relogio { margin: 0; font-size: .82rem; line-height: 1.6; color: rgba(255, 255, 255, .85); font-variant-numeric: tabular-nums; }
+.nota-da-abertura {
+  position: relative;
+  align-self: end;
+  margin-bottom: 1rem;
+  padding: 0 0 1rem;
+  text-shadow: 0 1px 2px rgba(6,14,46,.6);
+  scroll-margin-top: 7rem;
+}
+.nota-legenda { margin: 0 0 .4rem; font-size: .8rem; line-height: 1.6; color: rgba(255,255,255,.85); }
+.nota-legenda > b { color: var(--teal-claro); font-weight: 600; }
+.nota-relogio { margin: 0; font-size: .8rem; line-height: 1.6; color: rgba(255,255,255,.85); font-variant-numeric: tabular-nums; }
 .nota-relogio b { font-weight: 600; color: #fff; }
-/* uma linha só: trocar a espécie muda o comprimento da frase, e se ela
-   quebrasse em outro ponto a altura da nota mudaria e a chamada pularia */
-.nota-linha { display: block; white-space: nowrap; }
+.nota-relogio [data-geracoes] { color: var(--amarelo); }
 .nota-relogio [data-especie] { transition: color .7s ease; }
 .nota-relogio [data-especie].sorteada { color: var(--amarelo); transition: none; }
-.nota-sortear {                                   /* o dado do sorteio do catálogo */
-  margin-left: .6rem;
+.nota-sortear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 32px;
+  min-height: 32px;
+  margin-left: .15rem;
   padding: 0;
   font: inherit;
-  font-weight: 600;
+  font-size: .78rem;
   color: var(--teal-claro);
   background: none;
   border: 0;
   cursor: pointer;
 }
 .nota-sortear:hover { color: #fff; }
-.nota-sortear:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 3px; }
-.nota-dado { display: inline-block; font-size: 1.3rem; vertical-align: -.1em; margin-right: .25rem; transition: transform .5s ease; }
+.nota-sortear:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 4px; }
+.nota-dado { display: inline-block; font-size: 1.2rem; transition: transform .5s ease; }
 
 /* ---- a aresta: onde a abertura encontra a página ----
    O azul não desliza para o branco: ele é cortado por uma trajetória. O
@@ -144,10 +175,23 @@
   vector-effect: non-scaling-stroke;   /* o traço não engorda quando o SVG estica */
 }
 
+@media (max-width: 900px) {
+  .abertura-palco { grid-template-columns: 1fr; gap: 1rem; }
+  .abertura-conteudo { max-width: 42rem; padding-top: 3rem; padding-bottom: 1rem; }
+  .abertura h1 { font-size: clamp(2.1rem, 5.5vw, 3.45rem); }
+  .nota-da-abertura { max-width: 31rem; margin-top: 1.5rem; margin-bottom: 0; }
+  .abertura-canvas {
+    -webkit-mask-image: linear-gradient(100deg, rgba(0,0,0,.16), rgba(0,0,0,.25) 55%, rgba(0,0,0,.7));
+    mask-image: linear-gradient(100deg, rgba(0,0,0,.16), rgba(0,0,0,.25) 55%, rgba(0,0,0,.7));
+  }
+}
 @media (max-width: 700px) {
   .abertura { --altura-aresta: clamp(70px, 9vh, 100px); }
-  .abertura-canvas {
-    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
-    mask-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.6) 100%);
-  }
+  .abertura-lede { font-size: 1.03rem; }
+  .abertura-publico { font-size: .87rem; }
+  .abertura-conteudo { padding-top: 2.5rem; }
+  .botao-recortado { margin-top: 1.3rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nota-dado { transition: none; }
 }

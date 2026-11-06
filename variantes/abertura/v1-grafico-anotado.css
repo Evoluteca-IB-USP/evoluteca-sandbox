@@ -1,0 +1,91 @@
+/* v1 · o gráfico anotado */
+
+.ab-anotado { display: flex; align-items: flex-start; }
+.ab-anotado .container { position: relative; width: 100%; }
+
+/* o gráfico recua onde está o texto e ganha força na direita, onde a anotação mora */
+.ab-anotado canvas {
+  -webkit-mask-image: radial-gradient(ellipse 42% 38% at 22% 46%, rgba(0,0,0,.14) 60%, #000 100%);
+  mask-image: radial-gradient(ellipse 42% 38% at 22% 46%, rgba(0,0,0,.14) 60%, #000 100%);
+}
+.ab-anotado-texto {
+  max-width: 600px;
+  margin-top: clamp(4rem, 13vh, 8rem);
+}
+.ab-anotado-kicker {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin: 0 0 1.1rem;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal-claro);
+}
+.ab-anotado-kicker::before { content: ""; width: 28px; height: 2px; background: var(--amarelo); }
+.ab-anotado h1 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(2.4rem, 4.2vw, 3.7rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  color: #fff;
+}
+.ab-anotado-lede {
+  max-width: 46ch;
+  margin: 0 0 1.6rem;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, .86);
+}
+.ab-anotado-links { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.4rem; margin: 0; }
+.ab-anotado-links a { font-size: .95rem; color: rgba(255, 255, 255, .75); text-decoration: underline; text-decoration-color: rgba(100, 196, 210, .6); text-underline-offset: 4px; }
+.ab-anotado-links a:hover { color: #fff; }
+.ab-anotado-principal {
+  font-size: 1.12rem !important;
+  font-weight: 600;
+  color: var(--amarelo) !important;
+  text-decoration-color: var(--amarelo) !important;
+  text-decoration-thickness: 2px;
+}
+.ab-anotado-principal:hover { color: #fff !important; }
+
+/* o rótulo do eixo vertical, de pé, encostado na borda esquerda */
+.ab-anotado-eixo {
+  position: absolute;
+  left: 18px;
+  bottom: 70px;
+  margin: 0;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .6);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.ab-anotado-eixo::before { content: "↑ "; }
+
+/* a anotação presa à cabeça da linha âmbar */
+.ab-anotado-rotulo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding-right: 14px;
+  text-align: right;
+  font-size: .82rem;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, .88);
+  pointer-events: none;
+  will-change: transform;
+}
+.ab-anotado-rotulo b { color: var(--amarelo); font-variant-numeric: tabular-nums; }
+.ab-anotado-fio {
+  position: absolute;
+  right: 0;
+  top: .7em;
+  width: 1px;
+  height: 52px;
+  background: var(--amarelo);
+  opacity: .7;
+}

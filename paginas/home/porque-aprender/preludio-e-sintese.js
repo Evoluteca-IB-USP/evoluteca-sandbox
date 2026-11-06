@@ -1,28 +1,33 @@
-/* As duas pontas da trilha. O prelúdio pede que o aluno registre o que
-   pensa hoje sobre quatro frases que muita gente acha verdade, numa régua
-   de discordo a concordo; cada frase é posta à prova por um ou dois dos
-   casos. A síntese devolve as frases com o que os casos mostraram e abre a
-   porta dos simuladores, cada um com um desafio. As respostas ficam em
-   `crencas` (índice da frase → 1 a 5), que a moldura guarda. */
+/* A abertura registra opiniões numa régua de cinco pontos.
+   O encerramento retoma as frases e apresenta os simuladores. */
 
 import { criar } from "escrever-html";
 
 const FRASES = [
-  { frase: "Evolução leva milhões de anos; não dá para ver acontecendo.", casos: [0, 1],
-    resposta: "As bactérias atravessaram a placa em 11 dias, e o focinho do pug encolheu a um terço em pouco mais de um século." },
-  { frase: "Quando a gente escolhe os pais a dedo, só muda o que a gente escolheu.", casos: [1],
-    resposta: "Os criadores de pug escolheram o focinho curto, e a falta de ar veio junto: hoje, só 1 pug em cada 20 respira sem nenhum sinal do problema." },
-  { frase: "Se nenhuma versão de um gene tem vantagem, nada muda.", casos: [2],
-    resposta: "Nos vidros de Buri, sem vantagem nenhuma, mais da metade perdeu uma das versões em 19 gerações. Numa população pequena, o sorteio de quem deixa filhos muda tudo sozinho." },
-  { frase: "A seleção sempre leva ao melhor resultado possível.", casos: [3],
-    resposta: "A seleção só sobe, um passo por vez: a população parou no morro baixo e nunca viu o morro alto. Evolução não é “o melhor vence”, é “o que melhora a partir daqui”." },
+  { frase: "A evolução é lenta demais para ser observada.", casos: [0, 1],
+    titulo: "Algumas mudanças acontecem depressa.",
+    resposta: "Na placa, bactérias resistentes se espalharam em poucos dias. Nos cães, a mudança no focinho aconteceu ao longo de várias gerações." },
+  { frase: "Escolher as melhores características produz um organismo melhor como um todo.", casos: [1],
+    titulo: "Melhorar uma característica pode prejudicar outra.",
+    resposta: "Nos pugs, os criadores favoreceram o focinho curto por considerá-lo mais bonito. Essa escolha mudou a aparência, mas também dificultou a respiração. O que é desejável em uma característica pode trazer prejuízos ao conjunto." },
+  { frase: "Uma característica pode se espalhar mesmo sem trazer vantagem.", casos: [2],
+    titulo: "O acaso também muda uma população.",
+    resposta: "Mesmo sem dar vantagem, uma das versões da cor dos olhos pode se tornar a única entre as moscas de um vidro. Isso depende de quais moscas deixam descendentes." },
+  { frase: "A evolução sempre leva à melhor adaptação possível ao ambiente.", casos: [3],
+    titulo: "O caminho limita aonde a população pode chegar.",
+    resposta: "No modelo dos morros, a população pode parar no topo mais baixo, embora o outro permita sobreviver melhor no mesmo ambiente. Para chegar lá, teria de atravessar um vale onde sobreviveria pior. Favorecer mudanças vantajosas a cada passo não garante chegar à melhor combinação possível." },
+];
+
+const DESAFIOS = [
+  { modelo: "selecao-1-locus", nome: "Seleção em um locus", desafio: "Uma pequena vantagem pode se espalhar pelo grupo? Quanto tempo isso leva?" },
+  { modelo: "deriva", nome: "Deriva genética", desafio: "O acaso tem o mesmo efeito em grupos de 10 e de 1.000 indivíduos?" },
+  { modelo: "hardy-weinberg", nome: "Equilíbrio de Hardy–Weinberg", desafio: "Como as características dos pais se combinam nos filhos?" },
 ];
 
 const REGUA = ["discordo totalmente", "discordo um pouco", "em dúvida", "concordo um pouco", "concordo totalmente"];
-const LEMBRANCA = ["você já desconfiava", "você desconfiava um pouco", "você estava em dúvida", "você concordava um pouco", "você concordava"];
+const LEMBRANCA = ["você discordava", "você discordava um pouco", "você estava em dúvida", "você concordava um pouco", "você concordava"];
 const lado = (v) => (!v ? "nada" : v < 3 ? "discordo" : v > 3 ? "concordo" : "duvida");
 
-/* a régua de uma frase: cinco nós numa linha, de discordo a concordo */
 function regua(i, crencas) {
   const nos = REGUA.map((nome, k) => {
     const b = criar("button", { type: "button", class: "regua-no", role: "radio", title: nome, "aria-label": nome, "aria-checked": String(crencas.get(i) === k + 1) });
@@ -33,23 +38,17 @@ function regua(i, crencas) {
     criar("span", { class: "regua-ponta", texto: "discordo" }), criar("span", { class: "regua-trilho" }, ...nos), criar("span", { class: "regua-ponta", texto: "concordo" }));
 }
 
-const DESAFIOS = [
-  { modelo: "selecao-1-locus", nome: "Seleção em um locus", desafio: "Qual é a menor vantagem que ainda vence? E em quanto tempo?" },
-  { modelo: "deriva", nome: "Deriva genética", desafio: "Uma população de 10 perde a variação em quantas gerações? E uma de 1.000?" },
-  { modelo: "hardy-weinberg", nome: "Equilíbrio de Hardy–Weinberg", desafio: "O que acontece com uma população quando nenhuma força age?" },
-];
-
 /** crencas: Map; perguntas: PERGUNTAS; aoComecar() */
 export function preludio(coluna, palco, { crencas, perguntas, aoComecar }) {
-  const comecar = criar("button", { type: "button", class: "vivo-elo", texto: "começar pela pergunta 1 →" });
+  const comecar = criar("button", { type: "button", class: "vivo-elo", texto: "Começar pelos casos →" });
   comecar.addEventListener("click", aoComecar);
   coluna.replaceChildren(
-    criar("p", { class: "pergunta-texto", texto: "Antes dos casos: o que você pensa hoje?" }),
-    criar("p", { class: "vivo-texto", texto: "Quatro frases que muita gente acha verdade, inclusive quem estuda biologia. Marque o quanto você concorda: não vale nota, é só para registrar a sua intuição." }),
-    criar("p", { class: "vivo-texto", texto: "Depois vêm quatro casos reais. Em cada um você aposta, um modelo roda na hora e mostra o que acontece. No fim, a gente volta a estas frases." }),
-    criar("div", { class: "vivo-acoes" }, comecar));
-  palco.replaceChildren(criar("ol", { class: "frases" }, ...FRASES.map((f, i) =>
-    criar("li", { class: "frase frase-com-votos" }, criar("p", { class: "frase-texto", texto: f.frase }), regua(i, crencas)))));
+    criar("h3", { class: "pergunta-texto preludio-titulo", texto: "O que você acha?" }),
+    criar("p", { class: "vivo-texto preludio-instrucao", texto: "Marque o quanto concorda com cada frase. Vamos retomar suas respostas depois dos casos." }));
+  palco.replaceChildren(
+    criar("ol", { class: "frases" }, ...FRASES.map((f, i) =>
+      criar("li", { class: "frase frase-com-votos" }, criar("p", { class: "frase-texto", texto: f.frase }), regua(i, crencas)))),
+    criar("div", { class: "vivo-acoes preludio-continuar" }, comecar));
 }
 
 /** perguntas: PERGUNTAS; feitas, acertos: Sets de índices; crencas: Map; abrir(k) */
@@ -60,8 +59,7 @@ export function sintese(coluna, palco, { perguntas, feitas, acertos, crencas, ab
   coluna.replaceChildren(
     criar("p", { class: "pergunta-texto", html: placar }),
     criar("p", { class: "vivo-texto", html:
-      "Os quatro casos se explicam com três ingredientes: a <b>mutação</b>, que cria variação ao acaso; a <b>seleção</b>, que favorece quem deixa mais filhos; " +
-      "e a <b>deriva</b>, o sorteio de quem deixa filhos. Nos simuladores, quem controla cada um é você:" }),
+      "Evolução é a mudança das características herdadas em uma população ao longo das gerações. Nos simuladores, você pode mudar as condições e observar o que acontece:" }),
     criar("ul", { class: "desafios" }, ...DESAFIOS.map((d) => criar("li", {},
       criar("a", { href: `simulador.html?modelo=${d.modelo}` }, criar("span", { class: "desafio-nome", texto: `${d.nome} →` }), criar("span", { class: "desafio-texto", texto: d.desafio }))))),
     criar("div", { class: "vivo-acoes" }, criar("a", { class: "vivo-elo", href: "catalogo.html", texto: "ver todos os simuladores →" })));
@@ -72,7 +70,7 @@ export function sintese(coluna, palco, { perguntas, feitas, acertos, crencas, ab
       const casos = f.casos.map((k) => { const b = criar("button", { type: "button", class: "grade-caso", texto: perguntas[k].titulo }); b.addEventListener("click", () => abrir(k)); return b; });
       return criar("li", { class: "frase" },
         criar("p", { class: "frase-texto", texto: f.frase }),
-        criar("p", { class: "frase-resposta" }, criar("b", { texto: "Não é bem assim." }), criar("span", { texto: ` ${f.resposta}` })),
+        criar("p", { class: "frase-resposta" }, criar("b", { texto: f.titulo }), criar("span", { texto: ` ${f.resposta}` })),
         criar("p", { class: "frase-casos" },
           criar("span", { class: "frase-voto-dado", "data-voto": lado(voto), texto: voto ? LEMBRANCA[voto - 1] : "você não marcou" }),
           criar("span", { texto: " · rever: " }), ...casos.flatMap((b, j) => (j ? [criar("span", { texto: " · " }), b] : [b]))));

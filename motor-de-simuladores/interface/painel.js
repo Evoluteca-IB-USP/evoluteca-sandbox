@@ -13,7 +13,7 @@ export function montarPainel(ficha, raiz) {
   const anda = ficha.parametros.some((p) => p.tempo);
 
   if (anda) {
-    painel.tempo = linhaDoTempo({ geracoes: sessao.total(), aoMudar: (v) => { painel.t = v; painel.desenhar?.(); } });
+    painel.tempo = linhaDoTempo({ geracoes: sessao.total(), velocidade: ficha.velocidade && ((t) => ficha.velocidade(t, sessao.res, sessao.par)), aoMudar: (v) => { painel.t = v; painel.desenhar?.(); } });
     raiz.querySelector("#tempo").append(painel.tempo);
   }
   const reguas = ficha.parametros.map((p) => reguaLinha(p, sessao.par[p.nome], (v) => {

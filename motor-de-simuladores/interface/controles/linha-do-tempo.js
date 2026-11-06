@@ -44,13 +44,15 @@ export function linhaDoTempo({ geracoes, velocidade = 30, aoMudar }) {
   }
   entrada.addEventListener("input", () => { marcar(false); ir(+entrada.value); });
 
-  /* a animação inteira não passa de uns 8 s, seja qual for o número de gerações */
+  /* a animação inteira não passa de uns 8 s, seja qual for o número de gerações;
+     a ficha pode pedir outro ritmo, em gerações por segundo, que muda com o tempo */
   let antes = null;
   requestAnimationFrame(function quadro(agora) {
     const dt = antes === null ? 0 : Math.min(0.1, (agora - antes) / 1000);
     antes = agora;
     if (tocando) {
-      const t = Math.min(total, relogio + dt * Math.max(velocidade, total / 8));
+      const ritmo = typeof velocidade === "function" ? velocidade(relogio) : Math.max(velocidade, total / 8);
+      const t = Math.min(total, relogio + dt * ritmo);
       if (t >= total) marcar(false);
       ir(t);
     }

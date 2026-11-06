@@ -5,6 +5,7 @@
 
 import { criar } from "escrever-html";
 import { grafico, linha, cabeca, valorEm } from "../graficos-da-pagina/pecas.js";
+import { desenharArvore } from "../graficos-da-pagina/genealogia.js";
 
 export function montarTempoFlutuante(painel, lugar) {
   const { ficha, sessao } = painel, spec = ficha.graficos[0];
@@ -16,7 +17,10 @@ export function montarTempoFlutuante(painel, lugar) {
   const g = grafico(miniatura, { xlim: [0, 1], ylim: spec.ylim, margem: { esq: 2, dir: 6, topo: 4, base: 4 }, desenhar: (g) => {
     if (!sessao.res) return;
     const t = painel.t;
-    if (spec.tipo === "replicas") {
+    if (spec.tipo === "genealogia") {
+      const gen = spec.genealogia(sessao.res), G = gen.pais.length;
+      desenharArvore(g.ctx, gen, Math.min(t, G), { x0: 4, x1: g.W - 4, y: (ger) => g.H - 4 - (ger / G) * (g.H - 8) }, { largura: 1.4 });
+    } else if (spec.tipo === "replicas") {
       const series = spec.series(sessao.res);
       g.xlim = [0, series[0].length - 1];
       series.slice(1).forEach((s) => linha(g, s, { ate: t, alfa: 0.5, largura: 1 }));

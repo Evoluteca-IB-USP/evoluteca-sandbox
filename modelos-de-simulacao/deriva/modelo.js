@@ -29,3 +29,33 @@ export function simular({ N, p0, geracoes, replicas }, rng) {
   }
   return series;
 }
+
+/* A distribuição exata do número de cópias de A, sem sorteio: a chance de a
+   população ter 0, 1, …, 2N cópias em cada geração, de 0 até `geracoes`.
+   É a cadeia de Wright–Fisher: de i cópias, a geração seguinte tem j com
+   probabilidade dbinom(j, 2N, i/2N). Custa (2N+1)² contas por geração. */
+export function distribuicaoExata({ N, p0, geracoes }) {
+  const n = 2 * N;
+  const logFat = [0];
+  for (let k = 1; k <= n; k++) logFat[k] = logFat[k - 1] + Math.log(k);
+  const passo = Array.from({ length: n + 1 }, (_, i) => {
+    const p = i / n, linha = new Array(n + 1).fill(0);
+    if (p === 0) linha[0] = 1;
+    else if (p === 1) linha[n] = 1;
+    else for (let j = 0; j <= n; j++) linha[j] = Math.exp(logFat[n] - logFat[j] - logFat[n - j] + j * Math.log(p) + (n - j) * Math.log(1 - p));
+    return linha;
+  });
+  let x = new Array(n + 1).fill(0);
+  x[Math.round(p0 * n)] = 1;
+  const todas = [x];
+  for (let g = 1; g <= geracoes; g++) {
+    const y = new Array(n + 1).fill(0);
+    for (let i = 0; i <= n; i++) {
+      if (x[i] < 1e-15) continue;
+      const linha = passo[i];
+      for (let j = 0; j <= n; j++) y[j] += x[i] * linha[j];
+    }
+    todas.push((x = y));
+  }
+  return todas;
+}

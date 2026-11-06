@@ -15,7 +15,7 @@ export function montar(secao) {
   let passo = 0;
   const feitas = new Set(), acertos = new Set(), vistos = new Set(), crencas = new Map();   // acertos: as apostas que chegaram perto
   const FIM = PERGUNTAS.length + 1;
-  const entradas = [{ titulo: "Antes de apostar", marca: "0" }, ...PERGUNTAS.map((q, i) => ({ titulo: q.titulo, marca: i + 1 })), { titulo: "De volta às frases", marca: "fim" }];
+  const entradas = [{ titulo: "Para começar", marca: "0" }, ...PERGUNTAS.map((q, i) => ({ titulo: q.titulo, marca: i + 1 })), { titulo: "O que vimos", marca: "fim" }];
   const trilha = trilhaDePassos({ entradas, semente: 7, aoEscolher: ir });
   trilha.classList.add("perguntas-trilha");
   const pergunta = criar("p", { class: "pergunta-texto" });
@@ -83,7 +83,7 @@ export function montar(secao) {
       motivoN.textContent = `Motivo ${k + 1}`; motivoP.textContent = q.motivo;
       motivo.classList.remove("motivo-entra"); void motivo.offsetWidth; motivo.hidden = false; motivo.classList.add("motivo-entra");
       acoes.replaceChildren();
-      const prox = criar("button", { type: "button", class: "vivo-elo", texto: k + 1 < PERGUNTAS.length ? "próxima pergunta →" : "de volta às frases →" });
+      const prox = criar("button", { type: "button", class: "vivo-elo", texto: k + 1 < PERGUNTAS.length ? "próxima pergunta →" : "ver as conclusões →" });
       prox.addEventListener("click", () => ir(k + 2)); acoes.append(prox);
       if (q.depois && figura.deNovo) { const d = criar("button", { type: "button", class: "vivo-elo", texto: q.depois }); d.addEventListener("click", () => figura.deNovo()); acoes.append(d); }
       acoes.hidden = false;

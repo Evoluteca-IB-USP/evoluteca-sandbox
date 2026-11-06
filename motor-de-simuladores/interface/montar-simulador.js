@@ -11,6 +11,7 @@ import { montarAbas } from "./abas/abas.js";
 import { montarCaderno } from "./abas/caderno.js";
 import { montarDerivacao } from "./abas/derivacao.js";
 import { montarLupa } from "./abas/lupa.js";
+import { montarRelevo } from "./abas/relevo.js";
 import { montarDados } from "./abas/dados.js";
 
 export function montarSimulador(raiz, ficha) {
@@ -22,6 +23,7 @@ export function montarSimulador(raiz, ficha) {
     { rotulo: "Caderno", montar: (no) => montarCaderno(painel, no) },
     ficha.derivacoes && { rotulo: "De onde vêm as fórmulas", montar: (no) => montarDerivacao(painel, no) },
     ficha.lupa && { rotulo: ficha.lupa.aba, montar: (no) => montarLupa(painel, no) },
+    ficha.relevo && { rotulo: ficha.relevo.aba, montar: (no) => montarRelevo(painel, no) },
     { rotulo: "Dados para o R", montar: (no) => montarDados(painel, no) },
   ].filter(Boolean));
   if (painel.tempo) montarTempoFlutuante(painel, raiz.querySelector("#tempo"));

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abertura · v1, o gráfico anotado</title>
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="../../aparencia/home/__pacote__.css">
+  <link rel="stylesheet" href="comum/abertura-base.css">
+  <link rel="stylesheet" href="v1-grafico-anotado.css">
+  <script type="importmap">
+    { "imports": { "r": "../../motor-de-simuladores/r/__pacote__.js", "escrever-html": "../../escrever-html/__pacote__.js", "portugues": "../../portugues/__pacote__.js" } }
+  </script>
+</head>
+<body class="tem-abertura">
+  <div class="usp-faixa-amarela"></div>
+  <div class="usp-faixa-azul"></div>
+  <div class="usp-barra">
+    <div class="container usp-barra-inner">
+      <a class="usp-logo" href="https://www.ib.usp.br" rel="external" title="Instituto de Biociências da USP"><img src="../../imagens/simbolo_ib_bco.png" alt="Instituto de Biociências da USP" class="usp-logo-ib"></a>
+      <a class="usp-logo" href="https://www5.usp.br" rel="external" title="Universidade de São Paulo"><img src="../../imagens/logo_usp_bco.png" alt="Universidade de São Paulo" class="usp-logo-usp"></a>
+    </div>
+  </div>
+
+  <header class="topo">
+    <div class="container topo-inner">
+      <a class="marca" href="../../index.html">
+        <span class="marca-nome">Evoluteca</span>
+        <span class="marca-sub">Instituto de Biociências · USP</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="../../index.html" aria-current="page">Início</a>
+        <a href="../../catalogo.html">Simuladores</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="abertura ab-anotado">
+      <canvas id="fundo" aria-hidden="true"></canvas>
+      <p class="ab-anotado-eixo" aria-hidden="true">quanto da população tem a variante</p>
+      <div class="container">
+        <div class="ab-anotado-texto">
+          <p class="ab-anotado-kicker">Evoluteca · simuladores de evolução</p>
+          <h1>O acaso também<br>muda uma espécie.</h1>
+          <p class="ab-anotado-lede">Cada linha deste gráfico é uma população de 150 indivíduos.
+            Ninguém escolhe para onde ela vai: só o sorteio de quem deixa filhos.
+            Aqui você muda essas regras e vê o que acontece.</p>
+          <p class="ab-anotado-links">
+            <a class="ab-anotado-principal" href="../../simulador.html?modelo=deriva">Rodar este gráfico você mesmo <span aria-hidden="true">→</span></a>
+            <a href="../../catalogo.html">ou ver todos os simuladores</a>
+          </p>
+        </div>
+      </div>
+      <p class="ab-anotado-rotulo" id="rotulo" aria-hidden="true"><span class="ab-anotado-fio"></span>esta população: <b data-pct>50%</b> têm a variante</p>
+    </section>
+
+    <section id="secao-porque"></section>
+  </main>
+
+  <script type="module" src="v1-grafico-anotado.js"></script>
+</body>
+</html>

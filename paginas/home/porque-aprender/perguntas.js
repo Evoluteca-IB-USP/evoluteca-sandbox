@@ -1,4 +1,4 @@
-/* As quatro apostas, todas sobre casos reais da biologia. A dinâmica é sempre
+/* As quatro apostas: situações da biologia e um modelo de paisagem. A dinâmica é sempre
    a mesma: leia a pergunta, aposte, veja o modelo rodar de verdade e receba
    um motivo. Nenhuma figura é pictograma nem gráfico de linha. A aposta
    nunca é uma lista de opções, que entregaria a resposta pelo formato: é
@@ -28,48 +28,48 @@ export const PERGUNTAS = [
     titulo: "Uma placa de gel",
     forcas: ["mutacao", "selecao"],
     figura: (p, pe) => placa(p, pe),
-    pergunta: "Uma placa de gel com bactérias comuns numa ponta e faixas de antibiótico cada vez mais forte até a outra — a última faixa mata qualquer bactéria comum. Quanto tempo até elas atravessarem a placa inteira?",
+    pergunta: "Bactérias crescem numa placa de gel. Para chegar ao outro lado, precisam passar por faixas com doses cada vez maiores de antibiótico, uma substância que pode matá-las. Quanto tempo você acha que elas levam para atravessar?",
     aposta: ({ aoApostar }) => reguaDeTempo(aoApostar),
     comparar: (a, dias) => ({ modelo: dias, perto: dobro(a, dias) }),
-    leitura: (dias) => `Atravessaram em <b>${numero(dias)} dias</b>. Cada vez que a frente parava numa faixa, bastava nascer uma bactéria um pouco mais resistente — e ela nascia, porque são bilhões de divisões. A placa real, de 2016, levou 11 dias. É o mesmo que acontece com um tratamento de antibiótico parado no meio.`,
-    motivo: "Porque acontece agora — no hospital, na lavoura, no vírus.",
+    leitura: (dias) => `Nesta simulação, as bactérias atravessaram em <b>${numero(dias)} dias</b>. Ao se reproduzir, elas podem gerar descendentes com diferenças. Alguns resistem melhor ao antibiótico e continuam se multiplicando onde os outros morrem.`,
+    motivo: "A evolução pode acontecer enquanto a gente observa.",
     depois: "rodar outra placa",
   },
   {
     titulo: "Um cão campeão",
     forcas: ["selecao"],
     figura: (p, pe) => focinhos(p, pe, { inicio: 1880, anosPorGeracao: 4, geracoes: 35 }),
-    pergunta: "Por volta de 1880, o focinho do pug tinha um quarto do comprimento do crânio. Desde então, os criadores premiam e cruzam os de focinho mais curto. Em 2020, depois de umas 35 gerações de cães, que tamanho tem o focinho? E, de cada 20 pugs, quantos respiram com dificuldade?",
+    pergunta: "Por muitos anos, criadores cruzaram pugs de focinho curto para ter filhotes parecidos com eles. Veja o cão de 1880. Como você imagina o focinho em 2020? E quantos de cada 20 pugs terão dificuldade para respirar?",
     aposta: ({ figura, aoApostar }) => focinhoEFolego({ figura, inicio: 6, aoApostar }),
     comparar: (a, { focinho, doentes }) => ({ modelo: { focinho, doentes }, perto: Math.abs(a.focinho - focinho) <= 0.04 && Math.abs(a.doentes - doentes) <= 3 }),
-    leitura: ({ focinho, focinho0, doentes }) => `O focinho foi de ${numero(100 * focinho0)}% para <b>${numero(100 * focinho, focinho < 0.1 ? 1 : 0)}% do crânio</b> — e, de cada 20 pugs, <b>${doentes} respiram com dificuldade</b>. Ninguém escolheu a falta de ar: o osso encurtou, mas o céu da boca e a língua não encolheram junto, e a mesma carne, espremida num espaço menor, fecha a passagem. Fotos de campeões mostram o focinho do pug encolhendo ao longo do século 20; num estudo de 2017 com 189 pugs, só 1 em cada 20 respirava sem nenhum sinal do problema.`,
-    motivo: "Porque quem escolhe uma coisa leva outras junto.",
+    leitura: ({ focinho, focinho0, doentes }) => `Na simulação, o focinho passou de ${numero(100 * focinho0)}% para <b>${numero(100 * focinho, focinho < 0.1 ? 1 : 0)}% do comprimento do crânio</b>, e <b>${doentes} de cada 20 pugs</b> ficaram com dificuldade para respirar. O focinho mais curto deixa menos espaço para a passagem do ar. Escolher a aparência dos filhotes também pode afetar a saúde deles.`,
+    motivo: "Uma mudança na aparência pode vir acompanhada de outras mudanças.",
     depois: null,
   },
   {
     titulo: "107 vidros",
     forcas: ["deriva"],
     figura: (p, pe) => confete(p, pe, { N: 9, p0: 0.5, geracoes: 19, semente: 1956, n: 107 }),
-    pergunta: "Em 1956, Peter Buri pôs 16 moscas em cada um de 107 vidros: metade com uma versão de um gene da cor do olho, metade com a outra — nenhuma delas dá vantagem. Depois de 19 gerações, quantos vidros terminam só com uma das versões, e quantos ainda misturados?",
+    pergunta: "Em 107 vidros com poucas moscas, duas versões de uma informação herdada dos pais, ligada à cor dos olhos, começam igualmente comuns. Nenhuma dá vantagem. Após 19 gerações, quantos vidros terão só uma versão? Uma geração é a passagem dos pais para os filhos.",
     aposta: ({ aoApostar }) => barraDeVidros({ n: 107, aoApostar }),
     comparar: (a, real) => ({ modelo: real, perto: Math.abs(a.sem + a.marca - real.sem - real.marca) <= 15 }),
-    leitura: ({ marca, sem, meio }) => `<b>${marca}</b> vidros ficaram só com a versão A, <b>${sem}</b> só com a B${meio ? ` e ${meio} ainda misturados` : " — nenhum misturado"}. Sem vantagem nenhuma, o sorteio de quem deixa filhotes decide sozinho — e num vidro de 16 moscas, das quais só umas 9 chegam a se reproduzir, decide rápido. No experimento real: 30 vidros de um lado, 28 do outro, 49 ainda misturados.`,
-    motivo: "Porque o acaso também decide — e ninguém o enxerga.",
+    leitura: ({ marca, sem, meio }) => `<b>${marca + sem} vidros</b> terminaram com uma única versão e <b>${meio}</b> continuaram com as duas. Isso aconteceu sem que uma versão desse vantagem. Por acaso, algumas moscas deixam mais descendentes que outras. Em grupos pequenos, esse efeito pode fazer uma versão desaparecer.`,
+    motivo: "Uma característica pode se espalhar por acaso.",
     depois: "sortear de novo",
   },
   {
     titulo: "Dois morros",
     forcas: ["selecao", "deriva"],
     figura: (p, pe) => paisagem(p, pe, { N: 2000, Npequeno: 25, geracoes: 36, geracoesPequeno: 300, inicio: [0.08, 0.9] }),
-    pergunta: "Numa paisagem assim, quanto mais alto, mais a população sobrevive. A bolinha é a população, na encosta do morro baixo. Onde a seleção vai deixá-la?",
+    pergunta: "Imagine um grupo de animais, representado pela bolinha. Os morros são um desenho das possibilidades: quanto mais alto, maior a chance de sobreviver e deixar filhotes. A cada geração, mudanças que ajudam nisso tendem a se espalhar. Onde você acha que a bolinha vai parar?",
     aposta: ({ figura, aoApostar }) => {
       const a = apostaNaFigura({ instrucao: "<em>Clique na paisagem</em> onde você acha que a população vai parar.", formatar: figura.lugar, aoApostar });
       figura.aposta(a.mudou);
       return a;
     },
     comparar: (a, { ponto }) => ({ modelo: ponto, perto: Math.hypot(a[0] - ponto[0], a[1] - ponto[1]) <= 0.12 }),
-    leitura: ({ alto }) => `${alto ? "Chegou ao morro alto — deu sorte no caminho." : "Subiu até o <b>topo do morro baixo</b> e parou."} Seleção só sobe, um passo por vez, e não enxerga a paisagem: para chegar ao morro alto seria preciso descer antes. Uma paisagem dessas foi medida de verdade em 1960, num gafanhoto da Austrália, a partir de duas versões de dois cromossomos — e as populações estavam na passagem entre os morros, o que se discute até hoje. Encolha a população: só o acaso atravessa o vale.`,
-    motivo: "Porque evolução não é \"o melhor vence\" — é \"o que sobe daqui\".",
+    leitura: ({ alto }) => `${alto ? "A bolinha chegou ao morro mais alto. O acaso ajudou a atravessar o vale." : "A bolinha chegou ao <b>topo do morro mais baixo</b>."} Neste modelo, a seleção natural favorece mudanças que aumentam a chance de sobreviver e deixar filhotes. Ela não antecipa o futuro: para alcançar o outro topo, seria preciso passar antes por condições piores. Experimente diminuir o grupo para ver o efeito do acaso.`,
+    motivo: "Uma mudança vantajosa agora não garante o melhor resultado possível.",
     depois: null,
   },
 ];

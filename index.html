@@ -11,13 +11,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="aparencia/__pacote__.css">
-  <link rel="stylesheet" href="aparencia/home/__pacote__.css">
+  <link rel="stylesheet" href="aparencia/home/__pacote__.css?v=69a3e4bda312">
   <script type="importmap">
     {
       "imports": {
         "r": "./motor-de-simuladores/r/__pacote__.js",
         "escrever-html": "./escrever-html/__pacote__.js",
-        "portugues": "./portugues/__pacote__.js"
+        "portugues": "./portugues/__pacote__.js",
+        "./paginas/home/porque-aprender/montar-porque-aprender.js": "./paginas/home/porque-aprender/montar-porque-aprender.js?v=0dfbf31abd4e",
+        "./paginas/home/porque-aprender/perguntas.js": "./paginas/home/porque-aprender/perguntas.js?v=f47b422eb433",
+        "./paginas/home/porque-aprender/preludio-e-sintese.js": "./paginas/home/porque-aprender/preludio-e-sintese.js?v=afd84f17199f"
       }
     }
   </script>
@@ -57,18 +60,19 @@
 
     <!-- ============ abertura ============
          Dois grupos sobre o fundo: a chamada (título, lede e botão) e, no pé,
-         a nota de rodapé com a legenda do fundo, chamada pelo ¹ do lede.
+         a legenda do gráfico, chamada pelo ¹ do lede.
          O fundo é o modelo de Wright–Fisher pré-calculado (paginas/home/abertura.js). -->
     <section class="abertura">
       <canvas class="abertura-canvas" id="hero-canvas" aria-hidden="true"></canvas>
       <div class="container abertura-palco">
         <div class="abertura-conteudo">
-          <h1><span class="titulo-linha">A evolução,</span> <strong>em tempo de aula</strong>.</h1>
+          <h1><span class="titulo-linha">Explore a evolução</span> <strong>com simuladores interativos.</strong></h1>
           <p class="abertura-lede">
-            Simuladores de genética de populações para o ensino médio e a
-            graduação. A turma muda a população, a seleção e o acaso — e vê
-            milhares de gerações passarem em segundos, como ao fundo<a class="marca-da-nota" href="#nota-da-abertura">1</a>.
+            Altere o tamanho das populações, compare diferentes condições de
+            seleção e acompanhe as mudanças ao longo das gerações<a class="marca-da-nota" href="#nota-da-abertura">1</a>.
           </p>
+          <p class="abertura-publico">Simuladores de genética de populações para aprender e ensinar,
+            do ensino médio à graduação.</p>
           <!-- a borda de cima vem de paginas/home/borda-do-botao.js -->
           <a class="botao-recortado" href="catalogo.html">
             <svg preserveAspectRatio="none" aria-hidden="true" focusable="false"><path/></svg>
@@ -77,10 +81,10 @@
         </div>
         <!-- as gerações e o sorteio da espécie vêm de paginas/home/geracoes-ao-fundo.js -->
         <div class="nota-da-abertura" id="nota-da-abertura">
-          <p class="nota-legenda"><sup>1</sup> <b>Figura 1.</b> Ao fundo, populações de 150 indivíduos, sem seleção: cada linha mostra
-            quanto há de uma versão de um gene numa delas, e só o acaso a faz subir e descer.</p>
-          <p class="nota-relogio"><span class="nota-linha">Passaram <b data-geracoes>0 gerações</b> — em <b data-especie>humanos</b>, seriam <b data-tempo>0 anos</b>.
-            <button type="button" class="nota-sortear" data-sortear><span class="nota-dado" aria-hidden="true">⚄</span> outra espécie</button></span></p>
+          <p class="nota-legenda"><b>Figura 1.</b> Cada linha mostra a frequência de uma variante genética numa população de 150 indivíduos, sob efeito apenas do acaso.</p>
+          <p class="nota-relogio">Na animação: <b data-geracoes>0 gerações</b> ≈ <b data-tempo>0 anos</b> em <b data-especie>humanos</b>.
+            <button type="button" class="nota-sortear" data-sortear aria-label="Comparar com outra espécie" title="Comparar com outra espécie"><span class="nota-dado" aria-hidden="true">⚄</span></button>
+          </p>
         </div>
       </div>
       <!-- ============ a saída da abertura ============

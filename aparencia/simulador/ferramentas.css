@@ -55,6 +55,9 @@
 .lupa-conta { display: flex; align-items: baseline; gap: .5rem; margin: 0 0 .6rem; font-size: 1rem; color: var(--tinta); }
 .lupa-conta b { font-size: 2rem; font-weight: 300; color: var(--navy); font-variant-numeric: tabular-nums; }
 .lupa-conta small { margin-left: auto; color: var(--tinta-suave); }
+.relevo { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; align-items: start; }
+.relevo-canvas { display: block; width: 100%; height: 480px; cursor: grab; touch-action: none; }
+.relevo-canvas:active { cursor: grabbing; }
 .lupa-amostra { width: 12px; height: 12px; border-radius: 50%; align-self: center; }
 
 /* ---------- dados ---------- */

@@ -1,0 +1,37 @@
+/* Só o interior do passo 0. A trilha, os casos e a síntese mantêm sua aparência. */
+.perguntas:has(.perguntas-palco-preludio) { display: block; max-width: 60rem; margin-inline: auto; }
+.perguntas:has(.perguntas-palco-preludio) > div:last-child { position: static; }
+.perguntas:has(.perguntas-palco-preludio) .perguntas-pe { display: none; }
+
+.preludio-titulo {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.preludio-instrucao { max-width: none; margin-bottom: .8rem; color: var(--tinta-suave); }
+
+.perguntas-palco-preludio .frase {
+  min-height: 0;
+  padding: 1.05rem 0 1.05rem 2rem;
+  border: 0;
+  gap: .65rem 2rem;
+}
+.perguntas-palco-preludio .frase::before {
+  top: 1.3rem;
+  font-size: .8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--tinta-suave);
+}
+.perguntas-palco-preludio .frase-texto {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.perguntas-palco-preludio .preludio-continuar { justify-content: flex-end; margin-top: .85rem; }
+
+@media (max-width: 700px) {
+  .perguntas-palco-preludio .frase { grid-template-columns: minmax(0, 1fr); padding-left: 1.25rem; }
+  .perguntas-palco-preludio .frase-regua { justify-self: start; }
+}

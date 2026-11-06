@@ -4,12 +4,35 @@
    fórmulas, o que se vê por dentro e o que o caderno anota. */
 
 import { mean } from "r";
-import { simular } from "./modelo.js";
+import { simular, distribuicaoExata } from "./modelo.js";
 
 const perda = (N) => 1 - 1 / (2 * N);
 const H = ({ N, p0 }, t) => 2 * p0 * (1 - p0) * perda(N) ** t;
 const porGeracao = (series, f) => series[0].map((_, t) => f(series.map((s) => s[t])));
 const variancia = (v) => { const m = mean(v); return mean(v.map((x) => (x - m) ** 2)); };
+/* Acima de N = 100 a conta exata fica pesada; a distribuição de uma população
+   de 100 no tempo t · 100/N é a mesma pela aproximação de difusão. */
+const N_DA_CONTA = 100;
+/* até 20 classes de frequência entre as paredes, até 30 fileiras de gerações */
+const CLASSES = 19, FILEIRAS = 30;
+
+function relevoDaDeriva({ N, p0, geracoes }) {
+  const n = Math.min(N, N_DA_CONTA), escala = n / N;
+  const todas = distribuicaoExata({ N: n, p0, geracoes: Math.round(geracoes * escala) });
+  const k = Math.min(geracoes, FILEIRAS);
+  const geracoesMostradas = Array.from({ length: k + 1 }, (_, i) => Math.round((i * geracoes) / k));
+  const agrupar = (x) => {
+    if (2 * n - 1 <= CLASSES) return x;
+    const meio = new Array(CLASSES).fill(0);
+    for (let j = 1; j < 2 * n; j++) meio[Math.min(CLASSES - 1, Math.floor(((j - 1) / (2 * n - 1)) * CLASSES))] += x[j];
+    return [x[0], ...meio, x[2 * n]];
+  };
+  return {
+    fileiras: geracoesMostradas.map((t) => ({ t, alturas: agrupar(todas[Math.round(t * escala)]) })),
+    aproximado: N > N_DA_CONTA,
+  };
+}
+
 const comUmAlelo = (r, t) => r.series.filter((s) => s[t] === 0 || s[t] === 1).length;
 const soComA = (r, t) => r.series.filter((s) => s[t] === 1).length;
 
@@ -84,6 +107,18 @@ export default {
       ],
     },
   ],
+
+  relevo: {
+    aba: "A distribuição, geração a geração",
+    calcular: relevoDaDeriva,
+    eixoX: "frequência do alelo A",
+    eixoZ: "geração",
+    paredes: { esquerda: "perdeu A", direita: "fixou A" },
+    legenda: ({ N, p0 }, t, r) =>
+      `Se muitas populações de ${N.toLocaleString("pt-BR")} indivíduos começassem com p₀ = ${p0.toLocaleString("pt-BR")}, ` +
+      `cada barra é a fração delas com aquela frequência na geração ${t}. As colunas das pontas acumulam as que perderam ou fixaram o alelo.` +
+      (r.aproximado ? ` Com N acima de ${N_DA_CONTA}, a conta usa uma população de ${N_DA_CONTA} com o tempo reescalado.` : ""),
+  },
 
   lupa: {
     aba: "Por dentro de uma população",

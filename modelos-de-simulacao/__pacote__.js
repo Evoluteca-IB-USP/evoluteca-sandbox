@@ -3,7 +3,7 @@
    então este arquivo de uma linha é o único índice do projeto:
    criou a pasta do modelo, adicione o slug aqui. */
 
-export const lista = ["deriva", "hardy-weinberg", "selecao-1-locus"];
+export const lista = ["deriva", "hardy-weinberg", "selecao-1-locus", "coalescente"];
 
 /* Os simuladores que a home mostra por extenso, na ordem do percurso.
    O catálogo mostra o acervo inteiro; a home mostra só estes — assim a

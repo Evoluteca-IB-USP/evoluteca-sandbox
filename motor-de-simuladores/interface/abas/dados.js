@@ -23,6 +23,13 @@ function colunas(ficha, res, par) {
 function codigoR(ficha) {
   const spec = ficha.graficos[0];
   const ler = `dados <- read.csv("${ficha.arquivo}.csv",\n                  comment.char = "#")`;
+  /* a genealogia não cabe numa tabela por geração: o arquivo traz o número de linhagens */
+  if (spec.tipo === "genealogia") {
+    const curva = ficha.graficos.find((g) => g.tipo === "curva");
+    return `${ler}
+plot(dados$geracao, dados$${curva.id}, type = "s",
+     xlab = "gerações atrás", ylab = "${curva.titulo}")`;
+  }
   if (spec.tipo === "barras") {
     return `${ler}
 barplot(t(as.matrix(dados[, c("esperado", "amostra")])),
