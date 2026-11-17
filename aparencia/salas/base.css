@@ -1,0 +1,69 @@
+/* O que as duas páginas das salas usavam antes do redesenho: campos, listas,
+   resultados, pausa e projetor. aula.css e professor.css vêm depois e refinam. */
+.sala { padding-block: 2rem 4rem; }
+.sala-bloco { margin-block: 1.5rem; }
+.sala label { display: block; margin-block: .75rem; font-weight: 600; }
+.sala-campo {
+  display: block;
+  width: 100%;
+  max-width: 40rem;
+  box-sizing: border-box;
+  margin-top: .3rem;
+  padding: .6rem .75rem;
+  font: inherit;
+  border: 1px solid var(--borda-forte);
+  border-radius: var(--raio);
+}
+.sala textarea.sala-campo { font-family: ui-monospace, monospace; font-size: .85rem; }
+.sala .nota { color: #555; font-size: .9rem; }
+
+/* ---- blocos, editor e resultados ---- */
+.sala-larga { max-width: 1280px; }
+.sala textarea.sala-campo { font-family: inherit; font-size: 1rem; }
+.sala-campo-curto { display: inline-block; width: 22rem; max-width: 100%; }
+.sala-numero { width: 6rem; padding: .35rem .5rem; font: inherit; border: 1px solid var(--borda-forte); border-radius: var(--raio); }
+.sala-linha { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-block: .4rem; }
+.sala .sala-opcao { display: block; font-weight: 400; margin-block: .35rem; }
+.sala-editor { border: 1px solid var(--borda-forte); border-left: 4px solid var(--teal); padding: .75rem 1rem; margin-block: .75rem; background: #fff; }
+.sala-editor-caixa { background: var(--fundo-suave); padding: 1rem; }
+.sala-itens { list-style: none; margin: 0; padding: 0; }
+.sala-item { padding: .6rem .75rem; margin-block: .4rem; border: 1px solid var(--borda); border-radius: var(--raio); }
+.sala-item.atual { border-color: var(--teal); background: #eaf6f8; }
+.sala-item .botao { margin: .2rem .15rem 0 0; }
+.sala-painel { display: grid; grid-template-columns: minmax(16rem, 22rem) 1fr; gap: 1.5rem; align-items: start; }
+.sala-principal { display: grid; grid-template-columns: 1fr minmax(14rem, 18rem); gap: 1.5rem; align-items: start; }
+@media (max-width: 900px) { .sala-painel, .sala-principal { grid-template-columns: 1fr; } }
+.sala-turma { background: var(--fundo-suave); padding: 1rem; border-radius: var(--raio); }
+.sala-alunos { list-style: none; padding: 0; margin: 0; }
+.sala-alunos .offline { color: var(--tinta-suave); }
+.sala-barra-de-controle { background: var(--fundo-suave); padding: .5rem 1rem; border-radius: var(--raio); }
+.sala-barra-de-controle p { margin-block: .5rem; }
+.sala-tempo { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--navy); }
+.sala-tempo-grande { font-size: 4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.sala-simulador { width: 100%; height: 640px; border: 1px solid var(--borda-forte); border-radius: var(--raio); background: #fff; }
+.sala-navegacao { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.sala-sinais { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; }
+.sala-texto li.correta { font-weight: 700; color: var(--teal-escuro); }
+.sala-pausa { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--navy); color: #fff; text-align: center; }
+.sala-pausa[hidden], .sala-projetor[hidden] { display: none; }
+.sala-barras { display: grid; gap: .35rem; margin-block: .75rem; }
+.sala-barra { display: grid; grid-template-columns: minmax(6rem, 14rem) 1fr 3rem; gap: .6rem; align-items: center; }
+.sala-barra-trilha { background: var(--borda); height: 1.4rem; border-radius: 3px; overflow: hidden; }
+.sala-barra-cheia { display: block; height: 100%; background: var(--grafico-1); transition: width .3s; }
+.sala-barra.correta .sala-barra-cheia { background: var(--teal-escuro); }
+.sala-barra.correta .sala-barra-rotulo::after { content: " ✓"; }
+.sala-histograma { display: flex; align-items: stretch; gap: 3px; height: 11rem; margin-block: .75rem; }
+.sala-coluna { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-width: 0; }
+.sala-coluna-barra { display: block; width: 100%; background: var(--grafico-1); min-height: 1px; }
+.sala-coluna-n, .sala-coluna-rotulo { font-size: .75rem; color: var(--tinta-suave); }
+.sala-respostas { list-style: none; padding: 0; margin: 0; }
+.sala-respostas li { padding: .4rem .6rem; border-bottom: 1px solid var(--borda); }
+.sala-respostas li.destaque { background: #fff3d6; border-left: 4px solid var(--amarelo); }
+.sala-quadro { margin-block: 1rem; overflow-x: auto; }
+.sala-tabela { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.sala-tabela th, .sala-tabela td { padding: .3rem .6rem; text-align: right; border-bottom: 1px solid var(--borda); }
+.sala-tabela th:first-child, .sala-tabela td:first-child { text-align: left; }
+.sala-projetor { position: fixed; inset: 0; z-index: 60; background: #fff; overflow: auto; padding: 2rem 4vw; font-size: 1.6rem; }
+.sala-projetor-corpo h1 { font-size: 2.6rem; }
+.sala-projetor .sala-barra-trilha { height: 2.4rem; }
+.sala-projetor .sala-histograma { height: 22rem; }

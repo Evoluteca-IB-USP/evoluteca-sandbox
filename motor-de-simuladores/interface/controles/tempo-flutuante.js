@@ -5,7 +5,7 @@
 
 import { criar } from "escrever-html";
 import { grafico, linha, cabeca, valorEm } from "../graficos-da-pagina/pecas.js";
-import { desenharArvore } from "../graficos-da-pagina/genealogia.js";
+import { desenharArvore } from "../graficos-da-pagina/arvore-da-amostra.js";
 
 export function montarTempoFlutuante(painel, lugar) {
   const { ficha, sessao } = painel, spec = ficha.graficos[0];
@@ -23,9 +23,12 @@ export function montarTempoFlutuante(painel, lugar) {
     } else if (spec.tipo === "replicas") {
       const series = spec.series(sessao.res);
       g.xlim = [0, series[0].length - 1];
-      series.slice(1).forEach((s) => linha(g, s, { ate: t, alfa: 0.5, largura: 1 }));
-      linha(g, series[0], { cor: g.cores.destaque, largura: 1.6, ate: t });
-      cabeca(g, t, valorEm(series[0], t));
+      const foco = painel.escolha;
+      series.forEach((s, i) => { if (i !== foco) linha(g, s, { ate: t, alfa: 0.5, largura: 1 }); });
+      if (foco !== null && series[foco]) {
+        linha(g, series[foco], { cor: g.cores.destaque, largura: 1.6, ate: t });
+        cabeca(g, t, valorEm(series[foco], t));
+      }
     } else {
       const s = spec.serie(sessao.res);
       g.xlim = [0, s.length - 1];

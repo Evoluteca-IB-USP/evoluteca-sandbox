@@ -5,6 +5,7 @@
 
 import { criar } from "escrever-html";
 import { numero } from "../graficos-da-pagina/pecas.js";
+import { curvasDe } from "../graficos-da-pagina/tipos.js";
 
 function colunas(ficha, res, par) {
   const primeiro = ficha.graficos[0];
@@ -15,7 +16,7 @@ function colunas(ficha, res, par) {
   const cols = [];
   for (const spec of ficha.graficos) {
     if (spec.tipo === "replicas") spec.series(res).forEach((s, i) => cols.push({ nome: `${spec.id}_${i + 1}`, valores: s }));
-    else if (spec.tipo === "curva") cols.push({ nome: spec.id, valores: spec.serie(res) });
+    else if (spec.tipo === "curva") curvasDe(spec).forEach((c) => cols.push({ nome: c.id, valores: c.serie(res) }));
   }
   return [{ nome: "geracao", valores: cols[0].valores.map((_, t) => t) }, ...cols];
 }

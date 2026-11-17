@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sala de aula · v4, telefone sem fio</title>
+  <link rel="icon" type="image/png" href="../../imagens/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <link rel="stylesheet" href="../../aparencia/salas/__pacote__.css">
+  <link rel="stylesheet" href="comum/pecas-da-porta.css">
+  <link rel="stylesheet" href="v4-telefone-sem-fio.css">
+  <script type="importmap">
+    { "imports": { "r": "../../motor-de-simuladores/r/__pacote__.js", "escrever-html": "../../escrever-html/__pacote__.js", "portugues": "../../portugues/__pacote__.js" } }
+  </script>
+</head>
+<body>
+  <main id="conteudo"></main>
+  <script type="module">
+    import { montarMoldura } from "./comum/pecas-da-porta.js";
+    import { montar } from "./v4-telefone-sem-fio.js";
+
+    montarMoldura("v4-telefone-sem-fio");
+    montar(document.getElementById("conteudo"));
+  </script>
+</body>
+</html>

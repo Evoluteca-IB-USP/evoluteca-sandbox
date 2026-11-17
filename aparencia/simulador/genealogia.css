@@ -1,0 +1,19 @@
+/* ============ a figura da genealogia (coalescente) ============ */
+
+/* mais alta que os outros gráficos, como no livro; acompanha a altura da janela
+   para a figura e a linha do tempo caberem juntas na tela */
+.painel-principal.painel-genealogia { height: clamp(460px, calc(100vh - 430px), 660px); }
+
+/* a legenda da figura (legenda-da-genealogia.js), com cada sinal do tamanho de uma letra */
+.legenda-da-figura { margin: 1rem 0 0; max-width: 84ch; font-size: .85rem; line-height: 1.7; color: var(--tinta-suave); text-wrap: pretty; }
+.legenda-da-figura[hidden] { display: none; }
+.legenda-da-figura b { font-weight: 600; color: var(--navy); }
+.legenda-dica { display: block; margin-top: .35rem; color: var(--tinta); }
+
+.sinal { display: inline-block; box-sizing: border-box; width: .62em; height: .62em; margin: 0 .12em; border-radius: 50%; vertical-align: .02em; }
+.sinal-viva { background: var(--navy); }
+.sinal-perdida { background: var(--fantasma); }
+.sinal-oval { width: 1.5em; height: .7em; border: 1px solid #c3c8d3; background: #f4f5f8; vertical-align: -.03em; }
+.sinal-ancestral { margin: 0 .35em; background: var(--navy); box-shadow: 0 0 0 2.5px #fff, 0 0 0 4px var(--navy); }
+.sinal-mutacao { width: auto; height: auto; border-radius: 0; vertical-align: baseline; font-size: .82em; font-weight: 700; color: var(--tinta); }
+.sinal-mutacao::before { content: "✕"; }

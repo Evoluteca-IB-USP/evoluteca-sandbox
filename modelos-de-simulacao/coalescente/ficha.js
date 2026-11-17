@@ -1,11 +1,12 @@
 /* Ficha da página do simulador do coalescente
    (simulador.html?modelo=coalescente). O modelo é o `simular` de modelo.js:
-   Wright–Fisher seguido de trás para frente, a partir de uma amostra de hoje.
+   Wright–Fisher seguido de trás para frente, a partir de todas as cópias de
+   hoje, como na Figura 3.4 de Rice (2004): a "amostra" é a população inteira.
    O tempo da página anda para o passado: a geração t é t gerações atrás. */
 
 import { simular } from "./modelo.js";
 
-const esperado = ({ N, n }) => 4 * N * (1 - 1 / n);
+const esperado = ({ N }) => 4 * N * (1 - 1 / (2 * N));
 const kEm = (r, t) => r.k[Math.min(t, r.k.length - 1)];
 const chegou = (r, t) => r.tmrca !== null && t >= r.tmrca;
 
@@ -38,21 +39,19 @@ export default {
     return k >= 3 ? 2.5 : k === 2 ? 7 : 12;
   },
   parametros: [
-    { nome: "n", rotulo: "Tamanho da amostra", simbolo: "n", min: 2, max: 8, valor: 4 },
-    { nome: "N", rotulo: "Tamanho da população", simbolo: "N", min: 4, max: 30, valor: 5 },
+    { nome: "N", rotulo: "Tamanho da população", simbolo: "N", min: 2, max: 10, valor: 5 },
     { nome: "mu", rotulo: "Taxa de mutação", simbolo: "μ", min: 0, max: 0.1, passo: 0.005, valor: 0.02, casas: 3 },
-    { nome: "geracoes", rotulo: "Gerações para trás", min: 10, max: 300, passo: 5, valor: 30, tempo: true },
+    { nome: "geracoes", rotulo: "Gerações para trás", min: 10, max: 150, passo: 5, valor: 30, tempo: true },
   ],
 
-  simular,
+  simular: (par, rng) => simular({ ...par, n: 2 * par.N }, rng),
 
   graficos: [
     {
-      id: "genealogia", tipo: "genealogia", titulo: "gerações atrás",
+      id: "genealogia", aba: "Genealogia", tipo: "genealogia",
       genealogia: (r) => r,
-      referencia: (par) => ({ y: esperado(par), rotulo: "esperado" }),
     },
-    { id: "linhagens", tipo: "curva", titulo: "linhagens da amostra", ylim: [0, 8], serie: (r) => r.k },
+    { id: "linhagens", aba: "Linhagens", tipo: "curva", titulo: "linhagens que chegam até hoje", ylim: [0, 20], serie: (r) => r.k },
   ],
 
   derivados: {
@@ -64,7 +63,7 @@ export default {
       titulo: "Quando duas linhagens se encontram",
       passos: [
         {
-          texto: "Volte uma geração. Duas cópias da amostra sorteiam, cada uma, a sua mãe entre as 2N cópias de antes. A chance de sortearem a mesma — de as duas linhagens se encontrarem — é",
+          texto: "Volte uma geração. Duas cópias de hoje sorteiam, cada uma, de qual das 2N cópias da geração anterior vieram. A chance de sortearem a mesma — de as duas linhagens se encontrarem — é",
           formula: "[1|2{N}]", valor: ({ N }) => 1 / (2 * N), casas: 4,
         },
         {
@@ -88,31 +87,31 @@ export default {
       ],
     },
     {
-      titulo: "O ancestral comum de toda a amostra",
+      titulo: "O ancestral comum de todas as cópias",
       passos: [
         {
-          texto: "Somando as esperas de n linhagens até sobrar uma, os termos se cancelam aos pares, porque 4N/(k(k − 1)) = 4N(1/(k − 1) − 1/k):",
-          formula: "E(T_(ACMR)) = 4{N}(1 − [1|{n}])", valor: esperado, casas: 1,
+          texto: "Somando as esperas das 2N linhagens de hoje até sobrar uma, os termos se cancelam aos pares, porque 4N/(k(k − 1)) = 4N(1/(k − 1) − 1/k):",
+          formula: "E(T_(ACMR)) = 4{N}(1 − [1|2{N}])", valor: esperado, casas: 1,
           medido: (r, t) => (chegou(r, t) ? r.tmrca : "ainda não chegou"), rotuloMedido: "nesta genealogia,",
         },
         {
-          texto: "Por maior que seja a amostra, a espera não passa de 4N gerações. E metade dela, ou mais, é a das duas últimas linhagens:",
-          formula: "[E(T_2)|E(T_(ACMR))] = [{n}|2({n} − 1)]", valor: ({ n }) => n / (2 * (n - 1)), casas: 2,
+          texto: "Por maior que seja a população, a espera fica perto de 4N gerações. E metade dela, ou mais, é a das duas últimas linhagens:",
+          formula: "[E(T_2)|E(T_(ACMR))] = [2{N}|2(2{N} − 1)]", valor: ({ N }) => N / (2 * N - 1), casas: 2,
           medido: (r, t) => (chegou(r, t) ? comDuas(r) : "ainda não chegou"), rotuloMedido: "nesta genealogia,",
         },
       ],
     },
     {
-      titulo: "As mutações que a amostra carrega",
+      titulo: "As mutações que as cópias de hoje carregam",
       passos: [
         {
           texto: "Some os ramos da genealogia: enquanto há k linhagens, cada uma anda E(T_k) gerações, e k · 4N/(k(k − 1)) = 4N/(k − 1). O comprimento total é",
-          formula: "E(L) = 4{N}(1 + [1|2] + … + [1|{n} − 1])", valor: ({ N, n }) => 4 * N * harmonica(n), casas: 1,
+          formula: "E(L) = 4{N}(1 + [1|2] + … + [1|2{N} − 1])", valor: ({ N }) => 4 * N * harmonica(2 * N), casas: 1,
           medido: (r, t) => (chegou(r, t) ? `${comprimento(r)} gerações` : "ainda não chegou"), rotuloMedido: "nesta genealogia,",
         },
         {
-          texto: "Em cada geração de cada ramo, a cópia pode mudar de alelo, com chance μ. As mutações que separam as cópias da amostra são as que caíram nos ramos:",
-          formula: "E(M) = 4{N}{mu}(1 + [1|2] + … + [1|{n} − 1])", valor: ({ N, n, mu }) => 4 * N * mu * harmonica(n), casas: 2,
+          texto: "Em cada geração de cada ramo, a cópia pode mudar de alelo, com chance μ. As mutações que separam as cópias de hoje são as que caíram nos ramos:",
+          formula: "E(M) = 4{N}{mu}(1 + [1|2] + … + [1|2{N} − 1])", valor: ({ N, mu }) => 4 * N * mu * harmonica(2 * N), casas: 2,
           medido: (r, t) => (chegou(r, t) ? naGenealogia(r) : "ainda não chegou"), rotuloMedido: "nesta genealogia,",
         },
       ],
@@ -132,7 +131,7 @@ export default {
     { rotulo: "ancestral comum", valor: (r, par) => (r.tmrca !== null ? `geração ${r.tmrca}` : `além da ${par.geracoes}`) },
     { rotulo: "esperado", valor: (r, par) => `geração ${Math.round(esperado(par))}` },
     { rotulo: "com só duas linhagens", valor: (r) => (r.tmrca !== null ? `${Math.round(comDuas(r) * 100)}% do tempo` : "—") },
-    { rotulo: "alelos na amostra", valor: (r) => `${naAmostra(r)} A · ${r.amostra.length - naAmostra(r)} a` },
+    { rotulo: "alelos hoje", valor: (r) => `${naAmostra(r)} A · ${r.amostra.length - naAmostra(r)} a` },
     { rotulo: "mutações na genealogia", valor: (r) => (r.tmrca !== null ? String(naGenealogia(r)) : "—") },
   ],
 };

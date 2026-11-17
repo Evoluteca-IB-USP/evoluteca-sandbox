@@ -1,0 +1,11 @@
+/* O simulador dentro de um <iframe> da sala (simulador.html?embutido=1):
+   sem a faixa da USP, o cabeçalho, o rodapé e a volta aos simuladores. */
+.embutido .pular,
+.embutido .usp-faixa-amarela,
+.embutido .usp-faixa-azul,
+.embutido .usp-barra,
+.embutido .topo,
+.embutido .rodape,
+.embutido .simulador-voltar { display: none; }
+.embutido .simulador { padding-top: 1.2rem; padding-bottom: 2rem; }
+.embutido .simulador h1 { margin-top: 0; }

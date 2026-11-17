@@ -1,17 +1,65 @@
 /* ============ a página do simulador ============ */
 
 .simulador { padding: 2.2rem 0 5rem; }
-.simulador-voltar { font-size: .85rem; color: var(--teal-escuro); text-decoration: none; }
-.simulador-voltar:hover { text-decoration: underline; }
 .simulador h1 { color: var(--navy); font-size: clamp(2.6rem, 4.6vw, 3.6rem); font-weight: 700; letter-spacing: -.03em; line-height: 1; margin: 1.2rem 0 1.4rem; }
 .simulador h1 span { color: var(--amarelo); }
+.simulador-cabeca { display: flex; align-items: center; gap: .6rem; }
+.simulador-voltar { flex-shrink: 0; display: grid; place-items: center; margin-top: .3rem; color: var(--navy); transition: color .2s; }
+.simulador-voltar svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.simulador-voltar:hover { color: var(--amarelo); }
+.simulador-voltar:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
 
 /* o painel: réguas à esquerda, o gráfico principal e a linha do tempo */
-.painel-corpo { display: grid; grid-template-columns: 250px 1fr; gap: 3.5rem; margin-top: .6rem; }
-.painel-controles { display: flex; flex-direction: column; gap: 1.5rem; padding-top: 1.6rem; }
-.painel-controles .sortear { align-self: flex-start; margin-top: .4rem; }
-.painel-principal { display: block; width: 100%; height: 420px; }
-.painel-tempo { margin-top: .8rem; }
+/* o painel inteiro cabe numa tela: título mais junto dele */
+.pagina-simulador .simulador { padding-top: 1.4rem; }
+.pagina-simulador .simulador h1 { margin: .8rem 0 1rem; }
+
+.painel-corpo { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 3.5rem; margin-top: .6rem; }
+.painel-controles { display: flex; flex-direction: column; gap: 1.35rem; }
+.painel-controles:not(:has(.trilho-modo)) { padding-top: 2.6rem; }
+.painel-controles .sortear { align-self: flex-start; margin-top: .2rem; }
+.painel-principal { display: block; width: 100%; height: 400px; }
+.painel-peca .relevo { height: 100%; gap: 2rem; }
+.painel-peca .relevo-canvas { height: 400px; }
+
+/* básico × avançado: o avançado mostra o que a ficha marca com `avancado` */
+.so-avancado, .painel-aba.so-avancado { display: none; }
+.modo-avancado .so-avancado { display: revert; }
+.modo-avancado .painel-aba.so-avancado { display: grid; }
+
+
+/* a legenda do gráfico, em frase de figura, com os desenhos do tamanho de uma letra */
+.painel-legenda { margin: .7rem 0 0; font-size: .85rem; line-height: 1.6; color: var(--tinta-suave); }
+.painel-legenda b { color: var(--navy); font-weight: 700; }
+.painel-legenda-desenho svg { display: inline-block; width: 1.5em; height: .75em; vertical-align: -.02em; overflow: visible; }
+.painel-legenda-desenho svg[viewBox="0 0 10 10"] { width: .75em; }
+.painel-principal[hidden] { display: none; }
+
+/* as abas do gráfico: cada uma é o desenho miúdo do seu gráfico, vivo, com uma legenda
+   discreta embaixo, sempre no mesmo lugar. As outras mostram o desenho com as cores de verdade;
+   a aberta, que já está grande logo abaixo, fica em cinza e só troca a cor da legenda. */
+.painel-abas { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 150px); gap: 1.6rem; margin-bottom: .9rem; }
+.painel-aba {
+  display: grid;
+  grid-template-rows: 40px auto;
+  gap: .45rem;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.painel-aba-miniatura { grid-area: 1 / 1; display: block; width: 100%; height: 40px; transition: opacity .2s; }
+.painel-aba-nome { grid-area: 2 / 1; display: flex; align-items: baseline; gap: .4rem; font-size: .76rem; line-height: 1.25; color: var(--tinta-suave); transition: color .15s; }
+.painel-aba-numero { font-size: .66rem; font-weight: 600; letter-spacing: .04em; font-variant-numeric: tabular-nums; color: #b5b5b5; }
+.painel-aba:hover .painel-aba-nome { color: var(--teal-escuro); }
+.painel-aba:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; border-radius: 2px; }
+.painel-aba[aria-selected="true"] { cursor: default; }
+.painel-aba[aria-selected="true"] .painel-aba-miniatura { opacity: .22; filter: grayscale(1); }
+.painel-aba[aria-selected="true"] .painel-aba-nome { color: var(--navy); }
+.painel-aba[aria-selected="true"] .painel-aba-numero { color: var(--teal); }
+.painel-tempo { margin-top: .5rem; }
 
 /* a linha do tempo presa ao pé da janela quando o painel sai da tela (motor-de-simuladores/interface/controles/tempo-flutuante.js) */
 .flutuante { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(255, 255, 255, .96); backdrop-filter: blur(8px); border-top: 1px solid var(--borda); box-shadow: 0 -6px 20px rgba(20, 37, 96, .08); transform: translateY(110%); transition: transform .3s ease; }

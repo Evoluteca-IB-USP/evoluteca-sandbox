@@ -1,0 +1,33 @@
+/* A pergunta à turma da porta da sala (paginas/salas/pergunta-da-turma.js) */
+
+.pergunta { margin: 0; padding-top: 1.1rem; }
+.pergunta .kicker-secao { margin-bottom: .8rem; }
+.pergunta-enunciado { margin: 0 0 1.2rem; font-size: 1rem; line-height: 1.55; color: var(--tinta); }
+
+.pergunta-area { position: relative; cursor: crosshair; border-radius: var(--raio); }
+.pergunta-area:focus-visible { outline: 2px solid var(--teal); outline-offset: 6px; }
+.pergunta-desenho { display: block; width: 100%; height: auto; overflow: visible; }
+.pergunta-eixo { stroke: var(--borda-forte); stroke-width: 1.2; }
+.pergunta-numero { font-size: 11px; fill: var(--tinta-suave); text-anchor: middle; font-variant-numeric: tabular-nums; }
+.pergunta-aluno { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.2; }
+.pergunta-aluno.respondeu { fill: var(--navy); stroke: var(--navy); }
+.pergunta-convite { font-size: 13px; fill: var(--tinta-suave); text-anchor: middle; }
+.pergunta-ponto { fill: var(--teal-claro); }
+.pergunta-ponto.perto { fill: var(--teal); }
+
+/* o palpite: fio âmbar até o eixo; o fantasma segue o mouse */
+.pergunta-fantasma, .pergunta-palpite { opacity: 0; transition: opacity .15s; }
+.pergunta-fantasma.visivel { opacity: .45; }
+.pergunta-palpite.visivel { opacity: 1; }
+.pergunta-fio { stroke: var(--amarelo); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.pergunta-fantasma circle, .pergunta-palpite circle { fill: var(--amarelo); }
+.pergunta-palpite circle { stroke: #fff; stroke-width: 2; }
+.pergunta-fantasma text, .pergunta-palpite text { font-size: 11px; font-weight: 700; fill: #a8690a; text-anchor: middle; }
+
+.pergunta-linha { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1rem; min-height: 1.5em; margin: .9rem 0 0; font-size: .88rem; }
+.pergunta-estado { margin: 0; color: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.pergunta-estado b { color: var(--navy); }
+.pergunta-outra { font: inherit; font-size: .88rem; font-weight: 600; padding: 0; background: none; border: 0; color: var(--teal-escuro); cursor: pointer; white-space: nowrap; }
+.pergunta-outra:hover { text-decoration: underline; text-underline-offset: 3px; }
+.pergunta figcaption { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--borda); font-size: .78rem; line-height: 1.55; color: var(--tinta-suave); }
+.pergunta figcaption b { color: var(--navy); }

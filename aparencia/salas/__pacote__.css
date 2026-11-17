@@ -1,0 +1,14 @@
+/* As páginas das salas de aula (professor.html e sala.html), na ordem em que
+   uma refina a outra:
+     base.css      → campos, listas, resultados, pausa e projetor
+     aula.css      → a sala ao vivo (professor e aluno) e as peças comuns
+     professor.css → o painel do professor
+     entrada.css   → a porta (sala.html sem link), sobre o banner do catálogo
+     telefone-sem-fio.css → a figura interativa da porta */
+@import "../secoes-empilhadas/titulo-de-secao-grande.css";
+@import "../catalogo/banner-com-busca.css";
+@import "base.css";
+@import "aula.css";
+@import "professor.css";
+@import "entrada.css";
+@import "telefone-sem-fio.css";

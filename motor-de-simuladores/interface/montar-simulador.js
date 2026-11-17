@@ -5,6 +5,7 @@
    escreve a ficha; não escreve interface. */
 
 import { montarPainel } from "./painel.js";
+import { ligarPonteComASala } from "./ponte-com-a-sala.js";
 import { ligarAoPassarOMouse } from "./sessao.js";
 import { montarTempoFlutuante } from "./controles/tempo-flutuante.js";
 import { montarAbas } from "./abas/abas.js";
@@ -13,20 +14,25 @@ import { montarDerivacao } from "./abas/derivacao.js";
 import { montarLupa } from "./abas/lupa.js";
 import { montarRelevo } from "./abas/relevo.js";
 import { montarDados } from "./abas/dados.js";
+import { montarPremissas } from "./abas/premissas.js";
 
-export function montarSimulador(raiz, ficha) {
+/** `opcoes`: { modelo: slug, valores, semente, travados } — o que a URL pediu (parametros-da-url.js) */
+export function montarSimulador(raiz, ficha, opcoes = {}) {
   raiz.querySelector("#titulo").firstChild.textContent = ficha.titulo;
   document.title = `${ficha.titulo} · Evoluteca`;
 
-  const painel = montarPainel(ficha, raiz);
+  const painel = montarPainel(ficha, raiz, opcoes);
   montarAbas(painel, raiz.querySelector("#ferramentas"), [
     { rotulo: "Caderno", montar: (no) => montarCaderno(painel, no) },
+    ficha.premissas && { rotulo: "Como o modelo funciona", montar: (no) => montarPremissas(painel, no) },
     ficha.derivacoes && { rotulo: "De onde vêm as fórmulas", montar: (no) => montarDerivacao(painel, no) },
     ficha.lupa && { rotulo: ficha.lupa.aba, montar: (no) => montarLupa(painel, no) },
-    ficha.relevo && { rotulo: ficha.relevo.aba, montar: (no) => montarRelevo(painel, no) },
+    ficha.relevo?.aba && { rotulo: ficha.relevo.aba, montar: (no) => montarRelevo(painel, no) },
     { rotulo: "Dados para o R", montar: (no) => montarDados(painel, no) },
   ].filter(Boolean));
   if (painel.tempo) montarTempoFlutuante(painel, raiz.querySelector("#tempo"));
+  ligarPonteComASala(painel, opcoes.modelo);
   painel.comecar();
   ligarAoPassarOMouse(raiz);
+  return painel;
 }

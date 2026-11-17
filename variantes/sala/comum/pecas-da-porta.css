@@ -1,0 +1,63 @@
+/* O que as variantes v4 a v6 da porta da sala dividem (comum/pecas-da-porta.js).
+   O banner, o campo-trajetória e os links do professor vêm de aparencia/salas/. */
+
+.porta .banner-grade { align-items: center; padding: 4rem 0 4.5rem; }
+.porta .banner-grade > :first-child { padding-top: 0; }
+
+/* a seta de enviar, que a porta oficial não usa mais */
+.trajeto-campo { padding-right: 2rem; }
+.porta-seta {
+  position: absolute;
+  right: 0;
+  bottom: .3rem;
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  background: none;
+  border: 0;
+  padding: 0 .2rem;
+  cursor: pointer;
+  transition: color .2s, translate .2s;
+}
+.trajeto:focus-within .porta-seta, .porta-seta:hover, .trajeto-serve .porta-seta { color: var(--teal-escuro); }
+.porta-seta:hover { translate: 3px 0; }
+
+/* a linha do professor e o balão do "?" */
+.prof { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .55rem; margin: 0; font-size: .88rem; color: var(--tinta-suave); }
+.prof-balao {
+  position: absolute;
+  z-index: 5;
+  width: 24rem;
+  padding: .95rem 1.1rem;
+  background: var(--fundo);
+  border: 1px solid var(--teal-claro);
+  border-radius: var(--raio);
+  font-size: .84rem;
+  font-weight: 400;
+  line-height: 1.55;
+  text-align: left;
+  color: var(--tinta);
+}
+.prof-balao::before { content: ""; position: absolute; top: -7px; left: var(--seta, 2rem); width: 12px; height: 12px; background: var(--fundo); border-left: 1px solid var(--teal-claro); border-top: 1px solid var(--teal-claro); rotate: 45deg; }
+.prof-balao.para-cima::before { top: auto; bottom: -7px; rotate: 225deg; }
+.prof-balao p { margin: 0; }
+.prof-balao p + p { margin-top: .45rem; }
+.prof-balao b { color: var(--navy); }
+
+/* a linha embaixo da figura: o que aconteceu e a ação com o dado */
+.figura-linha { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .4rem 1.2rem; min-height: 1.5em; margin: 1rem 0 0; font-size: .88rem; line-height: 1.5; color: var(--tinta-suave); }
+.figura-estado { flex: 1; min-width: 12rem; }
+.figura-estado b { color: var(--navy); }
+.figura-acao { font: inherit; font-weight: 600; padding: 0; background: none; border: 0; color: var(--teal-escuro); cursor: pointer; white-space: nowrap; }
+.figura-acao:hover { text-decoration: underline; text-underline-offset: 3px; }
+.figura-dado { font-size: 1.15rem; vertical-align: -.08em; }
+.figura-legenda { margin: 1rem 0 0; padding-top: .8rem; border-top: 1px solid var(--borda); font-size: .78rem; line-height: 1.55; color: var(--tinta-suave); }
+.figura-legenda b { color: var(--navy); }
+
+/* só nas variantes: o atalho para trocar de uma para outra */
+.troca-de-variante { position: fixed; left: 0; bottom: 0; z-index: 20; display: flex; gap: 1rem; padding: .45rem .9rem; font-size: .72rem; color: #fff; background: rgba(20, 37, 96, .92); border-top-right-radius: var(--raio); }
+.troca-de-variante a { color: var(--teal-claro); text-decoration: none; }
+.troca-de-variante a:hover { text-decoration: underline; }
+.troca-de-variante a[aria-current="page"] { color: var(--amarelo); font-weight: 700; }

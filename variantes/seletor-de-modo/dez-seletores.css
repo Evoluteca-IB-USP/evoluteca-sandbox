@@ -1,0 +1,104 @@
+/* A vitrine dos dez seletores de modo (variantes/seletor-de-modo/) */
+
+body { background: #fff; }
+.vitrine { padding: 2.4rem 15px 4rem; }
+.vitrine h1 { margin: 0 0 .4rem; font-size: 2.4rem; font-weight: 700; letter-spacing: -.03em; color: var(--navy); }
+.vitrine h1 span { color: var(--amarelo); }
+.vitrine-nota { margin: 0 0 2rem; color: var(--tinta-suave); }
+.vitrine-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3.5rem; }
+.item { padding: 1.1rem 0 1.3rem; border-top: 1px solid var(--borda); }
+.item-nome { margin: 0; font-size: .95rem; font-weight: 600; color: var(--navy); }
+.item-nome b { margin-right: .4rem; font-size: .72rem; letter-spacing: .15em; color: var(--teal-escuro); }
+.item-descricao { margin: .15rem 0 .9rem; font-size: .8rem; color: var(--tinta-suave); }
+.item-estados { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.item-estados > div { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; }
+.item-estados small { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: #a3a3a3; }
+
+.vitrine button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+
+/* 01 trilho em miniatura */
+.s1 { display: inline-flex; align-items: center; gap: .55rem; font-size: .88rem; color: var(--tinta-suave); }
+.s1-trilho { position: relative; width: 30px; height: 12px; background: radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 6px 6px repeat-x; transition: background .2s; }
+.s1-trilho i { position: absolute; top: 50%; left: 0; width: 11px; height: 11px; margin-top: -5.5px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 3px rgba(252, 180, 33, .25); transition: left .2s; }
+.s1[aria-pressed="true"] { color: var(--navy); font-weight: 600; }
+.s1[aria-pressed="true"] .s1-trilho { background: linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / 100% 2.5px no-repeat; }
+.s1[aria-pressed="true"] .s1-trilho i { left: 19px; }
+
+/* 02 régua de duas marcas */
+.s2 { width: 120px; }
+.s2-linha { position: relative; display: block; height: 12px; margin: 0 5px; background: radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 6px 6px repeat-x; }
+.s2-linha::before { content: ""; position: absolute; left: 0; top: 50%; height: 2.5px; margin-top: -1.25px; width: 0; background: var(--teal-claro); transition: width .25s; }
+.s2-linha i { position: absolute; top: 50%; left: 0; width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 3px rgba(252, 180, 33, .25); transition: left .25s; }
+.s2[data-on="true"] .s2-linha::before { width: 100%; }
+.s2[data-on="true"] .s2-linha i { left: 100%; }
+.s2-marcas { display: flex; justify-content: space-between; margin-top: .1rem; font-size: .72rem; }
+.s2-marcas button { color: #a3a3a3; }
+.s2[data-on="false"] .s2-marcas button:first-child, .s2[data-on="true"] .s2-marcas button:last-child { color: var(--navy); font-weight: 600; }
+
+/* 03 dois nós da trilha */
+.s3 { display: inline-flex; align-items: center; gap: .4rem; font-size: .82rem; }
+.s3 button { color: #a3a3a3; }
+.s3-no { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--teal-claro); background: #fff; cursor: pointer; transition: all .2s; }
+.s3-onda { width: 26px; height: 8px; }
+.s3[data-on="false"] .s3-no:first-of-type, .s3[data-on="true"] .s3-no:last-of-type { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--amarelo); }
+.s3[data-on="false"] button:first-child, .s3[data-on="true"] button:last-child { color: var(--navy); font-weight: 600; }
+
+/* 04 traço que desliza */
+.s4 { position: relative; display: inline-flex; gap: 1rem; padding-bottom: 6px; font-size: .88rem; }
+.s4 button { color: #a3a3a3; transition: color .2s; }
+.s4 i { position: absolute; bottom: 0; left: 0; width: 43px; height: 2px; background: var(--amarelo); transition: left .25s, width .25s; }
+.s4[data-on="true"] i { left: 59px; width: 68px; }
+.s4[data-on="false"] button:first-child, .s4[data-on="true"] button:nth-child(2) { color: var(--navy); font-weight: 600; }
+
+/* 05 ponto final âmbar */
+.s5 { display: inline-flex; gap: .8rem; font-size: 1rem; }
+.s5 button { color: #a3a3a3; letter-spacing: -.01em; }
+.s5 button span { color: transparent; font-weight: 700; }
+.s5[data-on="false"] button:first-child, .s5[data-on="true"] button:last-child { color: var(--navy); font-weight: 700; }
+.s5[data-on="false"] button:first-child span, .s5[data-on="true"] button:last-child span { color: var(--amarelo); }
+
+/* 06 frase com menu */
+.s6 { position: relative; font-size: .88rem; color: var(--tinta-suave); }
+.s6-escolha { color: var(--teal-escuro) !important; font-weight: 600; text-decoration: underline; text-decoration-color: var(--teal-claro); text-underline-offset: 3px; }
+.s6-escolha span { font-size: .7em; }
+.s6-menu { position: absolute; left: 5.5rem; top: 1.5rem; z-index: 2; display: flex; flex-direction: column; padding: .3rem 0; background: #fff; border: 1px solid var(--borda-forte); border-radius: var(--raio); box-shadow: var(--sombra); }
+.s6-menu[hidden] { display: none; }
+.s6-menu button { padding: .25rem .9rem !important; text-align: left; }
+.s6-menu button:hover { color: var(--teal-escuro); }
+
+/* 07 palavra com desenhinho */
+.s7 { display: inline-flex; align-items: center; gap: .3rem; font-size: .88rem; color: var(--tinta-suave); }
+.s7 .glifo { width: 1.1em; height: .8em; color: #b5dfe6; transition: color .2s; }
+.s7-sinal::before { content: "＋"; font-size: .85em; }
+.s7[aria-pressed="true"] { color: var(--teal-escuro); font-weight: 600; }
+.s7[aria-pressed="true"] .s7-sinal::before { content: "✓"; color: var(--amarelo); font-weight: 700; }
+.s7[aria-pressed="true"] .glifo { color: var(--teal); }
+.s7[aria-pressed="true"] .s7-texto { text-decoration: underline; text-decoration-color: var(--teal-claro); text-underline-offset: 3px; }
+
+/* 08 camadas */
+.s8 { display: inline-flex; align-items: center; gap: .5rem; font-size: .88rem; color: var(--tinta-suave); }
+.s8 svg { width: 24px; height: 20px; }
+.s8 path { stroke: var(--teal); stroke-width: 1.2; stroke-linejoin: round; fill: #fff; transition: opacity .25s, transform .25s; }
+.s8 .c1 { fill: var(--teal-claro); }
+.s8 .c2, .s8 .c3 { opacity: 0; transform: translateY(4px); }
+.s8 span::before { content: "básico"; }
+.s8[aria-pressed="true"] { color: var(--navy); font-weight: 600; }
+.s8[aria-pressed="true"] .c2, .s8[aria-pressed="true"] .c3 { opacity: 1; transform: none; }
+.s8[aria-pressed="true"] .c3 { fill: var(--amarelo); stroke: #d9971a; }
+.s8[aria-pressed="true"] span::before { content: "avançado"; }
+
+/* 09 sorteio + conta */
+.s9 { display: inline-flex; align-items: center; gap: .35rem; font-size: .88rem; color: var(--tinta-suave); }
+.s9 svg { width: 34px; height: 18px; overflow: visible; }
+.s9-pontos { fill: var(--teal); }
+.s9-curva { fill: none; stroke: var(--navy); stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 30; stroke-dashoffset: 30; transition: stroke-dashoffset .4s; }
+.s9 b { font-weight: 600; color: #c4c4c4; transition: color .2s; }
+.s9[aria-pressed="true"] .s9-curva { stroke-dashoffset: 0; }
+.s9[aria-pressed="true"] b { color: var(--navy); }
+
+/* 10 nó que se marca */
+.s10 { display: inline-flex; align-items: center; gap: .55rem; font-size: .88rem; color: var(--tinta-suave); }
+.s10 i { position: relative; width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--teal-claro); background: #fff; transition: all .2s; }
+.s10[aria-pressed="true"] { color: var(--navy); font-weight: 600; }
+.s10[aria-pressed="true"] i { background: var(--teal); border-color: var(--teal); box-shadow: 0 0 0 2.5px #fff, 0 0 0 4.5px var(--amarelo); }
+.s10[aria-pressed="true"] i::after { content: ""; position: absolute; left: 3.5px; top: 1.5px; width: 3px; height: 6px; border: solid #fff; border-width: 0 1.6px 1.6px 0; transform: rotate(45deg); }

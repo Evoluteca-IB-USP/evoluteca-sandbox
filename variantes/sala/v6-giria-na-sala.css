@@ -1,0 +1,30 @@
+/* v6 · gíria na sala (v6-giria-na-sala.js) */
+
+.v6 .banner-grade { grid-template-columns: 1fr 400px; gap: 4rem; padding: 3.5rem 0 1.5rem; }
+.v6-figura { margin: 0; }
+.v6 .figura-linha { display: block; }
+.v6 .figura-linha b { color: var(--navy); }
+
+/* a sala vista de cima */
+.v6-sala { display: block; width: 100%; height: auto; overflow: visible; }
+.v6-parede { fill: none; stroke: var(--borda-forte); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.v6-lousa { stroke: var(--navy); stroke-width: 4; stroke-linecap: round; }
+.v6-folha { stroke: var(--teal); stroke-width: 3; stroke-linecap: round; transform-origin: 20px 54px; transition: transform .5s ease; }
+.v6-arco { fill: none; stroke: var(--teal-claro); stroke-width: 1.3; stroke-dasharray: 2 4; opacity: 0; transition: opacity .3s ease .2s; }
+.v6-aberta .v6-folha { transform: rotate(90deg); }
+.v6-aberta .v6-arco { opacity: 1; }
+
+.v6-carteira { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.3; cursor: pointer; outline: none; transition: fill .18s, stroke .18s; }
+.v6-carteira:hover, .v6-carteira:focus-visible { stroke: var(--teal); stroke-width: 2.2; }
+.v6-fala { fill: var(--navy); stroke: var(--navy); }
+.v6-fala:hover, .v6-fala:focus-visible { stroke: var(--teal); }
+.v6-copiou { fill: var(--amarelo); stroke: var(--amarelo); transition: none; }
+.v6-seu-lugar { stroke: var(--amarelo); stroke-width: 3.4; }
+@media (prefers-reduced-motion: reduce) { .v6-folha, .v6-arco, .v6-carteira { transition: none; } }
+
+/* a linha de fecho para na cabecinha, e a entrada do professor continua dali */
+.v6-fecho { margin-bottom: 3.2rem; }
+.v6-fecho-linha { height: 100%; clip-path: inset(-10px calc(100% - var(--x, 60%)) -10px 0); }
+.v6-fecho .fecho-cabeca { left: var(--x, 60%); top: var(--y, 35px); }
+.v6-professor { position: absolute; left: calc(var(--x, 60%) + 22px); top: var(--y, 35px); width: max-content; max-width: 400px; translate: 0 -50%; }
+.v6 .prof-balao { left: calc(var(--x, 60%) + 22px); bottom: calc(100% - var(--y, 35px) + 1.5rem); }

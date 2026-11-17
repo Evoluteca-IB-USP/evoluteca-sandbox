@@ -1,0 +1,47 @@
+/* ============ ferramentas de ensino: premissas, ideias erradas, casos, professor ============ */
+
+/* o link dentro do texto: teal sublinhado, sem fundo */
+.ensino-link { padding: 0; font: inherit; font-size: .88rem; color: var(--teal-escuro); background: none; border: 0; text-decoration: underline; text-decoration-color: var(--teal); text-underline-offset: 3px; cursor: pointer; }
+.ensino-link:hover { color: var(--navy); text-decoration-color: var(--amarelo); }
+
+/* ---------- como o modelo funciona ---------- */
+.premissas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem 2.6rem; }
+.premissa { display: grid; grid-template-columns: 32px 1fr; gap: .9rem; align-items: start; padding-top: 1rem; border-top: 1px solid var(--borda); }
+.ensino-desenho svg { display: block; }
+.premissa-titulo { margin: 0 0 .25rem; font-size: .95rem; font-weight: 700; color: var(--navy); }
+.premissa-texto { margin: 0 0 .5rem; font-size: .9rem; line-height: 1.55; color: var(--tinta); }
+.premissa-senao { margin: 0; font-size: .82rem; line-height: 1.5; color: var(--tinta-suave); }
+.premissa-senao b { font-weight: 600; color: var(--tinta-suave); }
+
+/* ---------- ideias erradas ---------- */
+.ideias { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem 3rem; margin: 0; padding: 0; list-style: none; counter-reset: ideia; }
+.ideia { position: relative; padding: 1rem 0 0 2.2rem; border-top: 1px solid var(--borda); counter-increment: ideia; }
+.ideia::before { content: counter(ideia); position: absolute; left: 0; top: 1rem; display: grid; place-items: center; width: 22px; height: 22px; border: 1.5px solid var(--teal); border-radius: 50%; font-size: .72rem; font-weight: 700; color: var(--teal-escuro); }
+.ideia-frase { margin: 0 0 .5rem; font-size: 1rem; line-height: 1.5; color: var(--navy); }
+.ideia-quem { font-size: .85rem; color: var(--tinta-suave); }
+.ideia-frase q { font-style: italic; }
+.ideia-resposta { margin: 0 0 .6rem; padding-left: .8rem; font-size: .9rem; line-height: 1.55; color: var(--tinta); border-left: 2px solid var(--amarelo); }
+.ideia-acoes { display: flex; gap: 1.4rem; margin: 0; }
+
+/* ---------- no mundo real ---------- */
+.casos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 3rem; }
+.caso { padding-top: 1rem; border-top: 2px solid var(--teal); }
+.caso-lugar { margin: 0 0 .2rem; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tinta-suave); }
+.caso-titulo { margin: 0 0 .45rem; font-size: 1.05rem; font-weight: 700; color: var(--navy); }
+.caso-texto { margin: 0 0 .5rem; font-size: .9rem; line-height: 1.6; color: var(--tinta); max-width: 60ch; }
+.caso-fonte { margin: .6rem 0 0; font-size: .75rem; line-height: 1.45; color: var(--tinta-suave); }
+
+/* ---------- para o professor ---------- */
+.professor { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; align-items: start; }
+.professor-bloco { padding-top: 1rem; border-top: 1px solid var(--borda); }
+.professor-titulo { margin: 0 0 .3rem; font-size: .95rem; font-weight: 700; color: var(--navy); }
+.professor-texto { margin: 0 0 .8rem; font-size: .88rem; line-height: 1.55; color: var(--tinta-suave); }
+.professor-travar { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin-bottom: .8rem; font-size: .85rem; color: var(--tinta); }
+.professor-rotulo { color: var(--tinta-suave); }
+.professor-opcao { display: inline-flex; align-items: center; gap: .35rem; cursor: pointer; }
+.professor-opcao input { appearance: none; width: 13px; height: 13px; margin: 0; border: 1.5px solid var(--teal); border-radius: 50%; cursor: pointer; }
+.professor-opcao input:checked { background: var(--teal); box-shadow: inset 0 0 0 2px #fff; }
+.professor-opcao input:focus-visible { outline: 2px solid var(--amarelo); outline-offset: 2px; }
+.professor-link { display: flex; align-items: baseline; gap: .9rem; margin: 0; }
+.professor-campo { flex: 1; min-width: 0; padding: .3rem 0; font-family: var(--fonte-mono); font-size: .78rem; color: var(--navy); background: none; border: 0; border-bottom: 1px solid var(--borda-forte); }
+.professor-campo:focus { outline: none; border-bottom-color: var(--teal); }

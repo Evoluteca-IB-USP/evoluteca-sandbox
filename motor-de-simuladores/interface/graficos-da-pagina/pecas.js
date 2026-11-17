@@ -1,9 +1,10 @@
 /* As peças dos gráficos da página do simulador. Um gráfico é uma área com
-   limites e margens; os desenhos (eixos, linhas, faixas, cabeça, histograma)
+   limites e margens; os desenhos (eixos, linhas, faixas, cabeça)
    são funções soltas que recebem essa área, e os tipos de gráfico
    (tipos.js) se montam juntando peças. */
 
 import { NAVY, AMARELO, TEAL_CLARO, TEAL_ESCURO, TINTA_SUAVE as SUAVE, FONTE } from "../cores.js";
+import { acender } from "../sessao.js";
 
 const CORES = { grade: "#ececec", eixo: "#cfcfcf", texto: SUAVE, replica: TEAL_CLARO, destaque: NAVY, previsao: TEAL_ESCURO, agora: "rgba(20, 37, 96, .25)", barras: NAVY };
 
@@ -14,10 +15,30 @@ export function grafico(canvas, { xlim, ylim, margem = {}, desenhar = () => {} }
   g.y = (v) => m.topo + (1 - (v - g.ylim[0]) / (g.ylim[1] - g.ylim[0])) * (g.H - m.topo - m.base);
   g.xInv = (px) => g.xlim[0] + ((px - m.esq) / (g.W - m.esq - m.dir)) * (g.xlim[1] - g.xlim[0]);
   g.yInv = (py) => g.ylim[0] + (1 - (py - m.topo) / (g.H - m.topo - m.base)) * (g.ylim[1] - g.ylim[0]);
+  g.regioes = [];
   g.redesenhar = () => {
     g.ctx.clearRect(0, 0, g.W, g.H);
+    g.regioes = [];
     g.desenhar(g);
   };
+  /* passar o mouse numa fórmula troca as letras pelos números de agora e acende as réguas ligadas a ela */
+  canvas.addEventListener("pointermove", (e) => {
+    const r = canvas.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    const achada = g.regioes.find((q) => x >= q.x0 && x <= q.x1 && y >= q.y0 && y <= q.y1);
+    const id = achada?.id ?? null;
+    if (id === g.formulaSobre) return;
+    const antes = g.regioes.find((q) => q.id === g.formulaSobre);
+    antes?.liga?.forEach((n) => acender(n, false));
+    achada?.liga?.forEach((n) => acender(n, true));
+    g.formulaSobre = id;
+    g.redesenhar();
+  });
+  canvas.addEventListener("pointerleave", () => {
+    if (g.formulaSobre === null || g.formulaSobre === undefined) return;
+    g.regioes.find((q) => q.id === g.formulaSobre)?.liga?.forEach((n) => acender(n, false));
+    g.formulaSobre = null;
+    g.redesenhar();
+  });
   new ResizeObserver(() => {
     const dpr = window.devicePixelRatio || 1;
     g.W = canvas.clientWidth;
@@ -42,7 +63,7 @@ export function pretty(a, b, n = 5) {
 export const numero = (v, casas = 2, minimo = casas) => v.toLocaleString("pt-BR", { minimumFractionDigits: minimo, maximumFractionDigits: casas });
 
 /* o título do eixo y fica deitado no alto, em versalete, como os rótulos do site */
-export function eixos(g, { tituloY = "", tituloX = "", formatoY = (v) => numero(v, 2, 0), marcasX, marcasY } = {}) {
+export function eixos(g, { tituloY = "", tituloX = "", formatoY = (v) => numero(v, 2, 0), formatoX = String, marcasX, marcasY } = {}) {
   const { ctx, m } = g;
   ctx.lineWidth = 1;
   for (const v of marcasY ?? pretty(...g.ylim, 4)) {
@@ -52,7 +73,7 @@ export function eixos(g, { tituloY = "", tituloX = "", formatoY = (v) => numero(
   }
   ctx.strokeStyle = g.cores.eixo;
   traco(ctx, m.esq, g.H - m.base, g.W - m.dir, g.H - m.base);
-  for (const v of marcasX ?? pretty(...g.xlim, 6)) texto(ctx, String(v), g.x(v), g.H - m.base + 13, "center", g.cores.texto);
+  for (const v of marcasX ?? pretty(...g.xlim, 6)) texto(ctx, formatoX(v), g.x(v), g.H - m.base + 13, "center", g.cores.texto);
   if (tituloY) texto(ctx, tituloY.toUpperCase(), m.esq, 8, "left", g.cores.texto, `600 10px`, 1.2);
   if (tituloX) texto(ctx, tituloX, g.W - m.dir, g.H - m.base - 9, "right", g.cores.texto, "italic 11px");
 }
@@ -128,19 +149,29 @@ export function agora(g, xv) {
   traco(g.ctx, g.x(xv), g.m.topo, g.x(xv), g.H - g.m.base);
 }
 
-/** histograma deitado, colado à direita do gráfico, no mesmo eixo y */
-export function histogramaLateral(g, valores, { classes = 20, largura = 70, cor = g.cores.barras } = {}) {
-  const { ctx } = g, conta = new Array(classes + 1).fill(0);
-  for (const v of valores) conta[Math.round(((v - g.ylim[0]) / (g.ylim[1] - g.ylim[0])) * classes)]++;
-  const maior = Math.max(1, ...conta), x0 = g.W - g.m.dir + 10, alto = (g.H - g.m.topo - g.m.base) / classes;
-  conta.forEach((c, i) => {
-    if (!c) return;
-    const eParede = i === 0 || i === classes;
-    ctx.fillStyle = eParede ? (i ? g.cores.destaque : AMARELO) : cor;
-    ctx.globalAlpha = eParede ? 1 : 0.55;
-    ctx.fillRect(x0, g.y(g.ylim[0] + (i / classes) * (g.ylim[1] - g.ylim[0])) - alto * 0.4, (c / maior) * largura, alto * 0.8);
-  });
-  ctx.globalAlpha = 1;
+/** uma fórmula pequena, em itálico, colada à linha que ela desenha; sob o mouse mostra os números */
+export function formula(g, { letras, numeros, liga, x, y, alinhar = "left", acima = false }, id) {
+  const { ctx } = g, sob = g.formulaSobre === id && numeros;
+  const t = sob ? numeros : letras, fonte = sob ? "600 11.5px" : "italic 11.5px";
+  ctx.font = `${fonte} ${FONTE}`;
+  const w = ctx.measureText(t).width;
+  let px = g.x(x), py = g.y(y) + (acima ? -11 : 11);
+  py = Math.max(g.m.topo + 8, Math.min(g.H - g.m.base - 8, py));
+  let x0 = alinhar === "right" ? px - w : alinhar === "center" ? px - w / 2 : px;
+  x0 = Math.max(g.m.esq + 2, Math.min(g.W - g.m.dir - w - 2, x0));
+  ctx.fillStyle = "rgba(255, 255, 255, .85)";
+  ctx.fillRect(x0 - 3, py - 8, w + 6, 16);
+  if (sob) { ctx.fillStyle = "rgba(252, 180, 33, .25)"; ctx.fillRect(x0 - 3, py - 8, w + 6, 16); }
+  texto(ctx, t, x0, py, "left", numeros ? TEAL_ESCURO : SUAVE, fonte);
+  if (numeros) g.regioes.push({ id, liga, x0: x0 - 3, x1: x0 + w + 3, y0: py - 9, y1: py + 9 });
+}
+
+/** um trecho do tempo marcado no fundo (o gargalo), com o nome no alto */
+export function trechoDeTempo(g, { de, ate, rotulo }) {
+  const { ctx } = g, x0 = g.x(de), x1 = g.x(ate);
+  ctx.fillStyle = "rgba(252, 180, 33, .14)";
+  ctx.fillRect(x0, g.m.topo, Math.max(2, x1 - x0), g.H - g.m.topo - g.m.base);
+  texto(ctx, rotulo, x0 + 4, g.m.topo + 8, "left", "#9a7318", "italic 10.5px");
 }
 
 export function valorEm(ys, t) {

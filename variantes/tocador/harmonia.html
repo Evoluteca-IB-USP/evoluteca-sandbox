@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Tocador · harmonia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <style>
+    body { background: #fff; padding: 1.5rem 3rem; font-family: var(--fonte); }
+    .opcao { display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; align-items: start; padding: 1.3rem 0; border-bottom: 1px solid var(--borda); }
+    .letra { font-weight: 700; color: var(--navy); font-size: 1.3rem; line-height: 52px; }
+    .letra small { display: block; margin-top: -1.2rem; font-size: .7rem; font-weight: 400; color: var(--tinta-suave); line-height: 1.2; }
+    .estados { display: flex; flex-direction: column; gap: .9rem; }
+    .linha { display: flex; align-items: center; gap: 1.4rem; max-width: 900px; min-height: 52px; }
+    .trilho { flex: 1; height: 12px; position: relative; background: linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / 35% 2.5px no-repeat, radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 8px 8px repeat-x; }
+    .trilho::after { content: ""; position: absolute; left: 35%; top: 50%; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 4px rgba(252, 180, 33, .25); }
+    .off .trilho { background: linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / 100% 2.5px no-repeat; }
+    .off .trilho::after { left: 100%; }
+    .geracao { font-size: .9rem; color: var(--tinta-suave); white-space: nowrap; }
+    .geracao b { color: var(--navy); }
+    button { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; color: var(--navy); }
+    svg { display: block; }
+    svg.traco { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* peças comuns */
+    .capsula { display: flex; align-items: center; gap: .25rem; padding: 4px 6px; border-radius: 999px; background: rgba(252, 180, 33, .18); }
+    .play { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--amarelo); color: var(--navy); }
+    .play svg { width: 22px; height: 22px; fill: currentColor; }
+    .seta { display: grid; place-items: center; width: 30px; height: 30px; }
+    .seta svg { width: 14px; height: 14px; stroke-width: 3; }
+    .volta svg { width: 20px; height: 20px; stroke-width: 2.4; }
+    .off .play { background: #e6e6e6; color: #b0b0b0; }
+    .off .capsula { background: #f2f2f2; }
+
+    .onda { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--borda-forte); }
+    .onda svg { width: 20px; height: 20px; stroke-width: 1.8; }
+    .onda .corte { display: none; }
+    .off .onda { color: #9a9a9a; border-style: dashed; }
+    .off .onda .corte { display: inline; stroke: var(--amarelo); stroke-width: 2.2; }
+    .rotulo { display: flex; flex-direction: column; font-size: .76rem; line-height: 1.2; color: var(--tinta-suave); text-align: left; }
+    .rotulo b { font-weight: 600; color: var(--navy); }
+    .off .rotulo b { color: #9a9a9a; }
+    .liga { display: flex; align-items: center; gap: .55rem; }
+
+    /* A — em fila: liga/desliga | ↺ | cápsula, cada um no seu respiro */
+    .a .volta { color: var(--navy); margin-right: -.4rem; }
+    .a .divisa { width: 1px; height: 28px; background: var(--borda); }
+
+    /* B — o ↺ entra na cápsula; o liga/desliga vai para depois do contador */
+    .b .capsula { gap: .1rem; padding-left: 10px; }
+    .b .volta { display: grid; place-items: center; width: 30px; height: 30px; color: var(--navy); }
+    .b .volta svg { width: 17px; height: 17px; }
+    .b .ponto { width: 1px; height: 18px; margin: 0 .3rem; background: rgba(20, 37, 96, .15); }
+    .b .geracao { margin-right: -.4rem; }
+
+    /* C — o ↺ no começo da régua, onde fica a geração 0 */
+    .c .tempo { flex: 1; display: flex; align-items: center; gap: .7rem; }
+    .c .volta { color: var(--teal-escuro); }
+    .c .volta svg { width: 18px; height: 18px; }
+
+    /* D — uma peça só: o liga/desliga vira a primeira casa da cápsula, sem rótulo ao lado mas com a palavra embaixo */
+    .d .console { display: flex; align-items: center; gap: .9rem; }
+    .d .peca { display: flex; flex-direction: column; align-items: center; gap: .15rem; font-size: .68rem; color: var(--tinta-suave); }
+    .d .peca .onda, .d .peca .volta-circ { width: 34px; height: 34px; }
+    .d .volta-circ { display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--borda-forte); color: var(--navy); }
+    .d .volta-circ svg { width: 17px; height: 17px; stroke-width: 2.2; }
+    .d .off .peca.anim span:last-child { color: #9a9a9a; }
+  </style>
+</head>
+<body>
+  <template id="icones">
+    <svg data-i="onda" class="traco" viewBox="0 0 24 24"><path d="M3 16c3-9 6-9 9-3s6 5 9-5"/><path class="corte" d="M4 4l16 16"/></svg>
+    <svg data-i="volta" class="traco" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4v4.5H9"/></svg>
+    <svg data-i="ant" class="traco" viewBox="0 0 16 16"><path d="M10.5 3 5.5 8l5 5"/></svg>
+    <svg data-i="prox" class="traco" viewBox="0 0 16 16"><path d="M5.5 3l5 5-5 5"/></svg>
+    <svg data-i="play" viewBox="0 0 24 24"><path d="M8.5 5.5v13l10-6.5z"/></svg>
+  </template>
+
+  <div class="opcao a"><span class="letra">A<small>em fila</small></span>
+    <div class="estados">
+      <div class="linha">
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>ligada</b></span></button>
+        <span class="divisa"></span>
+        <button class="volta" data-i="volta"></button>
+        <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+      </div>
+      <div class="linha off">
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>desligada</b></span></button>
+        <span class="divisa"></span>
+        <button class="volta" data-i="volta"></button>
+        <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="trilho"></div><span class="geracao">geração <b>200</b> de 200</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="opcao b"><span class="letra">B<small>cápsula cheia</small></span>
+    <div class="estados">
+      <div class="linha">
+        <span class="capsula"><button class="volta" data-i="volta"></button><span class="ponto"></span><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>ligada</b></span></button>
+      </div>
+      <div class="linha off">
+        <span class="capsula"><button class="volta" data-i="volta"></button><span class="ponto"></span><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="trilho"></div><span class="geracao">geração <b>200</b> de 200</span>
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>desligada</b></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="opcao c"><span class="letra">C<small>volta na régua</small></span>
+    <div class="estados">
+      <div class="linha">
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>ligada</b></span></button>
+        <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="tempo"><button class="volta" data-i="volta"></button><div class="trilho"></div></div>
+        <span class="geracao">geração <b>70</b> de 200</span>
+      </div>
+      <div class="linha off">
+        <button class="liga"><span class="onda" data-i="onda"></span><span class="rotulo">animação<b>desligada</b></span></button>
+        <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        <div class="tempo"><button class="volta" data-i="volta"></button><div class="trilho"></div></div>
+        <span class="geracao">geração <b>200</b> de 200</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="opcao d"><span class="letra">D<small>painel de botões</small></span>
+    <div class="estados">
+      <div class="linha">
+        <div class="console">
+          <span class="peca anim"><span class="onda" data-i="onda"></span><span>animação</span></span>
+          <span class="peca"><span class="volta-circ" data-i="volta"></span><span>&nbsp;</span></span>
+          <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        </div>
+        <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+      </div>
+      <div class="linha off">
+        <div class="console">
+          <span class="peca anim"><span class="onda" data-i="onda"></span><span>animação</span></span>
+          <span class="peca"><span class="volta-circ" data-i="volta"></span><span>&nbsp;</span></span>
+          <span class="capsula"><button class="seta" data-i="ant"></button><span class="play" data-i="play"></span><button class="seta" data-i="prox"></button></span>
+        </div>
+        <div class="trilho"></div><span class="geracao">geração <b>200</b> de 200</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const icones = document.getElementById("icones").content;
+    document.querySelectorAll("[data-i]").forEach((el) => {
+      if (el.tagName === "svg") return;
+      el.append(icones.querySelector(`[data-i="${el.dataset.i}"]`).cloneNode(true));
+    });
+  </script>
+</body>
+</html>

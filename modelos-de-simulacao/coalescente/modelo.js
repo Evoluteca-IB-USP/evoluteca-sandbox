@@ -5,12 +5,11 @@ import { sample, seq } from "r";
 export const meta = {
   titulo: "Coalescente",
   descricao:
-    "A genealogia de uma amostra, das pontas para o ancestral comum. Siga as linhagens para trás no tempo, veja quanto demora até todas se encontrarem e onde caem as mutações que a amostra carrega.",
+    "A genealogia de uma população, de hoje para o passado. Siga as linhagens para trás no tempo, veja quanto demora até todas se encontrarem no ancestral comum e onde caem as mutações.",
   nivel: ["graduacao"],
   tema: "molecular",
   tempo: "20 min",
   parametros: [
-    { nome: "n",        rotulo: "Tamanho da amostra",   valor: 4 },
     { nome: "N",        rotulo: "Tamanho da população", valor: 5 },
     { nome: "mu",       rotulo: "Taxa de mutação",      valor: 0.02 },
     { nome: "geracoes", rotulo: "Gerações para trás",   valor: 30, avancado: true },

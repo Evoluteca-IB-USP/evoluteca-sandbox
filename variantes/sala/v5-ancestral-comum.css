@@ -1,0 +1,37 @@
+/* v5 · ancestral comum (v5-ancestral-comum.js) */
+
+.v5 .banner-grade { grid-template-columns: 1fr 440px; gap: 4rem; }
+.v5-figura { margin: 0; }
+.v5 .figura-linha { flex-direction: column; gap: .45rem; margin-top: 1.4rem; }
+
+/* a entrada do professor, escrita em cima da raiz da árvore */
+.v5-palco { position: relative; padding-top: 2.4rem; }
+.v5-professor { position: absolute; bottom: calc(100% - 1.9rem); width: max-content; max-width: 21rem; translate: -50% 0; }
+.v5-professor .prof { justify-content: center; }
+.v5 .prof-balao { top: 2.4rem; right: 0; }
+
+.v5-desenho { display: block; width: 100%; height: auto; overflow: visible; }
+.v5-ramo { fill: none; stroke: var(--teal-claro); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; transition: stroke .15s, stroke-width .15s; }
+.v5-ramo.v5-sua { stroke: var(--teal); stroke-width: 2.4; }
+.v5-ramo.v5-morno { stroke: var(--navy); stroke-width: 2; stroke-dasharray: 1 6; }
+.v5-ramo.v5-quente { stroke: var(--navy); stroke-width: 2.8; }
+
+/* a raiz é o professor: teal com o anel âmbar */
+.v5-raiz-miolo { fill: var(--teal); }
+.v5-raiz-anel { fill: #fff; stroke: var(--amarelo); stroke-width: 2.2; }
+
+/* o ancestral comum: a cabecinha âmbar das trajetórias */
+.v5-marca { opacity: 0; transition: opacity .15s; pointer-events: none; }
+.v5-marca.visivel { opacity: 1; }
+.v5-marca-halo { fill: rgba(252, 180, 33, .28); }
+.v5-marca-miolo { fill: var(--amarelo); }
+
+.v5-aluno { cursor: pointer; outline: none; }
+.v5-toque { fill: transparent; }
+.v5-bola { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.3; transition: fill .12s, stroke .12s, scale .12s; }
+.v5-aluno:hover .v5-bola, .v5-aluno:focus-visible .v5-bola { scale: 1.3; }
+.v5-escolhido .v5-bola { fill: var(--navy); stroke: var(--navy); }
+.v5-voce .v5-bola { stroke: var(--amarelo); stroke-width: 3; }
+.v5-rotulo-voce { font-size: 11px; font-weight: 700; fill: #a8690a; text-anchor: middle; opacity: 0; transition: opacity .2s; }
+.v5-voce .v5-rotulo-voce { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .v5-ramo, .v5-bola, .v5-marca { transition: none; } }

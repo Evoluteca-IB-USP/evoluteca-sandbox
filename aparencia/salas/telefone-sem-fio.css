@@ -1,0 +1,37 @@
+/* O telefone sem fio da porta da sala (paginas/salas/telefone-sem-fio.js) */
+
+.telefone { margin: 0; }
+.telefone-palco { position: relative; cursor: pointer; border-radius: 50%; }
+.telefone-palco:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+
+/* a roda: o trilho pontilhado se pinta de teal conforme a frase dá a volta */
+.telefone-roda { display: block; width: 100%; height: auto; overflow: visible; }
+.telefone-trilho, .telefone-feito { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.telefone-trilho { stroke: var(--borda-forte); stroke-dasharray: 1 7; }
+.telefone-feito { stroke: var(--teal-claro); stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset .19s linear; }
+
+.telefone-toque { fill: transparent; }
+.telefone-bola { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.3; transition: fill .15s, stroke .15s, scale .15s; }
+.telefone-ouviu .telefone-bola { fill: var(--navy); stroke: var(--navy); }
+.telefone-errou .telefone-bola { fill: var(--amarelo); stroke: var(--amarelo); }
+.telefone-vez .telefone-bola, .telefone-lido .telefone-bola { scale: 1.45; }
+.telefone-professor .telefone-bola { fill: var(--teal); stroke: var(--teal); }
+.telefone-anel { fill: none; stroke: var(--amarelo); stroke-width: 2.2; }
+
+/* o miolo da roda: a frase como está agora */
+.telefone-centro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 4.2rem; text-align: center; pointer-events: none; }
+.telefone-kicker { margin: 0 0 1rem; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--teal-escuro); }
+.telefone-frase { margin: 0; font-size: 1.75rem; font-weight: 600; line-height: 1.25; letter-spacing: .01em; color: var(--navy); }
+.telefone-frase mark { color: #a8690a; background: none; box-shadow: inset 0 -.14em 0 var(--amarelo); }
+.telefone-nova { display: inline-block; animation: telefone-trocar .35s ease both; }
+@keyframes telefone-trocar { from { translate: 0 -.35em; opacity: 0; } }
+.telefone-legenda { margin: 1rem 0 0; font-size: .8rem; color: var(--tinta-suave); }
+
+/* embaixo da roda: o que aconteceu e a ação com o dado */
+.telefone-linha { display: flex; flex-direction: column; align-items: center; gap: .7rem; min-height: 1.5em; margin: 1rem 0 0; font-size: .88rem; line-height: 1.5; text-align: center; color: var(--tinta-suave); }
+.telefone-estado:empty { display: none; }
+.telefone-estado b { color: var(--navy); }
+.telefone-acao { font: inherit; font-weight: 600; padding: 0; background: none; border: 0; color: var(--teal-escuro); cursor: pointer; white-space: nowrap; }
+.telefone-acao:hover { text-decoration: underline; text-underline-offset: 3px; }
+.telefone-dado { font-size: 1.15rem; vertical-align: -.08em; }
+@media (prefers-reduced-motion: reduce) { .telefone-feito, .telefone-bola { transition: none; } .telefone-nova { animation: none; } }

@@ -1,0 +1,44 @@
+/* ============ a aba dos vidros (motor-de-simuladores/interface/graficos-da-pagina/vidros.js) ============ */
+
+.painel-vidros { display: grid; grid-template-columns: minmax(0, 1fr) 300px; grid-template-rows: minmax(0, 1fr); gap: 2.4rem; }
+.painel-vidros[hidden] { display: none; }
+.painel-vidros-esquerda { display: flex; flex-direction: column; min-height: 0; }
+/* o título no jeito do título do eixo dos gráficos: versalete pequeno, no alto */
+.painel-vidros-titulo { margin: 2px 0 10px; font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--tinta-suave); }
+.painel-vidros-grade { display: block; flex: 1 1 0; min-height: 0; width: 100%; }
+.painel-vidros-direita { display: flex; flex-direction: column; gap: .75rem; min-height: 0; padding-top: 4px; }
+
+/* a régua dos destinos: só com a | com os dois | só com A, um pedaço por vidro, como na home */
+.painel-vidros-barra { position: relative; display: flex; height: 12px; background: var(--borda); }
+.painel-vidros-parte { flex-basis: 0; min-width: 0; transition: flex-grow .25s; }
+.painel-vidros-parte.parte-0 { background: var(--amarelo); }
+.painel-vidros-parte.parte-1 { background: #c9cfdb; }
+.painel-vidros-parte.parte-2 { background: var(--navy); }
+.painel-vidros-marca { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 1.5px dashed var(--teal-escuro); display: none; }
+.modo-avancado .painel-vidros-marca { display: block; }
+.painel-vidros-contas { display: flex; justify-content: space-between; gap: .5rem; margin-top: .3rem; font-size: .76rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.painel-vidros-contas .parte-0 { color: #9a7318; }
+.painel-vidros-contas .parte-1 { color: var(--tinta-suave); }
+.painel-vidros-contas .parte-2 { color: var(--navy); }
+.painel-vidros-esperado { margin: .3rem 0 0; font-size: .74rem; color: var(--teal-escuro); }
+
+/* o vidro em foco: grande, com a conta das cópias e a linha dele */
+.painel-vidros-foco { display: none; padding-top: .75rem; border-top: 1px solid var(--borda); }
+.painel-vidros.com-foco .painel-vidros-foco { display: block; }
+.painel-vidros.com-foco .painel-vidros-dica { display: none; }
+.painel-vidros-quem { margin: 0 0 .5rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal-escuro); }
+.painel-vidros-par { display: grid; grid-template-columns: 88px 1fr; gap: .9rem; align-items: center; }
+.painel-vidros-zoom { display: block; width: 88px; height: 88px; }
+.painel-vidros-conta { font-size: .82rem; line-height: 1.4; color: var(--tinta); }
+.painel-vidros-conta p { margin: 0 0 .2rem; }
+.painel-vidros-conta b { color: var(--navy); font-size: 1rem; font-variant-numeric: tabular-nums; }
+.painel-vidros-miudo { font-size: .74rem; color: var(--tinta-suave); }
+.painel-vidros-linha { display: block; width: 100%; height: 54px; margin-top: .7rem; }
+.painel-vidros-ir { padding: 0; font: inherit; font-size: .8rem; font-weight: 600; color: var(--teal-escuro); background: none; border: 0; cursor: pointer; }
+.painel-vidros-ir:hover { text-decoration: underline; text-underline-offset: 3px; }
+.painel-vidros-dica { margin: 0; padding-top: .9rem; border-top: 1px solid var(--borda); font-size: .85rem; line-height: 1.5; color: var(--tinta-suave); }
+
+/* as bolinhas na legenda de figura */
+.painel-legenda .ponto-a, .painel-legenda .ponto-b { display: inline-block; width: 8px; height: 8px; border-radius: 50%; vertical-align: .02em; }
+.painel-legenda .ponto-a { background: var(--navy); }
+.painel-legenda .ponto-b { background: var(--amarelo); }

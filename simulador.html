@@ -21,7 +21,7 @@
     }
   </script>
 </head>
-<body>
+<body class="pagina-simulador">
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- chrome institucional: padrão de todos os sites da USP (www5.usp.br).
@@ -48,14 +48,17 @@
       <nav class="nav" aria-label="Principal">
         <a href="index.html">Início</a>
         <a href="catalogo.html" aria-current="page">Simuladores</a>
+        <a href="sala.html">Sala de aula</a>
       </nav>
     </div>
   </header>
 
   <main id="conteudo" class="simulador">
     <div class="container">
-      <a class="simulador-voltar" href="catalogo.html">← Simuladores</a>
-      <h1 id="titulo">Simulador<span>.</span></h1>
+      <div class="simulador-cabeca">
+        <a class="simulador-voltar" href="catalogo.html" aria-label="Voltar aos simuladores" title="Voltar aos simuladores"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M11 2 5 8l6 6"/></svg></a>
+        <h1 id="titulo">Simulador<span>.</span></h1>
+      </div>
       <div class="painel-corpo">
         <aside class="painel-controles" id="controles"></aside>
         <div>
@@ -78,6 +81,7 @@
         <ul>
           <li><a href="index.html">Início</a></li>
           <li><a href="catalogo.html">Simuladores</a></li>
+          <li><a href="sala.html">Sala de aula</a></li>
         </ul>
       </div>
       <div>
@@ -103,10 +107,12 @@
 
   <script type="module">
     import { lista } from "./modelos-de-simulacao/__pacote__.js";
-    import { montarSimulador } from "./motor-de-simuladores/__pacote__.js";
+    import { montarSimulador, lerParametrosDaUrl } from "./motor-de-simuladores/__pacote__.js";
 
     const raiz = document.getElementById("conteudo");
     const slug = new URLSearchParams(location.search).get("modelo");
+    /* embutido=1 (a sala abre o simulador num <iframe>): esconde a faixa da USP, o cabeçalho, o rodapé e a volta aos simuladores */
+    if (lerParametrosDaUrl(location.search).embutido) document.body.classList.add("embutido");
 
     if (!lista.includes(slug)) {
       raiz.innerHTML =
@@ -115,7 +121,7 @@
          <a href="catalogo.html">Veja todos os simuladores</a>.</p></div>`;
     } else {
       const { default: ficha } = await import(`./modelos-de-simulacao/${slug}/ficha.js`);
-      montarSimulador(raiz, ficha);
+      montarSimulador(raiz, ficha, { modelo: slug, ...lerParametrosDaUrl(location.search, ficha.parametros) });
     }
   </script>
 </body>

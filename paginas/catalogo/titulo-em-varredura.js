@@ -1,4 +1,4 @@
-/* O título do banner: "Simuladores" preenchido por dois alelos, como num
+/* O título do banner ("Simuladores" no catálogo) preenchido por dois alelos, como num
    gráfico de Muller. Um clone teal sobe de baixo e invade o navy ao longo
    da palavra, e um fio âmbar marca a fronteira. Com o mouse em cima, a
    fronteira desliza até uma nova réplica. */
@@ -37,8 +37,8 @@ function pintar(palavra, fs) {
   palavra.style.backgroundImage = `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
-export function tituloEmVarredura() {
-  const palavra = criar("span", { class: "titulo-varredura", texto: "Simuladores" });
+export function tituloEmVarredura(texto = "Simuladores") {
+  const palavra = criar("span", { class: "titulo-varredura", texto });
   const h1 = criar("h1", {}, palavra);
 
   let semente = 4, atual = replica(semente), quadro = null;

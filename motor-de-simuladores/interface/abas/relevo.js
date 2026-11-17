@@ -13,7 +13,8 @@ const ESQUERDA = { topo: "#fde3a7", frente: AMARELO, lado: "#d9971a" };
 const DIREITA = { topo: "#c9cfe3", frente: NAVY, lado: "#0d1a45" };
 const TRACO = "rgba(20, 37, 96, .45)", ALTURA = 0.55, VAO = 0.16;
 
-export function montarRelevo(painel, no) {
+/** `legenda` e `numero`: no painel de cima, a frase vai para a legenda de figura sob a linha do tempo */
+export function montarRelevo(painel, no, { legenda = null, numero = 0 } = {}) {
   const { ficha, sessao } = painel, spec = ficha.relevo;
   const canvas = criar("canvas", { class: "relevo-canvas", "aria-label": `${spec.eixoX} ao longo das gerações, em 3D` });
   const notas = criar("div", { class: "relevo-notas" });
@@ -117,8 +118,10 @@ export function montarRelevo(painel, no) {
       const nova = JSON.stringify(sessao.par);
       if (nova !== chave) { chave = nova; r = spec.calcular(sessao.par); }
       t = agora;
+      const frase = spec.legenda(sessao.par, Math.floor(t), r);
+      if (legenda) legenda.innerHTML = `<b>Figura ${numero}.</b> ${frase}`;
       notas.replaceChildren(
-        criar("p", { class: "abas-nota", texto: spec.legenda(sessao.par, Math.floor(t), r) }),
+        ...(legenda ? [] : [criar("p", { class: "abas-nota", texto: frase })]),
         parede(ESQUERDA, spec.paredes.esquerda),
         parede(DIREITA, spec.paredes.direita),
         criar("p", { class: "abas-nota", texto: "Arraste o gráfico para girar." }));

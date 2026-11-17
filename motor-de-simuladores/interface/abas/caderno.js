@@ -7,6 +7,7 @@
 import { criar } from "escrever-html";
 import { formulaHtml, simbolos } from "../formulas.js";
 import { formatar } from "../escala.js";
+import { resumoDaRodada } from "../resumo.js";
 
 const VISIVEIS = 7, ESPERA = 700;
 
@@ -16,13 +17,15 @@ export function montarCaderno(painel, no) {
   const nome = (p) => (p.simbolo ? formulaHtml(`{${p.nome}}`, sims) : p.rotulo.toLowerCase());
   const tabela = criar("div", { class: "caderno" });
   no.append(
-    criar("p", { class: "abas-nota", html: `Cada rodada que você faz entra numa coluna. <span class="caderno-amostra"></span>Em cinza no gráfico, a rodada anterior.` }),
+    criar("p", { class: "abas-nota", html: `Cada rodada que você faz entra numa coluna. <span class="caderno-amostra"></span>Em cinza no gráfico, a rodada anterior. ` +
+        `A sorte só muda em <b>Sortear de novo</b>: mudando só N, cada população repete a mesma sorte com outro tamanho, e dá para ver o que é acaso e o que é tamanho.` }),
     tabela);
 
   const mudancas = (de, para) => ficha.parametros.filter((p) => de.valores[p.nome] !== para.valores[p.nome]);
 
   function registrar() {
     const nova = { valores: { ...sessao.par }, semente: sessao.semente, res: sessao.res };
+    nova.resumo = resumoDaRodada(ficha, nova.res, nova.valores);
     const daVez = rodadas[atual];
     if (daVez && !mudancas(daVez, nova).length && daVez.semente === nova.semente) return;
     const anterior = rodadas.at(-1), mudou = anterior ? mudancas(anterior, nova) : [];
@@ -60,10 +63,11 @@ export function montarCaderno(painel, no) {
     const oQueMudou = fila("caderno-mudou", "o que mudou", vistas.map((r) =>
       criar("span", { class: `caderno-celula${r.aviso ? " aviso" : ""}`, html: r.aviso ? `${r.titulo}<small>duas de uma vez</small>` : r.titulo })));
     const filas = [
-      ...ficha.parametros.map((p) => fila("", nome(p), vistas.map((r, i) =>
+      /* as réguas do modo avançado só entram se o modo estiver ligado ou se alguém mexeu nelas */
+      ...ficha.parametros.filter((p) => !p.avancado || painel.avancado || vistas.some((r) => r.valores[p.nome] !== p.valor)).map((p) => fila("", nome(p), vistas.map((r, i) =>
         criar("span", { class: `caderno-celula${r.mudou.has(p.nome) ? " mudou" : ""}${inicio + i === atual ? " atual" : ""}`, texto: formatar(p, r.valores[p.nome]) })))),
-      ...(ficha.resumo ?? []).map((m) => fila("caderno-resumo", m.rotulo, vistas.map((r, i) =>
-        criar("span", { class: `caderno-celula${inicio + i === atual ? " atual" : ""}`, texto: m.valor(r.res, r.valores) })))),
+      ...(ficha.resumo ?? []).map((m, k) => fila("caderno-resumo", m.rotulo, vistas.map((r, i) =>
+        criar("span", { class: `caderno-celula${inicio + i === atual ? " atual" : ""}`, texto: r.resumo[k].texto })))),
     ];
     tabela.replaceChildren(cabeca, oQueMudou, ...filas);
   }

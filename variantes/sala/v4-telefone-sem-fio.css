@@ -1,0 +1,41 @@
+/* v4 · telefone sem fio (v4-telefone-sem-fio.js) */
+
+.v4 .banner-grade { grid-template-columns: 1fr 400px; gap: 4rem; }
+
+/* o professor: a segunda frase, do tamanho da primeira */
+.v4-professor-frase { position: relative; margin-top: 2.1rem; }
+.v4-professor-frase .prof { gap: .5rem .8rem; align-items: baseline; font-size: 1.6rem; font-weight: 300; color: var(--tinta); }
+.v4-professor-frase .porta-acao { font-weight: 400; text-decoration: underline; text-decoration-color: var(--teal-claro); text-decoration-thickness: 2px; text-underline-offset: .28em; }
+.v4-professor-frase .porta-acao:hover { text-decoration-color: var(--teal); }
+.v4-professor-frase .porta-ajuda { align-self: center; }
+.v4-professor-frase .porta-conta, .v4-professor-frase .porta-discreto { font-size: .85rem; }
+.v4-professor-frase .prof-balao { top: calc(100% + .9rem); left: 0; }
+
+/* a roda */
+.v4-figura { margin: 0; }
+.v4 .figura-linha { flex-direction: column; align-items: center; gap: .7rem; text-align: center; }
+.v4 .figura-estado:empty { display: none; }
+.v4-palco { position: relative; cursor: pointer; border-radius: 50%; }
+.v4-palco:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+.v4-roda { display: block; width: 100%; height: auto; overflow: visible; }
+.v4-trilho, .v4-feito { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.v4-trilho { stroke: var(--borda-forte); stroke-dasharray: 1 7; }
+.v4-feito { stroke: var(--teal-claro); stroke-dasharray: 1 1; stroke-dashoffset: 1; transition: stroke-dashoffset .19s linear; }
+
+.v4-toque { fill: transparent; }
+.v4-bola { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.3; transition: fill .15s, stroke .15s, scale .15s; }
+.v4-ouviu .v4-bola { fill: var(--navy); stroke: var(--navy); }
+.v4-errou .v4-bola { fill: var(--amarelo); stroke: var(--amarelo); }
+.v4-vez .v4-bola, .v4-lido .v4-bola { scale: 1.45; }
+.v4-professor .v4-bola { fill: var(--teal); stroke: var(--teal); }
+.v4-anel { fill: none; stroke: var(--amarelo); stroke-width: 2.2; }
+
+/* o miolo da roda: a frase como está agora */
+.v4-centro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 4.2rem; text-align: center; pointer-events: none; }
+.v4-kicker { margin: 0 0 1rem; font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--teal-escuro); }
+.v4-frase { margin: 0; font-size: 1.75rem; font-weight: 600; line-height: 1.25; letter-spacing: .01em; color: var(--navy); }
+.v4-frase mark { color: #a8690a; background: none; box-shadow: inset 0 -.14em 0 var(--amarelo); }
+.v4-nova { display: inline-block; animation: v4-trocar .35s ease both; }
+@keyframes v4-trocar { from { translate: 0 -.35em; opacity: 0; } }
+.v4-legenda { margin: 1rem 0 0; font-size: .8rem; color: var(--tinta-suave); }
+@media (prefers-reduced-motion: reduce) { .v4-feito, .v4-bola { transition: none; } .v4-nova { animation: none; } }

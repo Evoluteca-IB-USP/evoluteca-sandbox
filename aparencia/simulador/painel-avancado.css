@@ -1,0 +1,76 @@
+/* ============ o modo avançado e as peças que vieram com ele ============ */
+
+/* o interruptor: o trilho do site em miniatura (motor-de-simuladores/interface/controles/modo-basico-avancado.js) */
+.trilho-modo { display: inline-flex; align-items: center; gap: .55rem; align-self: flex-start; min-height: 2.1rem; padding: 0; font: inherit; font-size: .88rem; color: var(--tinta-suave); background: none; border: 0; cursor: pointer; }
+.trilho-modo-trilho { position: relative; width: 30px; height: 12px; background: radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 6px 6px repeat-x; }
+.trilho-modo-trilho i { position: absolute; top: 50%; left: 0; width: 11px; height: 11px; margin-top: -5.5px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 3px rgba(252, 180, 33, .25); transition: left .2s; }
+.trilho-modo:hover .trilho-modo-trilho i { box-shadow: 0 0 0 5px rgba(252, 180, 33, .3); }
+.trilho-modo:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; border-radius: 2px; }
+.trilho-modo[aria-pressed="true"] { color: var(--navy); font-weight: 600; }
+.trilho-modo[aria-pressed="true"] .trilho-modo-trilho { background: linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / 100% 2.5px no-repeat; }
+.trilho-modo[aria-pressed="true"] .trilho-modo-trilho i { left: 19px; }
+
+/* os grupos de réguas: população | outras forças */
+.controles-grupo { display: flex; flex-direction: column; gap: 1.2rem; }
+.controles-grupo[hidden] { display: none; }
+.controles-grupo + .controles-grupo { gap: .7rem; }
+.controles-grupo + .controles-grupo .rl-rotulo { font-size: .86rem; }
+.controles-grupo + .controles-grupo .rl-valor { font-size: 1rem; }
+.controles-abas { gap: 1.2rem; margin: -.4rem 0 -.2rem; }
+.modo-avancado .controles-abas { display: flex; }
+.controles-aba { padding: 0; font: inherit; font-size: .82rem; color: #a3a3a3; background: none; border: 0; cursor: pointer; transition: color .15s; }
+.controles-aba:hover { color: var(--teal-escuro); }
+.controles-aba[aria-selected="true"] { color: var(--navy); text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: var(--teal-claro); text-underline-offset: 5px; cursor: default; }
+.controles-extras { display: flex; flex-direction: column; gap: .45rem; }
+.controles-sorteio { display: flex; align-items: baseline; gap: 1rem; margin-top: .2rem; }
+.painel-controles .controles-sorteio .sortear { margin-top: 0; align-self: auto; }
+.controles-linha { margin: 0; font-size: .8rem; color: var(--tinta-suave); }
+.modo-avancado .controles-linha.so-avancado { display: block; }
+.controles-semente { width: 2ch; padding: 0 0 1px; font: inherit; font-weight: 600; color: var(--navy); background: none; border: 0; border-bottom: 1px dotted var(--teal-claro); }
+.controles-semente:focus { outline: none; border-bottom: 1.5px solid var(--teal); }
+
+/* os marcos da rodada sobre a régua do tempo */
+.tempo-trilho { position: relative; flex: 1; display: flex; }
+.tempo-marcos { position: absolute; inset: 0 6px; pointer-events: none; }
+.tempo-marco { position: absolute; top: 1px; width: 9px; height: 9px; margin-left: -4.5px; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; }
+.tempo-marco::before { content: ""; position: absolute; left: 3.5px; top: -2px; width: 2px; height: 8px; background: var(--navy); }
+.tempo-marco-conta::before { background: var(--teal-escuro); }
+.tempo-marco:hover::after { content: attr(data-rotulo); position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); padding: .2rem .5rem; font-size: .74rem; white-space: nowrap; color: var(--navy); background: #fff; border: 1px solid var(--borda-forte); border-radius: var(--raio); }
+
+/* uma aba com miniatura ao lado */
+.painel-com-lado { display: grid; grid-template-columns: minmax(0, 1fr) 240px; gap: 2rem; }
+.painel-com-lado[hidden] { display: none; }
+.painel-com-lado > canvas { display: block; width: 100%; height: 400px; }
+.miniatura { display: flex; flex-direction: column; padding-top: 26px; }
+.miniatura-titulo { margin: 0 0 .35rem; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal-escuro); }
+.miniatura-canvas { display: block; width: 100%; height: 96px; }
+.miniatura-corte { height: 150px; }
+.miniatura-nota { margin: .35rem 0 0; font-size: .76rem; line-height: 1.45; color: var(--tinta-suave); }
+/* a outra curva de uma aba com duas: o quadro todo é o botão que a traz para o centro */
+.miniatura-trocavel { align-self: start; padding: 26px 0 0; font: inherit; text-align: left; background: none; border: 0; cursor: pointer; }
+.miniatura-trocavel:hover .miniatura-titulo { color: var(--navy); }
+.miniatura-trocavel:hover .miniatura-nota { color: var(--teal-escuro); }
+.miniatura-trocavel:focus-visible { outline: 2px solid var(--navy); outline-offset: 4px; border-radius: 2px; }
+.relevo-lado { display: flex; flex-direction: column; }
+.relevo-lado .miniatura { padding-top: 1rem; }
+
+/* as ações do vidro em foco e as cenas */
+.painel-vidros-acoes { display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; margin-top: .55rem; }
+.painel-vidros-acao { padding: 0; font: inherit; font-size: .8rem; font-weight: 600; color: var(--teal-escuro); background: none; border: 0; cursor: pointer; text-align: left; }
+.painel-vidros-acao:hover { text-decoration: underline; text-underline-offset: 3px; }
+.painel-vidros-acao:disabled { color: #b5b5b5; cursor: not-allowed; text-decoration: none; }
+.painel-vidros.com-cena .painel-vidros-destino { opacity: .45; }
+
+/* projetar */
+.simulador .container { position: relative; }
+.projetor-botao { position: absolute; right: 15px; top: 1.3rem; display: inline-flex; align-items: center; gap: .35rem; padding: 0; font: inherit; font-size: .82rem; color: var(--teal-escuro); background: none; border: 0; cursor: pointer; }
+.projetor-botao svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.projetor-botao:hover { text-decoration: underline; text-underline-offset: 3px; }
+.simulador.projetor { overflow: auto; padding: 1.5rem 0; background: #fff; }
+.simulador.projetor .container { max-width: none; padding: 0 3vw; }
+.simulador.projetor .simulador-voltar, .simulador.projetor .ferramentas { display: none; }
+.simulador.projetor h1 { font-size: 2.4rem; margin: 0 0 .6rem; }
+.simulador.projetor .projetor-botao { top: .6rem; }
+.simulador.projetor .painel-principal, .simulador.projetor .painel-com-lado > canvas, .simulador.projetor .painel-peca .relevo-canvas { height: calc(100vh - 290px); }
+.simulador.projetor .painel-legenda { font-size: 1rem; }
+.simulador.projetor .rl-rotulo { font-size: 1.1rem; }

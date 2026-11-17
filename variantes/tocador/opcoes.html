@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Tocador · opções</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aparencia/__pacote__.css">
+  <style>
+    body { background: #fff; padding: 2rem 3rem; font-family: var(--fonte); }
+    .opcao { display: grid; grid-template-columns: 2rem 1fr; gap: 1rem; align-items: center; padding: 1.6rem 0; border-bottom: 1px solid var(--borda); }
+    .letra { font-weight: 700; color: var(--navy); font-size: 1.3rem; }
+    .linha { display: flex; align-items: center; gap: 1.4rem; max-width: 880px; }
+    .trilho { flex: 1; height: 12px; background: linear-gradient(var(--teal-claro), var(--teal-claro)) 0 50% / 35% 2.5px no-repeat, radial-gradient(circle, #b5dfe6 1.2px, transparent 1.6px) 0 50% / 8px 8px repeat-x; position: relative; }
+    .trilho::after { content: ""; position: absolute; left: 35%; top: 50%; width: 14px; height: 14px; margin: -7px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 4px rgba(252, 180, 33, .25); }
+    .geracao { font-size: .9rem; color: var(--tinta-suave); white-space: nowrap; }
+    .geracao b { color: var(--navy); }
+    .tocador { display: flex; align-items: center; }
+    .play { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 6px rgba(252, 180, 33, .25); color: var(--navy); }
+    .play svg { width: 22px; height: 22px; fill: currentColor; }
+    button { font: inherit; background: none; border: 0; padding: 0; cursor: pointer; color: var(--navy); }
+    svg.traco { fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* A: setas cheias, pequenas, encostadas no halo */
+    .a .tocador { gap: .7rem; }
+    .a .seta svg { width: 15px; height: 15px; fill: currentColor; }
+
+    /* B: o halo vira uma cápsula clara que abraça as três peças */
+    .b .tocador { gap: .25rem; padding: 4px 6px; border-radius: 999px; background: rgba(252, 180, 33, .18); }
+    .b .play { box-shadow: none; }
+    .b .seta { display: grid; place-items: center; width: 30px; height: 30px; }
+    .b .seta svg { width: 14px; height: 14px; stroke-width: 3; }
+
+    /* C: sem setas; palavras no lugar delas */
+    .c .tocador { gap: 1.1rem; }
+    .c .palavra { font-size: .84rem; font-weight: 600; color: var(--teal-escuro); white-space: nowrap; }
+
+    /* D: o play sozinho; as setas passam para o número da geração */
+    .d .tocador { gap: 1rem; }
+    .d .recomecar svg { width: 18px; height: 18px; stroke-width: 2.4; color: var(--tinta-suave); }
+    .d .passo { display: inline-grid; place-items: center; width: 18px; height: 18px; vertical-align: -3px; color: var(--teal-escuro); }
+    .d .passo svg { width: 12px; height: 12px; stroke-width: 3.2; }
+  </style>
+</head>
+<body>
+  <div class="opcao a"><span class="letra">A</span>
+    <div class="linha">
+      <div class="tocador">
+        <button class="seta"><svg viewBox="0 0 16 16"><path d="M2 2h2.2v12H2zM14 2v12L5.5 8z"/></svg></button>
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8.5 5.5v13l10-6.5z"/></svg></span>
+        <button class="seta"><svg viewBox="0 0 16 16"><path d="M2 2v12l8.5-6zM11.8 2H14v12h-2.2z"/></svg></button>
+      </div>
+      <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+    </div>
+  </div>
+
+  <div class="opcao b"><span class="letra">B</span>
+    <div class="linha">
+      <div class="tocador">
+        <button class="seta"><svg class="traco" viewBox="0 0 16 16"><path d="M10.5 3 5.5 8l5 5"/></svg></button>
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8.5 5.5v13l10-6.5z"/></svg></span>
+        <button class="seta"><svg class="traco" viewBox="0 0 16 16"><path d="M5.5 3l5 5-5 5"/></svg></button>
+      </div>
+      <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+    </div>
+  </div>
+
+  <div class="opcao c"><span class="letra">C</span>
+    <div class="linha">
+      <div class="tocador">
+        <button class="palavra">↺ do começo</button>
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8.5 5.5v13l10-6.5z"/></svg></span>
+        <button class="palavra">+1 geração</button>
+      </div>
+      <div class="trilho"></div><span class="geracao">geração <b>70</b> de 200</span>
+    </div>
+  </div>
+
+  <div class="opcao d"><span class="letra">D</span>
+    <div class="linha">
+      <div class="tocador">
+        <button class="recomecar" title="Do começo"><svg class="traco" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4.5h4.5"/></svg></button>
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8.5 5.5v13l10-6.5z"/></svg></span>
+      </div>
+      <div class="trilho"></div>
+      <span class="geracao">geração <button class="passo"><svg class="traco" viewBox="0 0 16 16"><path d="M10.5 3 5.5 8l5 5"/></svg></button><b>70</b><button class="passo"><svg class="traco" viewBox="0 0 16 16"><path d="M5.5 3l5 5-5 5"/></svg></button> de 200</span>
+    </div>
+  </div>
+</body>
+</html>

@@ -2,4 +2,9 @@
    ferramentas que andam junto com a simulação. */
 @import "pagina-do-simulador.css";
 @import "controles-do-simulador.css";
+@import "vidros-do-painel.css";
+@import "painel-avancado.css";
 @import "ferramentas.css";
+@import "ferramentas-de-ensino.css";
+@import "genealogia.css";
+@import "embutido.css";

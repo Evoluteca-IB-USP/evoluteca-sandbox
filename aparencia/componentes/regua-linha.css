@@ -6,6 +6,15 @@
 .rl-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
 .rl-rotulo { font-size: .95rem; color: var(--tinta); transition: color .2s; }
 .rl-valor { font-size: 1.15rem; font-weight: 600; color: var(--navy); font-variant-numeric: tabular-nums; }
+/* no simulador o valor se digita: parece texto, ganha o sublinhado pontilhado do site ao passar o mouse */
+input.rl-valor { width: 5.5ch; padding: 0 0 1px; font-family: inherit; text-align: right; background: none; border: 0; border-bottom: 1px dotted transparent; border-radius: 0; }
+input.rl-valor:hover { border-bottom-color: var(--teal-claro); cursor: text; }
+input.rl-valor:focus { outline: none; border-bottom: 1.5px solid var(--teal); }
+.rl-marcas { position: relative; display: block; height: 1rem; margin: -.2rem 6px 0; }
+.rl-marca { position: absolute; top: 0; transform: translateX(-50%); padding: 0; font: inherit; font-size: .7rem; color: #a3a3a3; background: none; border: 0; cursor: pointer; font-variant-numeric: tabular-nums; }
+.rl-marca:first-child { transform: translateX(-6px); }
+.rl-marca:last-child { transform: translateX(calc(-100% + 6px)); }
+.rl-marca:hover { color: var(--teal-escuro); text-decoration: underline; text-underline-offset: 2px; }
 .rl.acesa .rl-rotulo { color: var(--teal-escuro); }
 .rl-limites { display: flex; justify-content: space-between; font-size: .7rem; color: #a3a3a3; margin-top: -.15rem; }
 

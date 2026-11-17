@@ -1,0 +1,37 @@
+/* v1 · a figura da turma */
+
+.v1 { padding: 4.5rem 0 3rem; }
+.v1-grade { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4.5rem; align-items: center; }
+.v1 h1 { margin: 0 0 1.4rem; font-size: clamp(2.6rem, 4.4vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.05; color: var(--navy); }
+.v1 h1 span { color: var(--amarelo); }
+.v1-lede { max-width: 32rem; margin: 0 0 2.6rem; font-size: 1.1rem; line-height: 1.65; color: var(--tinta); }
+.v1-marca-nota { margin-left: 1px; font-weight: 700; color: var(--teal-escuro); text-decoration: none; }
+.v1-marca-nota:hover { color: var(--navy); }
+.v1-entrar .frase { font-size: 1.35rem; }
+.v1-entrar .frase-caixa { min-width: 170px; }
+
+.v1-figura { margin: 0; }
+.v1-desenho { display: block; width: 100%; height: auto; overflow: visible; }
+.v1-eixo { stroke: var(--borda-forte); stroke-width: 1.2; }
+.v1-marca { font-size: 11px; fill: var(--tinta-suave); text-anchor: middle; font-variant-numeric: tabular-nums; }
+.v1-rotulo { font-size: 12px; font-weight: 600; fill: var(--navy); }
+.v1-contagem { font-size: 11px; fill: var(--tinta-suave); font-variant-numeric: tabular-nums; }
+.v1-aluno { fill: #fff; stroke: var(--teal-claro); stroke-width: 1.3; }
+.v1-aluno.v1-respondeu { fill: var(--navy); stroke: var(--navy); }
+.v1-ponto { fill: var(--teal); }
+.v1-ponto.v1-caindo { fill: var(--amarelo); }
+.v1-figura figcaption { margin-top: 1.2rem; padding-top: .9rem; border-top: 1px solid var(--borda); font-size: .82rem; line-height: 1.6; color: var(--tinta-suave); }
+.v1-figura figcaption b { color: var(--navy); }
+
+/* a nota de rodapé: a entrada do professor, em texto corrido */
+.v1-nota { position: relative; margin-top: 4rem; padding-top: 1rem; max-width: 62rem; font-size: .92rem; line-height: 2.3; color: var(--tinta); }
+.v1-nota::before { content: ""; position: absolute; top: 0; left: 0; width: 5rem; border-top: 1px solid var(--tinta-suave); }
+.v1-nota:target { animation: v1-piscar 1.2s ease; }
+@keyframes v1-piscar { 0%, 60% { background: rgba(252, 180, 33, .14); } 100% { background: transparent; } }
+.v1-nota sup { margin-right: .2rem; font-weight: 700; color: var(--teal-escuro); }
+.v1-nota b { color: var(--navy); }
+.v1-nota .frase-caixa { display: inline-block; width: 11rem; min-width: 0; vertical-align: baseline; }
+.v1-nota .frase-campo { padding: 0; font-size: .92rem; line-height: 1.4; }
+.v1-nota .acao-texto { font-size: .92rem; }
+.v1-erro { margin-left: .8rem; font-weight: 600; color: #a33a1f; }
+.v1-nota-fina { color: var(--tinta-suave); font-size: .82rem; }

@@ -1,0 +1,32 @@
+/* A frase com campo tracejado (o componente aprovado da porta) e o que as
+   três variantes dividem. */
+
+.frase { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem .8rem; font-size: 1.6rem; font-weight: 300; color: var(--tinta); cursor: text; }
+.frase-caixa { position: relative; flex: 1; min-width: 260px; max-width: 440px; }
+.frase-campo {
+  font: inherit;
+  width: 100%;
+  font-weight: 600;
+  color: var(--navy);
+  background: none;
+  border: 0;
+  border-bottom: 2px dashed var(--borda-forte);
+  border-radius: 0;
+  padding: 0 2rem .2rem 0;
+  transition: border-color .2s;
+}
+.frase-campo::placeholder { font-weight: 300; color: #a3a3a3; }
+.frase-campo:hover { border-bottom-color: var(--tinta-suave); }
+.frase-campo:focus { outline: none; border-bottom: 2px solid var(--teal); }
+.frase-seta { position: absolute; right: 0; bottom: .35rem; font: inherit; font-size: 1.3rem; line-height: 1; font-weight: 600; color: var(--tinta-suave); background: none; border: 0; padding: 0 .2rem; cursor: pointer; transition: color .2s, translate .2s; }
+.frase-caixa:focus-within .frase-seta, .frase-seta:hover { color: var(--teal-escuro); }
+.frase-seta:hover { translate: 3px 0; }
+.frase-dica { margin: .9rem 0 0; font-size: .82rem; color: var(--tinta-suave); }
+.frase-dica.erro { color: #a33a1f; font-weight: 600; }
+
+.acao-texto { font: inherit; font-weight: 600; background: none; border: 0; padding: 0; color: var(--teal-escuro); text-decoration: none; cursor: pointer; }
+.acao-texto:hover { text-decoration: underline; text-underline-offset: 3px; }
+.acao-texto:disabled { color: var(--tinta-suave); cursor: wait; }
+
+.kicker { margin: 0 0 1rem; font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--teal-escuro); }
+.kicker::before { content: ""; display: inline-block; width: 1.6rem; height: 2px; margin-right: .65rem; vertical-align: .28em; background: var(--amarelo); }

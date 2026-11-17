@@ -15,7 +15,7 @@ export const meta = {
     { nome: "replicas", rotulo: "Réplicas",             valor: 20 },
     { nome: "geracoes", rotulo: "Gerações",             valor: 200, avancado: true },
   ],
-  saida: { tipo: "linhas", y: "frequência do alelo A" },
+  saida: { tipo: "linhas", y: "frequência do alelo A₁" },
 };
 
 export function simular({ N, p0, geracoes, replicas }, rng) {

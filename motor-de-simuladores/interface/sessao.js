@@ -5,6 +5,9 @@
 
 import { criarRng } from "r";
 
+/** a semente cabe em 5 dígitos; o sortear volta a 1 depois da última */
+export const SEMENTE_MAXIMA = 99999;
+
 export function criarSessao(ficha) {
   const par = Object.fromEntries(ficha.parametros.map((p) => [p.nome, p.valor]));
   const tempo = ficha.parametros.find((p) => p.tempo);
@@ -13,7 +16,7 @@ export function criarSessao(ficha) {
   s.total = () => (tempo ? par[tempo.nome] : 0);
   s.simular = () => { s.res = ficha.simular(par, criarRng(s.semente)); ouvintes.forEach((f) => f()); };
   s.definir = (nome, v) => { par[nome] = v; s.simular(); };
-  s.sortear = () => { s.semente++; s.simular(); };
+  s.sortear = () => { s.semente = s.semente >= SEMENTE_MAXIMA ? 1 : s.semente + 1; s.simular(); };
   s.aoSimular = (f) => ouvintes.push(f);
   return s;
 }

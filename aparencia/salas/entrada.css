@@ -1,0 +1,83 @@
+/* ============ a porta da sala de aula (paginas/salas/entrada-da-sala.js) ============
+   O molde do banner do catálogo: à esquerda, duas frases dizem o que é a
+   sala, o aluno cola o link numa frase e o professor entra por uma linha pequena; à direita, no lugar da urna,
+   o telefone sem fio (telefone-sem-fio.css). */
+
+.porta { min-height: 52vh; }
+.porta .banner-grade { grid-template-columns: 1fr 400px; padding: 4rem 0 4.5rem; }
+
+/* a apresentação, entre o título e a frase do aluno; os desenhos do tamanho de uma letra são o professor e o aluno da roda */
+.porta h1 { margin-bottom: 1.5rem; }
+.porta-apresenta { max-width: 33rem; margin: 0 0 2.5rem; font-size: 1.05rem; line-height: 1.65; color: var(--tinta); text-wrap: pretty; }
+.porta-apresenta b { font-weight: 600; color: var(--navy); }
+.porta-desenho { display: inline-block; width: .66em; height: .66em; margin: 0 .1em 0 .4em; border-radius: 50%; vertical-align: 0; }
+.porta-desenho-professor { margin-right: .28em; background: var(--teal); box-shadow: 0 0 0 2px var(--fundo), 0 0 0 3.5px var(--amarelo); }
+.porta-desenho-aluno { background: var(--fundo); border: 1.3px solid var(--teal-claro); }
+
+/* o campo-trajetória (paginas/salas/campo-com-trajetoria.js) */
+.trajeto { position: relative; flex: 1; min-width: 200px; max-width: 460px; --parte: 0; }
+.trajeto-campo { width: 100%; font: inherit; font-weight: 600; line-height: 1.3; color: var(--navy); background: none; border: 0; border-radius: 0; padding: 0 .5rem .15em 0; }
+.trajeto-campo::placeholder { font-weight: 300; color: #a3a3a3; }
+.trajeto-campo:focus { outline: none; }
+.trajeto-linha { position: absolute; left: 0; right: 0; bottom: -10px; height: 20px; pointer-events: none; }
+.trajeto-linha svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.trajeto-linha path { fill: none; stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.trajeto-vazio { stroke: var(--borda-forte); stroke-dasharray: .004 .01; transition: stroke .2s; }
+.trajeto-cheio { stroke: var(--teal-claro); stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - var(--parte)); transition: stroke-dashoffset .35s ease, stroke .3s; }
+.trajeto:hover .trajeto-vazio, .trajeto:focus-within .trajeto-vazio { stroke: var(--tinta-suave); }
+.trajeto-serve .trajeto-cheio { stroke: var(--teal); }
+.trajeto-cabeca { position: absolute; right: -6px; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: var(--amarelo); box-shadow: 0 0 0 4px rgba(252, 180, 33, .25); scale: 0; transition: scale .25s ease .2s; }
+.trajeto-serve .trajeto-cabeca { scale: 1; }
+@media (prefers-reduced-motion: reduce) { .trajeto-cheio, .trajeto-cabeca { transition: none; } }
+
+.porta-erro { margin: 1.3rem 0 0; font-size: .82rem; font-weight: 600; color: #a33a1f; }
+.porta-erro:empty { display: none; }
+
+/* o professor: uma linha pequena sob a frase do aluno */
+.porta-professor { position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .45rem; margin: 2.4rem 0 0; font-size: .95rem; color: var(--tinta-suave); }
+.porta-professor .porta-ajuda { align-self: center; }
+.porta-acao { font-weight: 600; text-decoration-color: var(--teal-claro); }
+.porta-conta { font-size: .8rem; }
+.porta-conta::before { content: "· "; }
+.porta-discreto { font: inherit; font-size: .8rem; color: var(--tinta-suave); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--borda-forte); text-underline-offset: 3px; }
+.porta-discreto:hover { color: var(--navy); }
+.porta-aviso { flex-basis: 100%; font-size: .82rem; font-weight: 600; color: #a33a1f; }
+
+.porta-ajuda {
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  padding: 0;
+  font: inherit;
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--teal-escuro);
+  background: #fff;
+  border: 1.3px solid var(--teal-claro);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.porta-ajuda:hover, .porta-ajuda[aria-expanded="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+.porta-ajuda:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+.porta-balao {
+  position: absolute;
+  top: calc(100% + .8rem);
+  left: 0;
+  z-index: 5;
+  width: min(30rem, 100%);
+  padding: .95rem 1.1rem;
+  background: var(--fundo);
+  border: 1px solid var(--teal-claro);
+  border-radius: var(--raio);
+  font-size: .84rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--tinta);
+}
+.porta-balao::before { content: ""; position: absolute; top: -7px; left: var(--seta, 12rem); width: 12px; height: 12px; background: var(--fundo); border-left: 1px solid var(--teal-claro); border-top: 1px solid var(--teal-claro); rotate: 45deg; }
+.porta-balao p { margin: 0; }
+.porta-balao p + p { margin-top: .45rem; }
+.porta-balao b { color: var(--navy); }
