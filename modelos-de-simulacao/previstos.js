@@ -20,9 +20,6 @@ const F = (slug, titulo, tema, nivel, tempo, tipo, descricao, parametros) =>
   ({ slug, meta: { titulo, tema, nivel, tempo, descricao, parametros, previsto: true, saida: { tipo } } });
 
 export const previstos = [
-  F("mutacao-deriva", "Mutação e deriva", "populacoes", ["graduacao"], "15 min", "linhas",
-    "Alelos novos surgem e quase todos se perdem. Veja o equilíbrio entre a taxa de mutação e o tamanho da população.",
-    [P("Tamanho da população"), P("Taxa de mutação"), P("Gerações", true)]),
   F("migracao-ilhas", "Migração entre ilhas", "populacoes", ["medio", "graduacao"], "15 min", "linhas",
     "Populações separadas trocam migrantes. Quanta migração basta para impedir que a deriva as diferencie?",
     [P("Número de ilhas"), P("Taxa de migração"), P("Tamanho de cada ilha")]),

@@ -8,6 +8,8 @@ import { criarRng, rbinom, mean } from "r";
 import * as deriva from "../modelos-de-simulacao/deriva/modelo.js";
 import * as hw from "../modelos-de-simulacao/hardy-weinberg/modelo.js";
 import * as selecao from "../modelos-de-simulacao/selecao-1-locus/modelo.js";
+import * as mutacaoDeriva from "../modelos-de-simulacao/mutacao-deriva/modelo.js";
+import * as selecaoDeriva from "../modelos-de-simulacao/selecao-deriva/modelo.js";
 
 const resultados = [];
 
@@ -107,6 +109,58 @@ teste("seleção: com s = 0 nada muda; com s > 0, p sobe toda geração", () => 
     esperar(sob[g] > sob[g - 1], `p caiu na geração ${g} com s > 0`);
   }
   esperar(sob[sob.length - 1] > 0.95, "alelo vantajoso não chegou perto da fixação");
+});
+
+/* ---------- mutação e deriva ---------- */
+
+teste("mutação e deriva: com μ = 0 e população monomórfica, H permanece 0", () => {
+  const series = mutacaoDeriva.simular({ N: 50, mu: 0, geracoes: 80, replicas: 5 }, criarRng(10));
+  esperar(series.every((s) => s.every((h) => h === 0)), "H mudou sem mutação");
+});
+
+teste("mutação e deriva: H converge para o equilíbrio 4Nμ / (1 + 4Nμ)", () => {
+  const N = 50, mu = 0.005, theta = 4 * N * mu;
+  const hEq = theta / (1 + theta);
+  const series = mutacaoDeriva.simular({ N, mu, geracoes: 400, replicas: 200 }, criarRng(11));
+  const hFinal = mean(series.map((s) => s[400]));
+  esperar(
+    Math.abs(hFinal - hEq) < 0.05,
+    `H médio = ${hFinal.toFixed(3)}, equilíbrio teórico 4Nμ/(1+4Nμ) = ${hEq.toFixed(3)}`
+  );
+});
+
+teste("mutação e deriva: mesma semente ⇒ exatamente o mesmo resultado", () => {
+  const par = { N: 60, mu: 0.004, geracoes: 100, replicas: 4 };
+  const a = mutacaoDeriva.simular(par, criarRng(12));
+  const b = mutacaoDeriva.simular(par, criarRng(12));
+  esperar(JSON.stringify(a) === JSON.stringify(b), "duas execuções com semente 12 divergiram");
+});
+
+/* ---------- seleção e deriva ---------- */
+
+teste("seleção e deriva: com s = 0, probabilidade de fixação converge para p0", () => {
+  const p0 = 0.35;
+  const series = selecaoDeriva.simular({ N: 20, s: 0, p0, geracoes: 500, replicas: 400 }, criarRng(13));
+  const fracao = series.filter((s) => s.at(-1) >= 1).length / series.length;
+  esperar(Math.abs(fracao - p0) < 0.08, `fração fixada ${fracao.toFixed(3)}, esperado ≈ ${p0}`);
+});
+
+teste("seleção e deriva: probabilidade de fixação segue a fórmula de Kimura", () => {
+  const par = { N: 30, s: 0.05, p0: 0.2, geracoes: 400, replicas: 500 };
+  const uEsperado = selecaoDeriva.probabilidadeFixacao(par);
+  const series = selecaoDeriva.simular(par, criarRng(14));
+  const fracao = series.filter((s) => s.at(-1) >= 1).length / series.length;
+  esperar(
+    Math.abs(fracao - uEsperado) < 0.06,
+    `fração fixada ${fracao.toFixed(3)}, Kimura prevê ${uEsperado.toFixed(3)}`
+  );
+});
+
+teste("seleção e deriva: mesma semente ⇒ exatamente o mesmo resultado", () => {
+  const par = { N: 50, s: 0.02, p0: 0.2, geracoes: 100, replicas: 5 };
+  const a = selecaoDeriva.simular(par, criarRng(15));
+  const b = selecaoDeriva.simular(par, criarRng(15));
+  esperar(JSON.stringify(a) === JSON.stringify(b), "duas execuções com semente 15 divergiram");
 });
 
 /* ---------- saída ---------- */
